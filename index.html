@@ -28,15 +28,6 @@
   .cat-pill:hover { background: #E5E7EB; border-color: #D1D5DB; }
   .cat-pill.active { background: var(--pill-active-bg); color: var(--pill-active-text); border-color: var(--pill-active-bg); }
 
-  .topics-section { margin: 20px 0 28px; }
-  .topics-section .label { font-size: 12px; font-weight: 600; color: var(--faint); letter-spacing: 1px; margin-bottom: 12px; }
-  .topics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .topic-card { background: var(--card); border: 1px solid rgba(0,0,0,0.05); border-radius: 12px; padding: 14px 12px; cursor: pointer; transition: all 0.15s cubic-bezier(0.2,0,0,1); text-align: center; user-select: none; }
-  .topic-card:hover { border-color: rgba(0,0,0,0.12); box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
-  .topic-card.active { border-color: var(--accent); background: #F0F4FA; }
-  .topic-card .topic-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-  .topic-card .topic-count { font-size: 11px; color: var(--faint); }
-
   .article-card { background: var(--card); border: 1px solid rgba(0,0,0,0.05); border-radius: 16px; padding: 24px 28px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s cubic-bezier(0.2,0,0,1); display: block; text-decoration: none; color: inherit; box-shadow: none; }
   .article-card:hover { transform: translateY(-1px); border-color: rgba(0,0,0,0.1); box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
   .article-card.hidden { display: none; }
@@ -54,8 +45,6 @@
     .site-header { padding: 20px 0 0; }
     .site-logo { font-size: 26px; }
     .site-title { font-size: 13px; }
-    .topics-grid { grid-template-columns: repeat(2, 1fr); }
-    .topic-card { padding: 12px 10px; }
     .cat-nav { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; margin-left: -4px; margin-right: -4px; }
     .cat-nav::-webkit-scrollbar { display: none; }
     .cat-pill { flex-shrink: 0; }
@@ -76,11 +65,6 @@
   </header>
 
   <nav class="cat-nav" id="cat-nav"></nav>
-
-  <section class="topics-section" id="topics-section">
-    <div class="label">热门专题</div>
-    <div class="topics-grid" id="topics-grid"></div>
-  </section>
 
   <div id="article-list"></div>
 
@@ -118,47 +102,8 @@
     catNav.innerHTML = visible.map(c => '<span class="cat-pill' + (c === activeCat ? ' active' : '') + '" data-cat="' + c + '">' + c + '</span>').join('');
     catNav.querySelectorAll('.cat-pill').forEach(p => {
       p.addEventListener('click', function() {
-        activeCat = this.getAttribute('data-cat'); activeTopic = null;
-        renderCategories(); renderTopics(); applyFilters();
-      });
-    });
-  }
-
-  // ── 9 hot topics ──
-  const hotTopics = [
-    { id: '化妆品包装', name: '化妆品包装', kw: ['包装','化妆品','瓶器','泵头','Silgan','Dispensing'] },
-    { id: '定量泵系统', name: '定量泵系统', kw: ['泵','Dispensing','分配','喷雾','Lotion','Mist','Airless'] },
-    { id: 'Airless Pump', name: 'Airless Pump', kw: ['真空泵','Airless','无吸管','密封'] },
-    { id: '色母粒', name: '色母粒', kw: ['色母粒','色母','着色','颜料','配色','色彩','颜色','色差','色斑'] },
-    { id: '注塑制造', name: '注塑制造', kw: ['注塑','模具','成型','吹塑','挤出','PET','PP','PE','塑料'] },
-    { id: '检测方法', name: '检测方法', kw: ['检测','测试','检验','AQL','CPK','SPC','色差仪','熔指','跌落'] },
-    { id: '可靠性测试', name: '可靠性测试', kw: ['老化','耐候','耐温','跌落测试','可靠性','QUV','TGA'] },
-    { id: 'PCR包装', name: 'PCR包装', kw: ['PCR','再生','回收','可持续','Mono','ESG','环保','循环'] },
-    { id: 'AI制造', name: 'AI制造', kw: ['AI','人工智能','自动化','智能','预测'] }
-  ];
-
-  const topicCounts = {}; hotTopics.forEach(t => { topicCounts[t.id] = 0; });
-  articles.forEach(a => {
-    const ft = a.title + ' ' + a.summary + ' ' + (a.topics||[]).join(' ') + ' ' + a.tags.join(' ');
-    hotTopics.forEach(ht => { if (ht.kw.some(k => ft.includes(k))) topicCounts[ht.id]++; });
-  });
-
-  let activeTopic = null;
-
-  function renderTopics() {
-    const grid = document.getElementById('topics-grid');
-    grid.innerHTML = hotTopics.map(ht =>
-      '<div class="topic-card' + (activeTopic === ht.id ? ' active' : '') + '" data-topic="' + ht.id + '">' +
-        '<div class="topic-name">' + ht.name + '</div>' +
-        '<div class="topic-count">' + topicCounts[ht.id] + ' 篇文章</div>' +
-      '</div>'
-    ).join('');
-    grid.querySelectorAll('.topic-card').forEach(c => {
-      c.addEventListener('click', function() {
-        const tid = this.getAttribute('data-topic');
-        activeTopic = activeTopic === tid ? null : tid;
-        if (activeTopic) { activeCat = '全部'; renderCategories(); }
-        renderTopics(); applyFilters();
+        activeCat = this.getAttribute('data-cat');
+        renderCategories(); applyFilters();
       });
     });
   }
@@ -166,12 +111,7 @@
   function applyFilters() {
     document.querySelectorAll('.article-card').forEach(card => {
       const tags = card.getAttribute('data-tags').split(',');
-      const td = card.getAttribute('data-topics');
-      let show = activeCat === '全部' || tags.some(t => t.trim() === activeCat);
-      if (show && activeTopic) {
-        const ht = hotTopics.find(h => h.id === activeTopic);
-        if (ht) show = ht.kw.some(k => (td||'') + ' ' + tags.join(' ')).includes(k));
-      }
+      const show = activeCat === '全部' || tags.some(t => t.trim() === activeCat);
       card.classList.toggle('hidden', !show);
     });
   }
@@ -188,7 +128,7 @@
     list.appendChild(card);
   });
 
-  renderCategories(); renderTopics();
+  renderCategories();
 </script>
 
 </body>
