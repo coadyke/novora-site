@@ -3,18 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>novora — 个人文章</title>
+<title>novora — Build. Think. Write.</title>
 <style>
   :root {
-    --bg: #F9FAFB;
+    --bg: #FAFAFA;
     --card: #FFFFFF;
     --text: #1F2937;
     --muted: #6B7280;
-    --accent: #1A3F6E;
-    --accent-l: #2563EB;
-    --border: #E5E7EB;
-    --tag-bg: #EFF6FF;
-    --tag-text: #1D4ED8;
+    --faint: #9CA3AF;
+    --accent: #0F2747;
+    --accent-l: #1A3F6E;
+    --tag-bg: #EEF3F9;
+    --tag-text: #1A3F6E;
+    --pill-bg: #FFFFFF;
+    --pill-active-bg: #0F2747;
+    --pill-active-text: #FFFFFF;
+    --pill-text: #6B7280;
+    --pill-hover-bg: #F3F4F6;
   }
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -25,35 +30,67 @@
   }
   .container { max-width: 720px; margin: 0 auto; }
 
-  /* Header */
+  /* ── Header ── */
   .site-header {
-    text-align: center; padding: 60px 0 40px;
+    text-align: center; padding: 72px 0 48px;
   }
-  .site-header h1 {
-    font-size: 28px; font-weight: 700; color: var(--accent);
-    letter-spacing: -0.5px;
+  .site-logo {
+    font-size: 40px; font-weight: 700; color: var(--accent);
+    letter-spacing: -1px; line-height: 1;
   }
-  .site-header .sub {
-    font-size: 16px; color: var(--muted); margin-top: 8px;
+  .site-slogan {
+    font-size: 20px; font-weight: 500; color: var(--text);
+    margin-top: 16px; letter-spacing: 0.3px;
   }
+  .site-desc {
+    font-size: 15px; color: var(--muted); margin-top: 12px;
+  }
+  .site-stats {
+    font-size: 14px; color: var(--faint); margin-top: 20px;
+    letter-spacing: 0.2px;
+  }
+  .site-stats span { margin: 0 2px; }
+  .site-stats .sep { color: #D1D5DB; }
 
-  /* Article Card */
+  /* ── Category Nav ── */
+  .cat-nav {
+    display: flex; justify-content: center; gap: 8px;
+    margin-bottom: 36px; flex-wrap: wrap;
+  }
+  .cat-pill {
+    font-size: 14px; font-weight: 500; padding: 7px 18px;
+    border-radius: 20px; border: 1px solid transparent;
+    cursor: pointer; transition: all 0.15s;
+    background: var(--pill-bg); color: var(--pill-text);
+    white-space: nowrap; user-select: none;
+  }
+  .cat-pill:hover { background: var(--pill-hover-bg); }
+  .cat-pill.active {
+    background: var(--pill-active-bg); color: var(--pill-active-text);
+    border-color: var(--pill-active-bg);
+  }
+  .cat-count { font-size: 12px; opacity: 0.6; margin-left: 2px; }
+
+  /* ── Article Cards ── */
   .article-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 12px; padding: 28px 32px; margin-bottom: 16px;
-    cursor: pointer; transition: box-shadow 0.15s, border-color 0.15s;
+    background: var(--card); border: 1px solid transparent;
+    border-radius: 20px; padding: 28px 32px; margin-bottom: 14px;
+    cursor: pointer; transition: all 0.2s ease;
     display: block; text-decoration: none; color: inherit;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
   }
   .article-card:hover {
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    border-color: var(--accent-l);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
   }
+  .article-card.hidden { display: none; }
   .article-card .meta {
     display: flex; align-items: center; gap: 12px;
     margin-bottom: 10px; flex-wrap: wrap;
   }
   .article-card .date {
-    font-size: 14px; color: var(--muted); font-weight: 500;
+    font-size: 14px; color: var(--faint); font-weight: 500;
+    font-variant-numeric: tabular-nums;
   }
   .article-card .tags {
     display: flex; gap: 6px; flex-wrap: wrap;
@@ -71,121 +108,223 @@
     font-size: 15px; color: var(--muted); line-height: 1.7;
   }
 
-  /* Footer */
+  /* ── Footer ── */
   .site-footer {
     text-align: center; padding: 48px 0 32px;
-    color: var(--muted); font-size: 14px;
+    color: var(--faint); font-size: 14px;
   }
 
+  /* ── Mobile ── */
   @media (max-width: 600px) {
     body { padding: 12px; font-size: 16px; }
-    .site-header { padding: 40px 0 28px; }
-    .site-header h1 { font-size: 24px; }
-    .article-card { padding: 20px 18px; }
+    .site-header { padding: 48px 0 32px; }
+    .site-logo { font-size: 36px; }
+    .site-slogan { font-size: 18px; }
+    .site-desc { font-size: 14px; }
+    .cat-nav {
+      justify-content: flex-start; flex-wrap: nowrap;
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+      padding-bottom: 4px; margin-left: -4px; margin-right: -4px;
+    }
+    .cat-nav::-webkit-scrollbar { display: none; }
+    .cat-pill { flex-shrink: 0; }
+    .article-card { padding: 20px 18px; border-radius: 16px; }
     .article-card h2 { font-size: 19px; }
+    .article-card p { font-size: 15px; }
   }
 </style>
 </head>
 <body>
 <div class="container">
 
+  <!-- ═══ Header ═══ -->
   <header class="site-header">
-    <h1>novora</h1>
-    <p class="sub">个人文章 · 想法存档</p>
+    <div class="site-logo">novora</div>
+    <div class="site-slogan">Build. Think. Write.</div>
+    <div class="site-desc">关于商业、制造业、品牌与长期主义</div>
+    <div class="site-stats" id="site-stats"></div>
   </header>
 
-  <!-- Article list — newest first -->
+  <!-- ═══ Category Nav ═══ -->
+  <nav class="cat-nav" id="cat-nav"></nav>
+
+  <!-- ═══ Article List ═══ -->
   <div id="article-list"></div>
 
-  <script>
-    const articles = [
-      {
-        title: "色母粒的分散性：为什么它决定了你产品的成败",
-        date: "2026-06-08",
-        summary: "因色母粒分散不良导致的质量问题占客诉的60%以上。从颜料选择到分散剂配方到加工工艺，一文讲透影响分散性的四大关键因素，附三种实用检测方法。",
-        tags: ["色母粒", "分散性", "品质控制"],
-        file: "articles/2026-06-08-dispersion.html"
-      },
-      {
-        title: "色母粒销售技巧与叙事体系",
-        date: "2026-06-07",
-        summary: "11章完整弹药库：从核心叙事框架到30条异议处理，从10个场景化故事到30个短视频标题库。不是卖色母粒，而是解决塑料企业的生产问题。",
-        tags: ["销售", "色母粒", "内部培训"],
-        file: "articles/sales-skills.html"
-      },
-      {
-        title: "世界文学名著典藏 · 30本导读",
-        date: "2026-06-07",
-        summary: "五卷分卷：英国文学9本、法国文学10本、俄国文学6本、欧洲经典3本、美国与东方2本。每本含中英书名、作者、导读与免费阅读链接。",
-        tags: ["阅读", "文学", "名著"],
-        file: "articles/classics.html"
-      },
-      {
-        title: "色母粒到底是什么？一分钟搞懂",
-        date: "2026-06-07",
-        summary: "从零开始的色母粒科普：为什么不用色粉直接染色？色母粒和色粉的本质区别是什么？一文讲清楚。",
-        tags: ["色母粒", "科普"],
-        file: "articles/what-is-masterbatch.html"
-      },
-      {
-        title: "瓶子发黄怎么办？塑料厂急诊室",
-        date: "2026-06-07",
-        summary: "PET瓶发黄、注塑件黑点、吹塑件破裂——这些看似不同的质量问题，往往指向同一个幕后黑手。完整诊断框架与解决方案。",
-        tags: ["色母粒", "技术诊断", "塑料"],
-        file: "articles/yellow-bottles.html"
-      },
-      {
-        title: "为什么低价色母粒最后反而更贵？",
-        date: "2026-06-07",
-        summary: "三组算账对比告诉你：便宜色母粒VS高品质色母粒，添加量、不良率、停机率——哪边才是真正的省钱？",
-        tags: ["色母粒", "成本分析", "采购"],
-        file: "articles/cheap-masterbatch.html"
-      },
-      {
-        title: "一个配方，一年帮客户省了120万",
-        date: "2026-06-07",
-        summary: "真实案例：添加量从4%优化到2.5%效果不变。色母粒不是越便宜越好——关键是综合成本。五维度成本拆解。",
-        tags: ["色母粒", "案例", "成本优化"],
-        file: "articles/roi-120wan.html"
-      },
-      {
-        title: "10万只瓶子报废，只因为颜色差了0.5%",
-        date: "2026-06-07",
-        summary: "客户验货当天，10万只瓶子直接退货。问题竟然出在色母粒添加比例上。塑料行业最贵的不是色母粒，而是返工。",
-        tags: ["色母粒", "翻车现场", "质量控制"],
-        file: "articles/bottles-100k.html"
-      },
-      {
-        title: "Silgan Dispensing 深度调研报告",
-        date: "2026-05-16",
-        summary: "西尔格分配系统全球最完整深度分析。14页覆盖：集团架构与三大事业部、中国市场28年深耕、5笔重大收购（Albéa/Weener等）、五年财务全景、ERA/MELODIE核心技术平台、全球竞争双寡头格局、ESG战略与风险研判。",
-        tags: ["行业调研", "分配包装", "竞争分析", "PDF"],
-        file: "articles/silgan-dispensing.html"
-      }
-    ];
-
-    const list = document.getElementById('article-list');
-    articles.forEach(a => {
-      const card = document.createElement('a');
-      card.className = 'article-card';
-      card.href = a.file;
-      card.innerHTML =
-        '<div class="meta">' +
-          '<span class="date">' + a.date + '</span>' +
-          '<span class="tags">' +
-            a.tags.map(t => '<span class="tag">' + t + '</span>').join('') +
-          '</span>' +
-        '</div>' +
-        '<h2>' + a.title + '</h2>' +
-        '<p>' + a.summary + '</p>';
-      list.appendChild(card);
-    });
-  </script>
-
+  <!-- ═══ Footer ═══ -->
   <footer class="site-footer">
-    novora.cc · 文章持续更新中
+    novora — Build. Think. Write.
   </footer>
 
 </div>
+
+<script>
+  const articles = [
+    {
+      title: "色母粒的分散性：为什么它决定了你产品的成败",
+      date: "2026-06-08",
+      summary: "因色母粒分散不良导致的质量问题占客诉的60%以上。从颜料选择到分散剂配方到加工工艺，一文讲透影响分散性的四大关键因素，附三种实用检测方法。",
+      tags: ["制造业", "色母粒"],
+      file: "articles/2026-06-08-dispersion.html"
+    },
+    {
+      title: "色母粒销售技巧与叙事体系",
+      date: "2026-06-07",
+      summary: "11章完整弹药库：从核心叙事框架到30条异议处理，从10个场景化故事到30个短视频标题库。不是卖色母粒，而是解决塑料企业的生产问题。",
+      tags: ["销售", "制造业"],
+      file: "articles/sales-skills.html"
+    },
+    {
+      title: "世界文学名著典藏 · 280部导读",
+      date: "2026-06-07",
+      summary: "17卷分卷：从古希腊荷马史诗到现代经典，涵盖英国、法国、俄国、德国、意大利、拉美、亚洲等全球文学。每本含中英书名、作者、导读与免费阅读链接。",
+      tags: ["阅读", "文学"],
+      file: "articles/classics.html"
+    },
+    {
+      title: "色母粒到底是什么？一分钟搞懂",
+      date: "2026-06-07",
+      summary: "从零开始的色母粒科普：为什么不用色粉直接染色？色母粒和色粉的本质区别是什么？一文讲清楚。",
+      tags: ["制造业", "色母粒"],
+      file: "articles/what-is-masterbatch.html"
+    },
+    {
+      title: "瓶子发黄怎么办？塑料厂急诊室",
+      date: "2026-06-07",
+      summary: "PET瓶发黄、注塑件黑点、吹塑件破裂——这些看似不同的质量问题，往往指向同一个幕后黑手。完整诊断框架与解决方案。",
+      tags: ["制造业", "色母粒"],
+      file: "articles/yellow-bottles.html"
+    },
+    {
+      title: "为什么低价色母粒最后反而更贵？",
+      date: "2026-06-07",
+      summary: "三组算账对比告诉你：便宜色母粒VS高品质色母粒，添加量、不良率、停机率——哪边才是真正的省钱？",
+      tags: ["商业", "制造业"],
+      file: "articles/cheap-masterbatch.html"
+    },
+    {
+      title: "一个配方，一年帮客户省了120万",
+      date: "2026-06-07",
+      summary: "真实案例：添加量从4%优化到2.5%效果不变。色母粒不是越便宜越好——关键是综合成本。五维度成本拆解。",
+      tags: ["商业", "制造业"],
+      file: "articles/roi-120wan.html"
+    },
+    {
+      title: "10万只瓶子报废，只因为颜色差了0.5%",
+      date: "2026-06-07",
+      summary: "客户验货当天，10万只瓶子直接退货。问题竟然出在色母粒添加比例上。塑料行业最贵的不是色母粒，而是返工。",
+      tags: ["制造业", "商业"],
+      file: "articles/bottles-100k.html"
+    },
+    {
+      title: "Silgan Dispensing 深度调研报告",
+      date: "2026-05-16",
+      summary: "西尔格分配系统全球最完整深度分析。14页覆盖：集团架构与三大事业部、中国市场28年深耕、5笔重大收购（Albéa/Weener等）、五年财务全景、ERA/MELODIE核心技术平台。",
+      tags: ["商业", "制造业"],
+      file: "articles/silgan-dispensing.html"
+    }
+  ];
+
+  // ── Dynamic Stats ──
+  const topicSet = new Set();
+  articles.forEach(a => a.tags.forEach(t => topicSet.add(t)));
+  document.getElementById('site-stats').innerHTML =
+    '<span>' + articles.length + ' Articles</span>' +
+    '<span class="sep"> &middot; </span>' +
+    '<span>' + topicSet.size + ' Topics</span>' +
+    '<span class="sep"> &middot; </span>' +
+    '<span>Updated Weekly</span>';
+
+  // ── Category Nav ──
+  const allCategories = ['全部文章', '商业', '制造业', '品牌', '销售', '阅读', '管理'];
+  const catNav = document.getElementById('cat-nav');
+
+  // Compute per-category counts
+  const catCounts = {};
+  allCategories.forEach(c => { catCounts[c] = 0; });
+  articles.forEach(a => {
+    // '全部文章' counts all
+    catCounts['全部文章']++;
+    // Map tags to categories
+    a.tags.forEach(t => {
+      // Direct match
+      if (allCategories.includes(t)) catCounts[t]++;
+      // Map "色母粒" → "制造业"
+      if (t === '色母粒' || t === '塑料') catCounts['制造业'] = (catCounts['制造业'] || 0) + 1;
+    });
+    // Map specific tags to categories
+    if (a.tags.includes('销售') || a.tags.includes('内部培训')) catCounts['销售'] = (catCounts['销售'] || 0) + 1;
+  });
+  // Ensure counts are at least 1 for display
+  allCategories.forEach(c => { if (catCounts[c] === 0) catCounts[c] = 0; });
+
+  let activeCat = '全部文章';
+
+  function renderCategories() {
+    // Only show categories that have at least 1 article
+    const visible = allCategories.filter(c => {
+      if (c === '全部文章') return true;
+      return (catCounts[c] || 0) > 0;
+    });
+
+    catNav.innerHTML = visible.map(c => {
+      const activeClass = c === activeCat ? ' active' : '';
+      const count = catCounts[c] || 0;
+      const countHtml = c === '全部文章' ? '' : '<span class="cat-count">' + count + '</span>';
+      return '<span class="cat-pill' + activeClass + '" data-cat="' + c + '">' + c + countHtml + '</span>';
+    }).join('');
+
+    catNav.querySelectorAll('.cat-pill').forEach(pill => {
+      pill.addEventListener('click', function() {
+        activeCat = this.getAttribute('data-cat');
+        renderCategories();
+        filterArticles();
+      });
+    });
+  }
+
+  function filterArticles() {
+    const cards = document.querySelectorAll('.article-card');
+    cards.forEach(card => {
+      if (activeCat === '全部文章') {
+        card.classList.remove('hidden');
+        return;
+      }
+      const tags = card.getAttribute('data-tags').split(',');
+      const matches = tags.some(t => {
+        const trimmed = t.trim();
+        if (trimmed === activeCat) return true;
+        // Map 色母粒/塑料 → 制造业
+        if (activeCat === '制造业' && (trimmed === '色母粒' || trimmed === '塑料')) return true;
+        // Map 内部培训 → 销售
+        if (activeCat === '销售' && trimmed === '内部培训') return true;
+        return false;
+      });
+      card.classList.toggle('hidden', !matches);
+    });
+  }
+
+  // ── Render Articles ──
+  const list = document.getElementById('article-list');
+  articles.forEach(a => {
+    const card = document.createElement('a');
+    card.className = 'article-card';
+    card.href = a.file;
+    card.setAttribute('data-tags', a.tags.join(','));
+    card.innerHTML =
+      '<div class="meta">' +
+        '<span class="date">' + a.date + '</span>' +
+        '<span class="tags">' +
+          a.tags.map(t => '<span class="tag">' + t + '</span>').join('') +
+        '</span>' +
+      '</div>' +
+      '<h2>' + a.title + '</h2>' +
+      '<p>' + a.summary + '</p>';
+    list.appendChild(card);
+  });
+
+  renderCategories();
+</script>
+
 </body>
 </html>
