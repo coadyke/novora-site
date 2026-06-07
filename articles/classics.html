@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>世界文学名著典藏 — 中文阅读与下载指南</title>
+<style>
+  :root {
+    --ink: #2D3748; --ink-light: #4A5568; --ink-faint: #A0AEC0;
+    --cream: #FFFDF7; --paper: #FFFFFF; --gold: #B8860B; --gold-light: #FDF6E3;
+    --accent: #1A3F6E; --accent-light: #EDF2F9;
+    --border: #E2D9C8;
+    --font-serif: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+    --font-sans: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: var(--font-serif); font-size: 16px; line-height: 1.9;
+    color: var(--ink); background: #F5F0E8;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Cover ── */
+  .cover {
+    background: linear-gradient(160deg, #1A3F6E 0%, #2C5282 40%, #1A365D 100%);
+    color: white; text-align: center; padding: 80px 24px 64px;
+    position: relative; overflow: hidden;
+  }
+  .cover::before {
+    content: ""; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,.06) 0%, transparent 60%);
+  }
+  .cover::after {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
+  }
+  .cover * { position: relative; z-index: 1; }
+  .cover-label {
+    font-family: var(--font-sans); font-size: 12px; letter-spacing: 6px;
+    opacity: .5; margin-bottom: 24px; text-transform: uppercase;
+  }
+  .cover h1 { font-size: 34px; font-weight: 700; margin-bottom: 12px; letter-spacing: 4px; }
+  .cover .sub {
+    font-size: 16px; opacity: .55; font-style: italic; margin-bottom: 40px;
+    font-family: var(--font-sans);
+  }
+  .cover .ornament { font-size: 24px; opacity: .3; }
+
+  /* ── Container ── */
+  .book-body { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+  /* ── TOC ── */
+  .toc-page {
+    background: var(--paper); margin: 40px 0; border-radius: 4px;
+    padding: 48px 40px; box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    border: 1px solid var(--border);
+    page-break-after: always;
+  }
+  .toc-page h2 {
+    text-align: center; font-size: 24px; color: var(--accent);
+    margin-bottom: 6px; letter-spacing: 2px;
+  }
+  .toc-ornament { text-align: center; color: var(--gold); font-size: 18px; margin-bottom: 32px; }
+  .toc-part {
+    margin-bottom: 24px; padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .toc-part:first-of-type { border-top: none; padding-top: 0; }
+  .toc-part-title {
+    font-family: var(--font-sans); font-size: 14px; font-weight: 700;
+    color: var(--accent); letter-spacing: 3px; margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+  .toc-item {
+    display: flex; align-items: baseline; padding: 4px 0;
+    font-size: 15px;
+  }
+  .toc-num {
+    width: 28px; color: var(--ink-faint); font-size: 13px; flex-shrink: 0;
+    font-family: var(--font-sans);
+  }
+  .toc-title { flex: 1; }
+  .toc-author { color: var(--ink-faint); font-size: 13px; margin-left: 8px; white-space: nowrap; }
+  .toc-page-num {
+    color: var(--ink-faint); font-size: 13px; margin-left: 12px;
+    font-family: var(--font-sans);
+  }
+
+  /* ── Part Title Page ── */
+  .part-title {
+    text-align: center; padding: 40px 0 20px; margin: 20px 0;
+    border-bottom: 2px solid var(--border);
+  }
+  .part-title .label {
+    font-family: var(--font-sans); font-size: 11px; letter-spacing: 5px;
+    color: var(--gold); margin-bottom: 8px;
+  }
+  .part-title h3 { font-size: 22px; color: var(--accent); letter-spacing: 2px; }
+
+  /* ── Book Entry ── */
+  .book-entry {
+    background: var(--paper); border-radius: 4px; padding: 28px 32px;
+    margin-bottom: 16px; box-shadow: 0 1px 4px rgba(0,0,0,.04);
+    border: 1px solid var(--border);
+  }
+  .book-entry-header {
+    display: flex; align-items: baseline; gap: 12px; margin-bottom: 10px;
+  }
+  .book-num {
+    font-size: 12px; color: var(--ink-faint); font-family: var(--font-sans);
+    min-width: 24px;
+  }
+  .book-title {
+    font-size: 19px; font-weight: 700; color: var(--ink);
+  }
+  .book-original {
+    font-size: 13px; color: var(--ink-faint); font-style: italic; margin-left: 8px;
+    font-family: var(--font-sans);
+  }
+  .book-author {
+    font-size: 14px; color: var(--ink-light); margin-bottom: 14px;
+    padding-left: 36px;
+  }
+  .book-links {
+    display: flex; flex-wrap: wrap; gap: 8px; padding-left: 36px;
+  }
+  .book-links a {
+    display: inline-block; padding: 5px 16px; border-radius: 3px;
+    font-size: 13px; text-decoration: none; font-family: var(--font-sans);
+    font-weight: 500; transition: all .15s;
+  }
+  .link-zh  { background: var(--gold-light); color: var(--gold); border: 1px solid var(--gold); }
+  .link-zh:hover { background: var(--gold); color: white; }
+  .link-read { background: var(--accent-light); color: var(--accent); border: 1px solid var(--accent); }
+  .link-read:hover { background: var(--accent); color: white; }
+  .link-en  { background: #FFF7ED; color: #C2410C; border: 1px solid #FED7AA; }
+  .link-en:hover  { background: #C2410C; color: white; }
+  .book-note {
+    font-size: 13px; color: var(--ink-faint); margin-top: 10px;
+    padding-left: 36px; font-style: italic;
+  }
+
+  /* ── Appendix ── */
+  .appendix {
+    background: var(--paper); border-radius: 4px; padding: 40px;
+    margin: 40px 0; box-shadow: 0 2px 12px rgba(0,0,0,.06);
+    border: 1px solid var(--border); text-align: center;
+  }
+  .appendix h3 { color: var(--accent); margin-bottom: 20px; letter-spacing: 2px; }
+  .dl-grid {
+    display: flex; flex-wrap: wrap; gap: 10px; justify-content: center;
+    margin-bottom: 24px;
+  }
+  .dl-grid a {
+    display: inline-block; padding: 8px 18px; background: var(--accent);
+    color: white; border-radius: 4px; text-decoration: none;
+    font-family: var(--font-sans); font-size: 13px; font-weight: 600;
+  }
+  .dl-grid a:hover { opacity: .85; }
+
+  /* ── Colophon ── */
+  .colophon {
+    text-align: center; padding: 48px 20px;
+    color: var(--ink-faint); font-size: 13px;
+  }
+  .colophon p { margin-bottom: 4px; }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;
+    margin-bottom: 28px; font-family: var(--font-sans); font-size: 13px;
+  }
+
+  @media (max-width: 600px) {
+    .cover h1 { font-size: 24px; }
+    .toc-page { padding: 28px 20px; }
+    .book-entry { padding: 20px 16px; }
+    .book-links { padding-left: 0; }
+    .book-author { padding-left: 0; }
+    .book-note { padding-left: 0; }
+    .book-entry-header { flex-wrap: wrap; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ COVER ═══════════════ -->
+<div class="cover">
+  <div class="cover-label">The World Literature Treasury</div>
+  <h1>世界文学名著典藏</h1>
+  <p class="sub">三十部不朽经典 · 中文阅读与原文下载指南</p>
+  <div class="ornament">◆</div>
+</div>
+
+<div class="book-body">
+
+<!-- ═══════════════ TOC ═══════════════ -->
+<div class="toc-page">
+  <h2>目　录</h2>
+  <div class="toc-ornament">— ◆ —</div>
+
+  <div class="toc-part">
+    <div class="toc-part-title">第一卷 · 英国文学</div>
+    <div class="toc-item"><span class="toc-num">1</span><span class="toc-title">傲慢与偏见</span><span class="toc-author">简·奥斯汀</span></div>
+    <div class="toc-item"><span class="toc-num">2</span><span class="toc-title">简·爱</span><span class="toc-author">夏洛蒂·勃朗特</span></div>
+    <div class="toc-item"><span class="toc-num">3</span><span class="toc-title">呼啸山庄</span><span class="toc-author">艾米莉·勃朗特</span></div>
+    <div class="toc-item"><span class="toc-num">4</span><span class="toc-title">大卫·科波菲尔</span><span class="toc-author">查尔斯·狄更斯</span></div>
+    <div class="toc-item"><span class="toc-num">5</span><span class="toc-title">双城记</span><span class="toc-author">查尔斯·狄更斯</span></div>
+    <div class="toc-item"><span class="toc-num">6</span><span class="toc-title">雾都孤儿</span><span class="toc-author">查尔斯·狄更斯</span></div>
+    <div class="toc-item"><span class="toc-num">7</span><span class="toc-title">德伯家的苔丝</span><span class="toc-author">托马斯·哈代</span></div>
+    <div class="toc-item"><span class="toc-num">8</span><span class="toc-title">鲁滨逊漂流记</span><span class="toc-author">丹尼尔·笛福</span></div>
+    <div class="toc-item"><span class="toc-num">9</span><span class="toc-title">格列佛游记</span><span class="toc-author">乔纳森·斯威夫特</span></div>
+  </div>
+
+  <div class="toc-part">
+    <div class="toc-part-title">第二卷 · 法国文学</div>
+    <div class="toc-item"><span class="toc-num">10</span><span class="toc-title">巴黎圣母院</span><span class="toc-author">维克多·雨果</span></div>
+    <div class="toc-item"><span class="toc-num">11</span><span class="toc-title">悲惨世界</span><span class="toc-author">维克多·雨果</span></div>
+    <div class="toc-item"><span class="toc-num">12</span><span class="toc-title">红与黑</span><span class="toc-author">司汤达</span></div>
+    <div class="toc-item"><span class="toc-num">13</span><span class="toc-title">基督山伯爵</span><span class="toc-author">大仲马</span></div>
+    <div class="toc-item"><span class="toc-num">14</span><span class="toc-title">三个火枪手</span><span class="toc-author">大仲马</span></div>
+    <div class="toc-item"><span class="toc-num">15</span><span class="toc-title">包法利夫人</span><span class="toc-author">福楼拜</span></div>
+    <div class="toc-item"><span class="toc-num">16</span><span class="toc-title">高老头</span><span class="toc-author">巴尔扎克</span></div>
+    <div class="toc-item"><span class="toc-num">17</span><span class="toc-title">欧也妮·葛朗台</span><span class="toc-author">巴尔扎克</span></div>
+    <div class="toc-item"><span class="toc-num">18</span><span class="toc-title">茶花女</span><span class="toc-author">小仲马</span></div>
+    <div class="toc-item"><span class="toc-num">19</span><span class="toc-title">莫泊桑短篇小说选</span><span class="toc-author">莫泊桑</span></div>
+  </div>
+
+  <div class="toc-part">
+    <div class="toc-part-title">第三卷 · 俄国文学</div>
+    <div class="toc-item"><span class="toc-num">20</span><span class="toc-title">战争与和平</span><span class="toc-author">列夫·托尔斯泰</span></div>
+    <div class="toc-item"><span class="toc-num">21</span><span class="toc-title">安娜·卡列尼娜</span><span class="toc-author">列夫·托尔斯泰</span></div>
+    <div class="toc-item"><span class="toc-num">22</span><span class="toc-title">复活</span><span class="toc-author">列夫·托尔斯泰</span></div>
+    <div class="toc-item"><span class="toc-num">23</span><span class="toc-title">罪与罚</span><span class="toc-author">陀思妥耶夫斯基</span></div>
+    <div class="toc-item"><span class="toc-num">24</span><span class="toc-title">卡拉马佐夫兄弟</span><span class="toc-author">陀思妥耶夫斯基</span></div>
+    <div class="toc-item"><span class="toc-num">25</span><span class="toc-title">契诃夫短篇小说选</span><span class="toc-author">契诃夫</span></div>
+  </div>
+
+  <div class="toc-part">
+    <div class="toc-part-title">第四卷 · 欧洲经典</div>
+    <div class="toc-item"><span class="toc-num">26</span><span class="toc-title">少年维特之烦恼</span><span class="toc-author">歌德</span></div>
+    <div class="toc-item"><span class="toc-num">27</span><span class="toc-title">浮士德</span><span class="toc-author">歌德</span></div>
+    <div class="toc-item"><span class="toc-num">28</span><span class="toc-title">堂吉诃德</span><span class="toc-author">塞万提斯</span></div>
+  </div>
+
+  <div class="toc-part">
+    <div class="toc-part-title">第五卷 · 美国与东方</div>
+    <div class="toc-item"><span class="toc-num">29</span><span class="toc-title">了不起的盖茨比</span><span class="toc-author">菲茨杰拉德</span></div>
+    <div class="toc-item"><span class="toc-num">30</span><span class="toc-title">一千零一夜</span><span class="toc-author">阿拉伯民间故事</span></div>
+  </div>
+</div>
+
+<!-- ═══════════════ LEGEND ═══════════════ -->
+<div class="legend" style="background:var(--paper);padding:16px 24px;border-radius:4px;border:1px solid var(--border);text-align:center;">
+  <span style="display:inline-flex;align-items:center;gap:6px;"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:var(--gold);"></span> 中英双语/中文免费</span>
+  <span style="display:inline-flex;align-items:center;gap:6px;"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:var(--accent);"></span> 微信读书免费在线读</span>
+  <span style="display:inline-flex;align-items:center;gap:6px;"><span style="display:inline-block;width:12px;height:12px;border-radius:2px;background:#C2410C;"></span> 英文原版 PDF 下载</span>
+</div>
+
+<!-- ═══════════════ VOLUME I: BRITISH ═══════════════ -->
+<div class="part-title">
+  <div class="label">Volume I</div>
+  <h3>英国文学</h3>
+</div>
+
+<!-- 1 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">1</span>
+    <span class="book-title">傲慢与偏见</span>
+    <span class="book-original">Pride and Prejudice</span>
+  </div>
+  <div class="book-author">[英] 简·奥斯汀 Jane Austen · 1813年</div>
+  <div class="book-links">
+    <a class="link-zh" href="http://lost-theory.org/ocrat/prideprej/" target="_blank">中英逐章对照</a>
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=傲慢与偏见" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/1342" target="_blank">英文原版 PDF</a>
+  </div>
+  <div class="book-note">奥斯汀最负盛名之作，以班纳特家五位千金的婚恋故事，写尽英国乡绅社会的世态人情。</div>
+</div>
+
+<!-- 2 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">2</span>
+    <span class="book-title">简·爱</span>
+    <span class="book-original">Jane Eyre</span>
+  </div>
+  <div class="book-author">[英] 夏洛蒂·勃朗特 Charlotte Brontë · 1847年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=简爱" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/1260" target="_blank">英文原版 PDF</a>
+  </div>
+  <div class="book-note">一部关于尊严、平等与爱的自传体小说。简·爱那句"我们的灵魂是平等的"至今振聋发聩。</div>
+</div>
+
+<!-- 3 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">3</span>
+    <span class="book-title">呼啸山庄</span>
+    <span class="book-original">Wuthering Heights</span>
+  </div>
+  <div class="book-author">[英] 艾米莉·勃朗特 Emily Brontë · 1847年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=呼啸山庄" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/768" target="_blank">英文原版 PDF</a>
+  </div>
+  <div class="book-note">一部狂暴而深情的爱情悲剧。希斯克利夫与凯瑟琳的爱恨交织在荒原之上，超越了时代对小说的想象。</div>
+</div>
+
+<!-- 4 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">4</span>
+    <span class="book-title">大卫·科波菲尔</span>
+    <span class="book-original">David Copperfield</span>
+  </div>
+  <div class="book-author">[英] 查尔斯·狄更斯 Charles Dickens · 1850年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=大卫·科波菲尔" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/766" target="_blank">英文原版 PDF</a>
+  </div>
+  <div class="book-note">狄更斯自认"最心爱的孩子"，一部维多利亚时代的成长史诗。从孤儿到作家，书写百态人生。</div>
+</div>
+
+<!-- 5 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">5</span>
+    <span class="book-title">双城记</span>
+    <span class="book-original">A Tale of Two Cities</span>
+  </div>
+  <div class="book-author">[英] 查尔斯·狄更斯 Charles Dickens · 1859年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=双城记" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/98" target="_blank">英文原版 PDF</a>
+  </div>
+  <div class="book-note">"这是最好的时代，也是最坏的时代。"以法国大革命为背景，写尽牺牲、复仇与救赎。</div>
+</div>
+
+<!-- 6 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">6</span>
+    <span class="book-title">雾都孤儿</span>
+    <span class="book-original">Oliver Twist</span>
+  </div>
+  <div class="book-author">[英] 查尔斯·狄更斯 Charles Dickens · 1838年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=雾都孤儿" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/730" target="_blank">英文原版 PDF</a>
+  </div>
+  <div class="book-note">孤儿奥利弗在伦敦底层社会的挣扎求生。狄更斯以此揭露济贫院的黑暗，呼唤社会良知。</div>
+</div>
+
+<!-- 7 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">7</span>
+    <span class="book-title">德伯家的苔丝</span>
+    <span class="book-original">Tess of the d'Urbervilles</span>
+  </div>
+  <div class="book-author">[英] 托马斯·哈代 Thomas Hardy · 1891年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=苔丝" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/110" target="_blank">英文原版 PDF</a>
+  </div>
+  <div class="book-note">一个纯洁女人的悲剧命运。哈代以悲悯笔触控诉维多利亚时代的道德伪善与社会不公。</div>
+</div>
+
+<!-- 8 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">8</span>
+    <span class="book-title">鲁滨逊漂流记</span>
+    <span class="book-original">Robinson Crusoe</span>
+  </div>
+  <div class="book-author">[英] 丹尼尔·笛福 Daniel Defoe · 1719年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=鲁滨逊漂流记" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/521" target="_blank">英文原版 PDF</a>
+  </div>
+  <div class="book-note">英国文学史上第一部现实主义小说。荒岛生存28年的传奇，启迪无数人对冒险与人性的思考。</div>
+</div>
+
+<!-- 9 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">9</span>
+    <span class="book-title">格列佛游记</span>
+    <span class="book-original">Gulliver's Travels</span>
+  </div>
+  <div class="book-author">[英] 乔纳森·斯威夫特 Jonathan Swift · 1726年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=格列佛游记" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/829" target="_blank">英文原版 PDF</a>
+  </div>
+  <div class="book-note">小人国、大人国、飞岛国、慧骃国——看似奇幻历险，实则对人性与政治的锋利讽刺。</div>
+</div>
+
+<!-- ═══════════════ VOLUME II: FRENCH ═══════════════ -->
+<div class="part-title">
+  <div class="label">Volume II</div>
+  <h3>法国文学</h3>
+</div>
+
+<!-- 10 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">10</span>
+    <span class="book-title">巴黎圣母院</span>
+    <span class="book-original">Notre-Dame de Paris</span>
+  </div>
+  <div class="book-author">[法] 维克多·雨果 Victor Hugo · 1831年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=巴黎圣母院" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/2610" target="_blank">法文原版 PDF</a>
+  </div>
+  <div class="book-note">敲钟人卡西莫多与吉普赛少女爱斯梅拉达的故事。美与丑、善与恶在圣母院的钟声中永恒对峙。</div>
+</div>
+
+<!-- 11 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">11</span>
+    <span class="book-title">悲惨世界</span>
+    <span class="book-original">Les Misérables</span>
+  </div>
+  <div class="book-author">[法] 维克多·雨果 Victor Hugo · 1862年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=悲惨世界" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/135" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">冉阿让的一生是一部关于苦难、救赎与革命的人类史诗。雨果以恢宏笔力写尽19世纪法国的全部。</div>
+</div>
+
+<!-- 12 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">12</span>
+    <span class="book-title">红与黑</span>
+    <span class="book-original">Le Rouge et le Noir</span>
+  </div>
+  <div class="book-author">[法] 司汤达 Stendhal · 1830年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=红与黑" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/44747" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">于连·索雷尔的野心与幻灭。红是军服，黑是教袍——一部关于阶级跨越与个人奋斗的心理小说先驱。</div>
+</div>
+
+<!-- 13 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">13</span>
+    <span class="book-title">基督山伯爵</span>
+    <span class="book-original">Le Comte de Monte-Cristo</span>
+  </div>
+  <div class="book-author">[法] 大仲马 Alexandre Dumas · 1846年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=基督山伯爵" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/1184" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">人类文学史上最酣畅淋漓的复仇故事。爱德蒙·邓蒂斯从伊夫堡监狱到基督山伯爵的传奇之旅。</div>
+</div>
+
+<!-- 14 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">14</span>
+    <span class="book-title">三个火枪手</span>
+    <span class="book-original">Les Trois Mousquetaires</span>
+  </div>
+  <div class="book-author">[法] 大仲马 Alexandre Dumas · 1844年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=三个火枪手" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/1257" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">"人人为我，我为人人。"达达尼昂与阿多斯、波尔多斯、阿拉密斯的冒险传奇。</div>
+</div>
+
+<!-- 15 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">15</span>
+    <span class="book-title">包法利夫人</span>
+    <span class="book-original">Madame Bovary</span>
+  </div>
+  <div class="book-author">[法] 福楼拜 Gustave Flaubert · 1857年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=包法利夫人" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/2413" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">现代小说的起点。爱玛对浪漫生活的幻想到幻灭，福楼拜以精密如手术刀的笔法解剖人性。</div>
+</div>
+
+<!-- 16 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">16</span>
+    <span class="book-title">高老头</span>
+    <span class="book-original">Le Père Goriot</span>
+  </div>
+  <div class="book-author">[法] 巴尔扎克 Honoré de Balzac · 1835年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=高老头" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/1237" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">"人间喜剧"最悲怆的一页。一个父亲被两个女儿榨干后抛弃的故事，写尽金钱社会的冷酷。</div>
+</div>
+
+<!-- 17 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">17</span>
+    <span class="book-title">欧也妮·葛朗台</span>
+    <span class="book-original">Eugénie Grandet</span>
+  </div>
+  <div class="book-author">[法] 巴尔扎克 Honoré de Balzac · 1833年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=欧也妮·葛朗台" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/1575" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">文学史上最经典的守财奴形象。葛朗台老爹对金钱的执念与女儿欧也妮的纯真形成绝妙对照。</div>
+</div>
+
+<!-- 18 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">18</span>
+    <span class="book-title">茶花女</span>
+    <span class="book-original">La Dame aux Camélias</span>
+  </div>
+  <div class="book-author">[法] 小仲马 Alexandre Dumas fils · 1848年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=茶花女" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/1603" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">玛格丽特与阿尔芒的爱情悲剧，开启了一个半世纪的改编传奇——从舞台到歌剧《茶花女》。</div>
+</div>
+
+<!-- 19 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">19</span>
+    <span class="book-title">莫泊桑短篇小说选</span>
+    <span class="book-original">Selected Stories of Maupassant</span>
+  </div>
+  <div class="book-author">[法] 居伊·德·莫泊桑 Guy de Maupassant · 1880-1891年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=莫泊桑+短篇小说" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/search/?query=Maupassant" target="_blank">法文原版合集</a>
+  </div>
+  <div class="book-note">"短篇小说之王"。《羊脂球》《项链》《我的叔叔于勒》——每一篇都是技巧与深度的完美融合。</div>
+</div>
+
+<!-- ═══════════════ VOLUME III: RUSSIAN ═══════════════ -->
+<div class="part-title">
+  <div class="label">Volume III</div>
+  <h3>俄国文学</h3>
+</div>
+
+<!-- 20 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">20</span>
+    <span class="book-title">战争与和平</span>
+    <span class="book-original">Война и миръ</span>
+  </div>
+  <div class="book-author">[俄] 列夫·托尔斯泰 Leo Tolstoy · 1869年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=战争与和平" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/2600" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">人类文学史上规模最宏大的小说。拿破仑战争背景下，五百多个人物交织出一幅俄罗斯灵魂的全景图。</div>
+</div>
+
+<!-- 21 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">21</span>
+    <span class="book-title">安娜·卡列尼娜</span>
+    <span class="book-original">Анна Каренина</span>
+  </div>
+  <div class="book-author">[俄] 列夫·托尔斯泰 Leo Tolstoy · 1877年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=安娜·卡列尼娜" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/1399" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">"幸福的家庭都是相似的，不幸的家庭各有各的不幸。"托尔斯泰最完美的小说，一段禁忌之爱的悲剧。</div>
+</div>
+
+<!-- 22 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">22</span>
+    <span class="book-title">复活</span>
+    <span class="book-original">Воскресеніе</span>
+  </div>
+  <div class="book-author">[俄] 列夫·托尔斯泰 Leo Tolstoy · 1899年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=复活+托尔斯泰" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/1938" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">托尔斯泰晚年的精神自传。贵族聂赫留朵夫的精神复活之路，对俄国司法与社会制度的深入批判。</div>
+</div>
+
+<!-- 23 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">23</span>
+    <span class="book-title">罪与罚</span>
+    <span class="book-original">Преступленіе и наказаніе</span>
+  </div>
+  <div class="book-author">[俄] 陀思妥耶夫斯基 Fyodor Dostoevsky · 1866年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=罪与罚" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/2554" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">大学生拉斯柯尼科夫杀死放高利贷的老太婆，随之而来的是深入骨髓的心理煎熬。犯罪小说与哲学沉思的完美合体。</div>
+</div>
+
+<!-- 24 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">24</span>
+    <span class="book-title">卡拉马佐夫兄弟</span>
+    <span class="book-original">Братья Карамазовы</span>
+  </div>
+  <div class="book-author">[俄] 陀思妥耶夫斯基 Fyodor Dostoevsky · 1880年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=卡拉马佐夫兄弟" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/28054" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">陀思妥耶夫斯基的巅峰与绝笔。弑父之谜下是对信仰、自由意志与道德责任的终极追问。</div>
+</div>
+
+<!-- 25 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">25</span>
+    <span class="book-title">契诃夫短篇小说选</span>
+    <span class="book-original">Selected Stories of Chekhov</span>
+  </div>
+  <div class="book-author">[俄] 安东·契诃夫 Anton Chekhov · 1883-1904年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=契诃夫+短篇小说" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/search/?query=Chekhov" target="_blank">英文版合集</a>
+  </div>
+  <div class="book-note">《变色龙》《套中人》《小公务员之死》——以极简笔触写尽人性的荒诞与温情。现代短篇小说之父。</div>
+</div>
+
+<!-- ═══════════════ VOLUME IV: EUROPEAN ═══════════════ -->
+<div class="part-title">
+  <div class="label">Volume IV</div>
+  <h3>欧洲经典</h3>
+</div>
+
+<!-- 26 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">26</span>
+    <span class="book-title">少年维特之烦恼</span>
+    <span class="book-original">Die Leiden des jungen Werthers</span>
+  </div>
+  <div class="book-author">[德] 歌德 Johann Wolfgang von Goethe · 1774年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=少年维特之烦恼" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/2527" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">年轻的歌德一鸣惊人之作。维特对绿蒂无望的爱情，掀起了全欧洲"维特热"的文学风暴。</div>
+</div>
+
+<!-- 27 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">27</span>
+    <span class="book-title">浮士德</span>
+    <span class="book-original">Faust</span>
+  </div>
+  <div class="book-author">[德] 歌德 Johann Wolfgang von Goethe · 1808/1832年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=浮士德" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/14460" target="_blank">德文原版 PDF</a>
+  </div>
+  <div class="book-note">歌德耗费六十年完成的毕生杰作。浮士德博士与魔鬼梅菲斯特的赌约——人类对知识与意义的永恒追求。</div>
+</div>
+
+<!-- 28 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">28</span>
+    <span class="book-title">堂吉诃德</span>
+    <span class="book-original">Don Quijote de la Mancha</span>
+  </div>
+  <div class="book-author">[西] 塞万提斯 Miguel de Cervantes · 1605/1615年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=堂吉诃德" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/996" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">现代小说的开山之作。一个读骑士小说入了魔的老乡绅，骑着瘦马带着仆人，与风车作战——可笑又伟大。</div>
+</div>
+
+<!-- ═══════════════ VOLUME V: AMERICA & EAST ═══════════════ -->
+<div class="part-title">
+  <div class="label">Volume V</div>
+  <h3>美国与东方</h3>
+</div>
+
+<!-- 29 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">29</span>
+    <span class="book-title">了不起的盖茨比</span>
+    <span class="book-original">The Great Gatsby</span>
+  </div>
+  <div class="book-author">[美] F·斯科特·菲茨杰拉德 F. Scott Fitzgerald · 1925年</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=了不起的盖茨比" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/64317" target="_blank">英文原版 PDF</a>
+  </div>
+  <div class="book-note">"于是我们奋力向前划，逆流而上，却不断被浪潮推回过去。"爵士时代的挽歌，美国梦的幻灭。</div>
+</div>
+
+<!-- 30 -->
+<div class="book-entry">
+  <div class="book-entry-header">
+    <span class="book-num">30</span>
+    <span class="book-title">一千零一夜</span>
+    <span class="book-original">ألف ليلة وليلة · Arabian Nights</span>
+  </div>
+  <div class="book-author">阿拉伯民间故事集 · 约9-14世纪</div>
+  <div class="book-links">
+    <a class="link-read" href="https://weread.qq.com/web/search?keyword=一千零一夜" target="_blank">微信读书</a>
+    <a class="link-en" href="https://www.gutenberg.org/ebooks/search/?query=Arabian+Nights" target="_blank">英文版 PDF</a>
+  </div>
+  <div class="book-note">山鲁佐德用一千零一个夜晚讲述的故事——阿拉丁、辛巴达、阿里巴巴。东方叙事的无尽宝藏。</div>
+</div>
+
+<!-- ═══════════════ APPENDIX ═══════════════ -->
+<div class="appendix">
+  <h3>附　录　英文原版批量下载入口</h3>
+  <p style="margin-bottom:20px;color:var(--ink-light);">全部英文原版（公版、合法）均可在 Project Gutenberg 免费下载 PDF / EPUB / Kindle 格式。</p>
+  <div class="dl-grid">
+    <a href="https://www.gutenberg.org/ebooks/1342" target="_blank">傲慢与偏见</a>
+    <a href="https://www.gutenberg.org/ebooks/1260" target="_blank">简·爱</a>
+    <a href="https://www.gutenberg.org/ebooks/768" target="_blank">呼啸山庄</a>
+    <a href="https://www.gutenberg.org/ebooks/2600" target="_blank">战争与和平</a>
+    <a href="https://www.gutenberg.org/ebooks/2554" target="_blank">罪与罚</a>
+    <a href="https://www.gutenberg.org/ebooks/135" target="_blank">悲惨世界</a>
+    <a href="https://www.gutenberg.org/ebooks/1184" target="_blank">基督山伯爵</a>
+    <a href="https://www.gutenberg.org/ebooks/766" target="_blank">大卫·科波菲尔</a>
+    <a href="https://www.gutenberg.org/ebooks/98" target="_blank">双城记</a>
+    <a href="https://www.gutenberg.org/ebooks/730" target="_blank">雾都孤儿</a>
+    <a href="https://www.gutenberg.org/ebooks/521" target="_blank">鲁滨逊漂流记</a>
+    <a href="https://www.gutenberg.org/ebooks/829" target="_blank">格列佛游记</a>
+    <a href="https://www.gutenberg.org/ebooks/2413" target="_blank">包法利夫人</a>
+    <a href="https://www.gutenberg.org/ebooks/1399" target="_blank">安娜·卡列尼娜</a>
+    <a href="https://www.gutenberg.org/ebooks/996" target="_blank">堂吉诃德</a>
+  </div>
+  <p style="color:var(--ink-faint);font-size:13px;">以上均为英文原版。中文译本因翻译版权原因，推荐通过微信读书免费在线阅读。</p>
+</div>
+
+<!-- ═══════════════ COLOPHON ═══════════════ -->
+<div class="colophon">
+  <p>世界文学名著典藏 · 中文阅读与下载指南</p>
+  <p>全部内容来源：Project Gutenberg（gutenberg.org）、微信读书（weread.qq.com）</p>
+  <p>均为合法正版平台 · 2026年6月</p>
+</div>
+
+</div><!-- .book-body -->
+
+</body>
+</html>
