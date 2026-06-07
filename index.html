@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>novora — Build. Think. Write.</title>
+<title>novora — 探索制造与创新的边界</title>
 <style>
   :root {
     --bg: #FAFAFA;
@@ -20,6 +20,7 @@
     --pill-active-text: #FFFFFF;
     --pill-text: #6B7280;
     --pill-hover-bg: #F3F4F6;
+    --divider: #E5E7EB;
   }
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -30,36 +31,40 @@
   }
   .container { max-width: 720px; margin: 0 auto; }
 
-  /* ── Header ── */
+  /* ── Compact Header ── */
   .site-header {
-    text-align: center; padding: 72px 0 48px;
+    text-align: center; padding: 36px 0 8px;
   }
   .site-logo {
-    font-size: 40px; font-weight: 700; color: var(--accent);
-    letter-spacing: -1px; line-height: 1;
+    font-size: 32px; font-weight: 700; color: var(--accent);
+    letter-spacing: -0.8px; line-height: 1;
   }
-  .site-slogan {
-    font-size: 20px; font-weight: 500; color: var(--text);
-    margin-top: 16px; letter-spacing: 0.3px;
+  .site-title {
+    font-size: 15px; font-weight: 500; color: var(--text);
+    margin-top: 12px; letter-spacing: 0.3px;
   }
-  .site-desc {
-    font-size: 15px; color: var(--muted); margin-top: 12px;
+  .site-sub {
+    font-size: 13px; color: var(--muted); margin-top: 8px;
+    letter-spacing: 0.5px;
   }
   .site-stats {
-    font-size: 14px; color: var(--faint); margin-top: 20px;
+    font-size: 13px; color: var(--faint); margin-top: 10px;
     letter-spacing: 0.2px;
   }
-  .site-stats span { margin: 0 2px; }
-  .site-stats .sep { color: #D1D5DB; }
+  .site-stats .sep { color: #D1D5DB; margin: 0 4px; }
+  .header-divider {
+    width: 40px; height: 2px; background: var(--accent);
+    margin: 18px auto 0; border-radius: 1px;
+  }
 
   /* ── Category Nav ── */
   .cat-nav {
-    display: flex; justify-content: center; gap: 8px;
-    margin-bottom: 36px; flex-wrap: wrap;
+    display: flex; justify-content: center; gap: 6px;
+    margin: 16px 0 28px; flex-wrap: wrap;
   }
   .cat-pill {
-    font-size: 14px; font-weight: 500; padding: 7px 18px;
-    border-radius: 20px; border: 1px solid transparent;
+    font-size: 13px; font-weight: 500; padding: 5px 16px;
+    border-radius: 16px; border: 1px solid transparent;
     cursor: pointer; transition: all 0.15s;
     background: var(--pill-bg); color: var(--pill-text);
     white-space: nowrap; user-select: none;
@@ -69,7 +74,6 @@
     background: var(--pill-active-bg); color: var(--pill-active-text);
     border-color: var(--pill-active-bg);
   }
-  .cat-count { font-size: 12px; opacity: 0.6; margin-left: 2px; }
 
   /* ── Article Cards ── */
   .article-card {
@@ -111,16 +115,15 @@
   /* ── Footer ── */
   .site-footer {
     text-align: center; padding: 48px 0 32px;
-    color: var(--faint); font-size: 14px;
+    color: var(--faint); font-size: 13px;
   }
 
   /* ── Mobile ── */
   @media (max-width: 600px) {
     body { padding: 12px; font-size: 16px; }
-    .site-header { padding: 48px 0 32px; }
-    .site-logo { font-size: 36px; }
-    .site-slogan { font-size: 18px; }
-    .site-desc { font-size: 14px; }
+    .site-header { padding: 28px 0 6px; }
+    .site-logo { font-size: 28px; }
+    .site-title { font-size: 14px; }
     .cat-nav {
       justify-content: flex-start; flex-wrap: nowrap;
       overflow-x: auto; -webkit-overflow-scrolling: touch;
@@ -130,19 +133,19 @@
     .cat-pill { flex-shrink: 0; }
     .article-card { padding: 20px 18px; border-radius: 16px; }
     .article-card h2 { font-size: 19px; }
-    .article-card p { font-size: 15px; }
   }
 </style>
 </head>
 <body>
 <div class="container">
 
-  <!-- ═══ Header ═══ -->
+  <!-- ═══ Compact Header ═══ -->
   <header class="site-header">
     <div class="site-logo">novora</div>
-    <div class="site-slogan">Build. Think. Write.</div>
-    <div class="site-desc">关于商业、制造业、品牌与长期主义</div>
+    <div class="site-title">探索制造与创新的边界</div>
+    <div class="site-sub">包装 · 材料 · AI · 可持续发展</div>
     <div class="site-stats" id="site-stats"></div>
+    <div class="header-divider"></div>
   </header>
 
   <!-- ═══ Category Nav ═══ -->
@@ -153,74 +156,75 @@
 
   <!-- ═══ Footer ═══ -->
   <footer class="site-footer">
-    novora — Build. Think. Write.
+    novora — 产业知识库 · 包装与材料 · AI与可持续发展
   </footer>
 
 </div>
 
 <script>
+  // ── Article Database ──
   const articles = [
     {
       title: "色母粒的分散性：为什么它决定了你产品的成败",
       date: "2026-06-08",
-      summary: "因色母粒分散不良导致的质量问题占客诉的60%以上。从颜料选择到分散剂配方到加工工艺，一文讲透影响分散性的四大关键因素，附三种实用检测方法。",
-      tags: ["制造业", "色母粒"],
+      summary: "因色母粒分散不良导致的质量问题占客诉60%以上。从颜料选择到分散剂配方到加工工艺，一文讲透分散性的四大关键因素，附三种实用检测方法。",
+      tags: ["材料", "制造"],
       file: "articles/2026-06-08-dispersion.html"
     },
     {
       title: "色母粒销售技巧与叙事体系",
       date: "2026-06-07",
       summary: "11章完整弹药库：从核心叙事框架到30条异议处理，从10个场景化故事到30个短视频标题库。不是卖色母粒，而是解决塑料企业的生产问题。",
-      tags: ["销售", "制造业"],
+      tags: ["销售", "材料"],
       file: "articles/sales-skills.html"
     },
     {
       title: "世界文学名著典藏 · 280部导读",
       date: "2026-06-07",
       summary: "17卷分卷：从古希腊荷马史诗到现代经典，涵盖英国、法国、俄国、德国、意大利、拉美、亚洲等全球文学。每本含中英书名、作者、导读与免费阅读链接。",
-      tags: ["阅读", "文学"],
+      tags: ["阅读"],
       file: "articles/classics.html"
     },
     {
       title: "色母粒到底是什么？一分钟搞懂",
       date: "2026-06-07",
       summary: "从零开始的色母粒科普：为什么不用色粉直接染色？色母粒和色粉的本质区别是什么？一文讲清楚。",
-      tags: ["制造业", "色母粒"],
+      tags: ["材料", "制造"],
       file: "articles/what-is-masterbatch.html"
     },
     {
       title: "瓶子发黄怎么办？塑料厂急诊室",
       date: "2026-06-07",
       summary: "PET瓶发黄、注塑件黑点、吹塑件破裂——这些看似不同的质量问题，往往指向同一个幕后黑手。完整诊断框架与解决方案。",
-      tags: ["制造业", "色母粒"],
+      tags: ["材料", "制造"],
       file: "articles/yellow-bottles.html"
     },
     {
       title: "为什么低价色母粒最后反而更贵？",
       date: "2026-06-07",
-      summary: "三组算账对比告诉你：便宜色母粒VS高品质色母粒，添加量、不良率、停机率——哪边才是真正的省钱？",
-      tags: ["商业", "制造业"],
+      summary: "三组算账对比：便宜色母粒VS高品质色母粒，添加量、不良率、停机率——真正的省钱是什么？",
+      tags: ["材料", "制造"],
       file: "articles/cheap-masterbatch.html"
     },
     {
       title: "一个配方，一年帮客户省了120万",
       date: "2026-06-07",
       summary: "真实案例：添加量从4%优化到2.5%效果不变。色母粒不是越便宜越好——关键是综合成本。五维度成本拆解。",
-      tags: ["商业", "制造业"],
+      tags: ["材料", "制造"],
       file: "articles/roi-120wan.html"
     },
     {
       title: "10万只瓶子报废，只因为颜色差了0.5%",
       date: "2026-06-07",
       summary: "客户验货当天，10万只瓶子直接退货。问题竟然出在色母粒添加比例上。塑料行业最贵的不是色母粒，而是返工。",
-      tags: ["制造业", "商业"],
+      tags: ["材料", "制造"],
       file: "articles/bottles-100k.html"
     },
     {
       title: "Silgan Dispensing 深度调研报告",
       date: "2026-05-16",
-      summary: "西尔格分配系统全球最完整深度分析。14页覆盖：集团架构与三大事业部、中国市场28年深耕、5笔重大收购（Albéa/Weener等）、五年财务全景、ERA/MELODIE核心技术平台。",
-      tags: ["商业", "制造业"],
+      summary: "西尔格分配系统全球最完整深度分析。14页覆盖：集团架构与三大事业部、中国市场28年深耕、5笔重大收购、五年财务全景、核心技术平台。",
+      tags: ["包装", "制造"],
       file: "articles/silgan-dispensing.html"
     }
   ];
@@ -229,53 +233,36 @@
   const topicSet = new Set();
   articles.forEach(a => a.tags.forEach(t => topicSet.add(t)));
   document.getElementById('site-stats').innerHTML =
-    '<span>' + articles.length + ' Articles</span>' +
-    '<span class="sep"> &middot; </span>' +
-    '<span>' + topicSet.size + ' Topics</span>' +
-    '<span class="sep"> &middot; </span>' +
-    '<span>Updated Weekly</span>';
+    articles.length + '篇文章' +
+    '<span class="sep">·</span>' +
+    topicSet.size + '个专题' +
+    '<span class="sep">·</span>' +
+    '持续更新';
 
-  // ── Category Nav ──
-  const allCategories = ['全部文章', '商业', '制造业', '品牌', '销售', '阅读', '管理'];
+  // ── Category System ──
+  const categories = ['全部文章', '包装', '材料', '制造', 'AI', '可持续发展', '销售', '管理'];
   const catNav = document.getElementById('cat-nav');
 
-  // Compute per-category counts
+  // Per-category counts
   const catCounts = {};
-  allCategories.forEach(c => { catCounts[c] = 0; });
+  categories.forEach(c => { catCounts[c] = 0; });
   articles.forEach(a => {
-    // '全部文章' counts all
     catCounts['全部文章']++;
-    // Map tags to categories
     a.tags.forEach(t => {
-      // Direct match
-      if (allCategories.includes(t)) catCounts[t]++;
-      // Map "色母粒" → "制造业"
-      if (t === '色母粒' || t === '塑料') catCounts['制造业'] = (catCounts['制造业'] || 0) + 1;
+      if (categories.includes(t)) catCounts[t]++;
     });
-    // Map specific tags to categories
-    if (a.tags.includes('销售') || a.tags.includes('内部培训')) catCounts['销售'] = (catCounts['销售'] || 0) + 1;
   });
-  // Ensure counts are at least 1 for display
-  allCategories.forEach(c => { if (catCounts[c] === 0) catCounts[c] = 0; });
 
   let activeCat = '全部文章';
 
   function renderCategories() {
-    // Only show categories that have at least 1 article
-    const visible = allCategories.filter(c => {
-      if (c === '全部文章') return true;
-      return (catCounts[c] || 0) > 0;
-    });
-
+    const visible = categories.filter(c => catCounts[c] > 0 || c === '全部文章');
     catNav.innerHTML = visible.map(c => {
-      const activeClass = c === activeCat ? ' active' : '';
-      const count = catCounts[c] || 0;
-      const countHtml = c === '全部文章' ? '' : '<span class="cat-count">' + count + '</span>';
-      return '<span class="cat-pill' + activeClass + '" data-cat="' + c + '">' + c + countHtml + '</span>';
+      const cls = c === activeCat ? ' active' : '';
+      return '<span class="cat-pill' + cls + '" data-cat="' + c + '">' + c + '</span>';
     }).join('');
-
-    catNav.querySelectorAll('.cat-pill').forEach(pill => {
-      pill.addEventListener('click', function() {
+    catNav.querySelectorAll('.cat-pill').forEach(p => {
+      p.addEventListener('click', function() {
         activeCat = this.getAttribute('data-cat');
         renderCategories();
         filterArticles();
@@ -284,23 +271,10 @@
   }
 
   function filterArticles() {
-    const cards = document.querySelectorAll('.article-card');
-    cards.forEach(card => {
-      if (activeCat === '全部文章') {
-        card.classList.remove('hidden');
-        return;
-      }
+    document.querySelectorAll('.article-card').forEach(card => {
+      if (activeCat === '全部文章') { card.classList.remove('hidden'); return; }
       const tags = card.getAttribute('data-tags').split(',');
-      const matches = tags.some(t => {
-        const trimmed = t.trim();
-        if (trimmed === activeCat) return true;
-        // Map 色母粒/塑料 → 制造业
-        if (activeCat === '制造业' && (trimmed === '色母粒' || trimmed === '塑料')) return true;
-        // Map 内部培训 → 销售
-        if (activeCat === '销售' && trimmed === '内部培训') return true;
-        return false;
-      });
-      card.classList.toggle('hidden', !matches);
+      card.classList.toggle('hidden', !tags.some(t => t.trim() === activeCat));
     });
   }
 
