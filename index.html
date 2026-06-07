@@ -6,7 +6,7 @@
 <title>novora — 探索制造与创新的边界</title>
 <style>
   :root {
-    --bg: #FAFAFA;
+    --bg: #F7F7F7;
     --card: #FFFFFF;
     --text: #1F2937;
     --muted: #6B7280;
@@ -15,61 +15,59 @@
     --accent-l: #1A3F6E;
     --tag-bg: #EEF3F9;
     --tag-text: #1A3F6E;
-    --pill-bg: #FFFFFF;
+    --pill-bg: #F3F4F6;
     --pill-active-bg: #0F2747;
     --pill-active-text: #FFFFFF;
     --pill-text: #6B7280;
-    --pill-hover-bg: #F3F4F6;
-    --divider: #E5E7EB;
+    --pill-border: #E5E7EB;
   }
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    font-size: 17px; line-height: 1.8; color: var(--text);
+    font-size: 16px; line-height: 1.75; color: var(--text);
     background: var(--bg); padding: 20px;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  .container { max-width: 720px; margin: 0 auto; }
+  .container { max-width: 700px; margin: 0 auto; }
 
-  /* ── Compact Header ── */
-  .site-header {
-    text-align: center; padding: 36px 0 8px;
-  }
+  /* ── Header (ultra-compact) ── */
+  .site-header { text-align: center; padding: 24px 0 0; }
   .site-logo {
-    font-size: 32px; font-weight: 700; color: var(--accent);
-    letter-spacing: -0.8px; line-height: 1;
+    font-size: 30px; font-weight: 700; color: var(--accent);
+    letter-spacing: -0.6px; line-height: 1;
   }
   .site-title {
-    font-size: 15px; font-weight: 500; color: var(--text);
-    margin-top: 12px; letter-spacing: 0.3px;
+    font-size: 14px; font-weight: 500; color: var(--text);
+    margin-top: 10px; letter-spacing: 0.2px;
   }
   .site-sub {
-    font-size: 13px; color: var(--muted); margin-top: 8px;
-    letter-spacing: 0.5px;
+    font-size: 12px; color: var(--muted); margin-top: 6px;
+    letter-spacing: 0.6px;
   }
   .site-stats {
-    font-size: 13px; color: var(--faint); margin-top: 10px;
+    font-size: 12px; color: var(--faint); margin-top: 8px;
     letter-spacing: 0.2px;
   }
-  .site-stats .sep { color: #D1D5DB; margin: 0 4px; }
+  .site-stats .sep { color: #D1D5DB; margin: 0 5px; }
   .header-divider {
-    width: 40px; height: 2px; background: var(--accent);
-    margin: 18px auto 0; border-radius: 1px;
+    width: 28px; height: 1.5px; background: var(--accent);
+    margin: 14px auto 0; border-radius: 1px; opacity: 0.6;
   }
 
   /* ── Category Nav ── */
   .cat-nav {
     display: flex; justify-content: center; gap: 6px;
-    margin: 16px 0 28px; flex-wrap: wrap;
+    margin: 12px 0 24px; flex-wrap: wrap;
   }
   .cat-pill {
-    font-size: 13px; font-weight: 500; padding: 5px 16px;
-    border-radius: 16px; border: 1px solid transparent;
+    font-size: 12px; font-weight: 500; padding: 4px 14px;
+    border-radius: 14px; border: 1px solid var(--pill-border);
     cursor: pointer; transition: all 0.15s;
     background: var(--pill-bg); color: var(--pill-text);
     white-space: nowrap; user-select: none;
   }
-  .cat-pill:hover { background: var(--pill-hover-bg); }
+  .cat-pill:hover { background: #E5E7EB; border-color: #D1D5DB; }
   .cat-pill.active {
     background: var(--pill-active-bg); color: var(--pill-active-text);
     border-color: var(--pill-active-bg);
@@ -77,53 +75,52 @@
 
   /* ── Article Cards ── */
   .article-card {
-    background: var(--card); border: 1px solid transparent;
-    border-radius: 20px; padding: 28px 32px; margin-bottom: 14px;
-    cursor: pointer; transition: all 0.2s ease;
+    background: var(--card); border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 16px; padding: 24px 28px; margin-bottom: 12px;
+    cursor: pointer; transition: all 0.2s cubic-bezier(0.2,0,0,1);
     display: block; text-decoration: none; color: inherit;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    box-shadow: none;
   }
   .article-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transform: translateY(-1px);
+    border-color: rgba(0,0,0,0.1);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
   }
   .article-card.hidden { display: none; }
   .article-card .meta {
-    display: flex; align-items: center; gap: 12px;
-    margin-bottom: 10px; flex-wrap: wrap;
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 8px; flex-wrap: wrap;
   }
   .article-card .date {
-    font-size: 14px; color: var(--faint); font-weight: 500;
+    font-size: 13px; color: var(--faint); font-weight: 500;
     font-variant-numeric: tabular-nums;
   }
-  .article-card .tags {
-    display: flex; gap: 6px; flex-wrap: wrap;
-  }
+  .article-card .tags { display: flex; gap: 5px; flex-wrap: wrap; }
   .article-card .tag {
-    font-size: 12px; padding: 2px 10px;
+    font-size: 11px; padding: 2px 8px;
     background: var(--tag-bg); color: var(--tag-text);
-    border-radius: 4px; font-weight: 500;
+    border-radius: 3px; font-weight: 500; letter-spacing: 0.2px;
   }
   .article-card h2 {
-    font-size: 22px; font-weight: 700; line-height: 1.4;
-    margin-bottom: 8px; color: var(--accent);
+    font-size: 20px; font-weight: 700; line-height: 1.4;
+    margin-bottom: 6px; color: var(--accent);
   }
   .article-card p {
-    font-size: 15px; color: var(--muted); line-height: 1.7;
+    font-size: 14px; color: var(--muted); line-height: 1.7;
   }
 
   /* ── Footer ── */
   .site-footer {
-    text-align: center; padding: 48px 0 32px;
-    color: var(--faint); font-size: 13px;
+    text-align: center; padding: 40px 0 28px;
+    color: var(--faint); font-size: 12px; letter-spacing: 0.3px;
   }
 
   /* ── Mobile ── */
   @media (max-width: 600px) {
-    body { padding: 12px; font-size: 16px; }
-    .site-header { padding: 28px 0 6px; }
-    .site-logo { font-size: 28px; }
-    .site-title { font-size: 14px; }
+    body { padding: 12px; font-size: 15px; }
+    .site-header { padding: 20px 0 0; }
+    .site-logo { font-size: 26px; }
+    .site-title { font-size: 13px; }
     .cat-nav {
       justify-content: flex-start; flex-wrap: nowrap;
       overflow-x: auto; -webkit-overflow-scrolling: touch;
@@ -131,8 +128,8 @@
     }
     .cat-nav::-webkit-scrollbar { display: none; }
     .cat-pill { flex-shrink: 0; }
-    .article-card { padding: 20px 18px; border-radius: 16px; }
-    .article-card h2 { font-size: 19px; }
+    .article-card { padding: 18px 16px; border-radius: 14px; }
+    .article-card h2 { font-size: 18px; }
   }
 </style>
 </head>
