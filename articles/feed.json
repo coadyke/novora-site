@@ -1,8 +1,19 @@
 [
   {
+    "title": "Airless Pump 如何进行真空保持测试？",
+    "date": "2026-06-08",
+    "summary": "高端品牌供应商审核必考项目。从三重密封到28天全周期检测，从负压挑战到温差循环，全面解析真空保持测试的方法论与判定标准。",
+    "tags": [
+      "包装",
+      "制造",
+      "质量"
+    ],
+    "url": "https://coadyke.github.io/novora-site/articles/2026-06-08-airless-vacuum.html"
+  },
+  {
     "title": "色母粒的分散性：为什么它决定了你产品的成败",
     "date": "2026-06-08",
-    "summary": "因色母粒分散不良导致的质量问题占客诉60%以上。从颜料选择到分散剂配方到加工工艺，一文讲透影响分散性的四大关键因素。",
+    "summary": "因色母粒分散不良导致的质量问题占客诉60%以上。从颜料选择到分散剂配方到加工工艺，一文讲透分散性的四大关键因素。",
     "tags": [
       "材料",
       "制造"
@@ -12,7 +23,7 @@
   {
     "title": "色母粒销售技巧与叙事体系",
     "date": "2026-06-07",
-    "summary": "11章完整销售弹药库：核心叙事框架、12个痛点切入点、10个场景化故事、30个异议处理、6种客户策略、12个价格谈判技巧。",
+    "summary": "11章完整弹药库：核心叙事框架、12个痛点切入点、10个场景化故事、30个异议处理、6种客户策略、12个价格谈判技巧。",
     "tags": [
       "材料"
     ],
@@ -26,5 +37,26 @@
       "包装"
     ],
     "url": "https://coadyke.github.io/novora-site/articles/silgan-dispensing.html"
+  },
+  {
+    "title": "色母粒到底是什么？一分钟搞懂",
+    "date": "2026-06-07",
+    "summary": "从零开始的色母粒科普：为什么不用色粉直接染色？色母粒和色粉的本质区别是什么？",
+    "tags": [
+      "材料",
+      "制造"
+    ],
+    "url": "https://coadyke.github.io/novora-site/articles/what-is-masterbatch.html"
+  },
+  {
+    "title": "瓶子发黄怎么办？塑料厂急诊室",
+    "date": "2026-06-07",
+    "summary": "PET瓶发黄、注塑件黑点、吹塑件破裂——完整诊断框架与解决方案，从氧化降解到助剂迁移逐层排查。",
+    "tags": [
+      "材料",
+      "制造",
+      "质量"
+    ],
+    "url": "https://coadyke.github.io/novora-site/articles/yellow-bottles.html"
   }
 ]
