@@ -32,14 +32,21 @@
     font-size: 22px; font-weight: 700; color: var(--accent);
     letter-spacing: -0.4px; line-height: 1; white-space: nowrap;
   }
-  .site-sub {
-    font-size: 11px; color: var(--faint); letter-spacing: 0.3px;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    flex: 1; min-width: 0;
+  .hdr-cats {
+    display: flex; gap: 3px; flex-wrap: wrap; align-items: baseline;
   }
+  .hdr-chip {
+    font-size: 11px; font-weight: 500; padding: 2px 7px;
+    border-radius: 4px; border: 1px solid transparent;
+    cursor: pointer; transition: all 0.15s;
+    color: var(--faint); background: transparent;
+    white-space: nowrap; user-select: none; line-height: 1.4;
+  }
+  .hdr-chip:hover { color: var(--accent); background: rgba(15,39,71,0.06); }
+  .hdr-chip.active { color: var(--accent); background: rgba(15,39,71,0.08); font-weight: 700; }
   .head-row2 {
     display: flex; align-items: center; justify-content: space-between;
-    gap: 12px; margin-top: 4px;
+    gap: 12px; margin-top: 6px;
   }
   .head-stats {
     font-size: 11px; color: var(--faint); white-space: nowrap;
@@ -52,31 +59,14 @@
     transition: color 0.15s;
   }
   .megee-inline:hover { color: var(--accent); }
-  .cat-row {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-top: 7px;
-  }
   .head-sub-btn {
     font-size: 12px; font-weight: 500; padding: 3px 10px;
     border-radius: 999px; border: 1px solid #DDE3EA;
     color: #94A3B8; background: transparent; cursor: pointer;
     transition: all 0.15s; white-space: nowrap; letter-spacing: 0.2px;
-    flex-shrink: 0; margin-right: 160px;
+    flex-shrink: 0;
   }
   .head-sub-btn:hover { color: var(--accent); border-color: #BFCAD8; background: transparent; }
-
-  .cat-nav {
-    display: flex; gap: 5px; flex-wrap: wrap;
-  }
-  .cat-pill {
-    font-size: 11px; font-weight: 500; padding: 3px 12px;
-    border-radius: 12px; border: 1px solid var(--pill-border);
-    cursor: pointer; transition: all 0.15s;
-    background: var(--pill-bg); color: var(--pill-text);
-    white-space: nowrap; user-select: none;
-  }
-  .cat-pill:hover { background: #E5E7EB; border-color: #D1D5DB; }
-  .cat-pill.active { background: var(--pill-active-bg); color: var(--pill-active-text); border-color: var(--pill-active-bg); }
 
   /* page content below header */
   .page-content { padding-top: 16px; }
@@ -118,15 +108,11 @@
     .container { padding: 0 12px; }
     .sticky-head { padding: 8px 12px 5px; }
     .site-logo { font-size: 20px; }
-    .site-sub { font-size: 10px; }
+    .hdr-chip { font-size: 10px; padding: 2px 6px; }
     .head-stats { font-size: 10px; }
     .megee-inline { font-size: 10px; }
     .head-sub-btn { font-size: 10px; padding: 2px 8px; }
     .head-row2 { gap: 8px; }
-    .cat-row { gap: 6px; }
-    .cat-nav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
-    .cat-nav::-webkit-scrollbar { display: none; }
-    .cat-pill { flex-shrink: 0; font-size: 10px; padding: 3px 10px; }
     .article-card { padding: 18px 16px; border-radius: 14px; }
     .article-card h2 { font-size: 18px; }
   }
@@ -137,13 +123,10 @@
   <div class="sticky-head-inner">
     <div class="head-row1">
       <span class="site-logo">novora</span>
-      <span class="site-sub">包装｜材料｜制造｜质量｜AI｜可持续发展｜洞察｜阅读</span>
+      <div class="hdr-cats" id="hdr-cats"></div>
     </div>
     <div class="head-row2">
       <span class="head-stats" id="site-stats"></span>
-    </div>
-    <div class="cat-row">
-      <nav class="cat-nav" id="cat-nav"></nav>
       <button class="head-sub-btn" id="sub-btn">获取更新</button>
     </div>
   </div>
@@ -196,19 +179,19 @@
 
   // ── 7 categories ──
   const categories = ['全部', '包装', '材料', '制造', '质量', '可持续发展', 'AI', '洞察', '阅读'];
-  const catNav = document.getElementById('cat-nav');
+  const hdrCats = document.getElementById('hdr-cats');
   const catCounts = {}; categories.forEach(c => { catCounts[c] = 0; });
   articles.forEach(a => { catCounts['全部']++; a.tags.forEach(t => { if (categories.includes(t)) catCounts[t]++; }); });
 
   let activeCat = '全部';
 
-  function renderCategories() {
-    const visible = categories.filter(c => catCounts[c] > 0 || c === '全部');
-    catNav.innerHTML = visible.map(c => '<span class="cat-pill' + (c === activeCat ? ' active' : '') + '" data-cat="' + c + '">' + c + '</span>').join('');
-    catNav.querySelectorAll('.cat-pill').forEach(p => {
-      p.addEventListener('click', function() {
-        activeCat = this.getAttribute('data-cat');
-        renderCategories(); applyFilters();
+  function renderCats() {
+    const visible = categories.filter(c => catCounts[c] > 0 && c !== '全部');
+    hdrCats.innerHTML = visible.map(c => '<span class="hdr-chip' + (c === activeCat ? ' active' : '') + '" data-cat="' + c + '">' + c + '</span>').join('');
+    hdrCats.querySelectorAll('.hdr-chip').forEach(chip => {
+      chip.addEventListener('click', function() {
+        activeCat = this.getAttribute('data-cat') === activeCat ? '全部' : this.getAttribute('data-cat');
+        renderCats(); applyFilters();
       });
     });
   }
@@ -233,7 +216,7 @@
     list.appendChild(card);
   });
 
-  renderCategories();
+  renderCats();
 </script>
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
