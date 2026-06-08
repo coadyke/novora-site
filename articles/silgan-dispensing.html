@@ -96,7 +96,17 @@
     table { font-size: 12px; }
     th, td { padding: 6px 7px; font-size: 12px; }
   }
+
+  .like-section { text-align:center; padding:32px 0 16px; border-top:1px solid var(--gray-1); margin-top:32px; }
+  .like-btn { display:inline-flex; align-items:center; gap:6px; font-size:15px; font-weight:500; color:var(--muted); background:none; border:1px solid var(--gray-1); border-radius:999px; padding:8px 20px; cursor:pointer; transition:all .2s; user-select:none; }
+  .like-btn:hover { border-color:#E57373; color:#E57373; }
+  .like-btn.liked { color:#E53935; border-color:#EF9A9A; background:#FFF5F5; animation:like-pop .3s ease; }
+  .like-btn .heart { font-size:18px; transition:transform .3s; }
+  .like-btn.liked .heart { transform:scale(1.3); }
+  @keyframes like-pop { 0%{transform:scale(1)} 50%{transform:scale(1.1)} 100%{transform:scale(1)} }
+  .like-count { font-variant-numeric:tabular-nums; }
 </style>
+
 </head>
 <body>
 <div class="container">
@@ -485,6 +495,44 @@
       back.href = 'https://coadyke.github.io/novora-site/';
     }
   })();
+</script>
+
+<div class="like-section">
+  <button class="like-btn" id="like-btn" onclick="toggleLike()">
+    <span class="heart" id="heart-icon">♡</span>
+    <span class="like-count" id="like-count">喜欢这篇文章</span>
+  </button>
+</div>
+
+<script>
+(function(){
+  var slug = window.location.pathname.split('/').pop().replace('.html','');
+  var key = 'nv_like_' + slug;
+  var btn = document.getElementById('like-btn');
+  var icon = document.getElementById('heart-icon');
+  var cnt = document.getElementById('like-count');
+  var liked = localStorage.getItem(key) === '1';
+
+  if (liked) {
+    btn.classList.add('liked');
+    icon.textContent = '♥';
+    cnt.textContent = '已点赞';
+  }
+
+  window.toggleLike = function(){
+    if (btn.classList.contains('liked')) {
+      btn.classList.remove('liked');
+      icon.textContent = '♡';
+      cnt.textContent = '喜欢这篇文章';
+      localStorage.removeItem(key);
+    } else {
+      btn.classList.add('liked');
+      icon.textContent = '♥';
+      cnt.textContent = '已点赞';
+      localStorage.setItem(key, '1');
+    }
+  };
+})();
 </script>
 </body>
 </html>

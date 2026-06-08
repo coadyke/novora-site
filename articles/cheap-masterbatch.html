@@ -122,4 +122,42 @@
 </div></article>
 
 <footer class="footer"><div class="container"><div class="footer-bottom"><p>© 2026 贝多芬新材料科技（湖州）有限公司</p></div></div></footer>
+
+<div class="like-section">
+  <button class="like-btn" id="like-btn" onclick="toggleLike()">
+    <span class="heart" id="heart-icon">♡</span>
+    <span class="like-count" id="like-count">喜欢这篇文章</span>
+  </button>
+</div>
+
+<script>
+(function(){
+  var slug = window.location.pathname.split('/').pop().replace('.html','');
+  var key = 'nv_like_' + slug;
+  var btn = document.getElementById('like-btn');
+  var icon = document.getElementById('heart-icon');
+  var cnt = document.getElementById('like-count');
+  var liked = localStorage.getItem(key) === '1';
+
+  if (liked) {
+    btn.classList.add('liked');
+    icon.textContent = '♥';
+    cnt.textContent = '已点赞';
+  }
+
+  window.toggleLike = function(){
+    if (btn.classList.contains('liked')) {
+      btn.classList.remove('liked');
+      icon.textContent = '♡';
+      cnt.textContent = '喜欢这篇文章';
+      localStorage.removeItem(key);
+    } else {
+      btn.classList.add('liked');
+      icon.textContent = '♥';
+      cnt.textContent = '已点赞';
+      localStorage.setItem(key, '1');
+    }
+  };
+})();
+</script>
 </body></html>
