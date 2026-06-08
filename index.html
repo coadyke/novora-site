@@ -41,6 +41,29 @@
 
   .site-footer { text-align: center; padding: 40px 0 28px; color: var(--faint); font-size: 12px; letter-spacing: 0.3px; }
 
+  /* ── Subscribe ── */
+  .sub-btn { display: inline-block; font-size: 12px; font-weight: 500; padding: 4px 16px; border-radius: 14px; border: 1px solid var(--accent); color: var(--accent); background: transparent; cursor: pointer; transition: all 0.15s; white-space: nowrap; letter-spacing: 0.3px; margin-left: 6px; }
+  .sub-btn:hover { background: var(--accent); color: #fff; }
+  .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15,39,71,0.5); z-index: 999; justify-content: center; align-items: center; padding: 20px; }
+  .modal-overlay.show { display: flex; }
+  .modal { background: #fff; border-radius: 16px; padding: 32px 28px; width: 100%; max-width: 420px; box-shadow: 0 8px 32px rgba(0,0,0,0.12); position: relative; animation: modal-in 0.2s ease; }
+  @keyframes modal-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+  .modal-close { position: absolute; top: 14px; right: 18px; font-size: 20px; color: var(--faint); cursor: pointer; background: none; border: none; line-height: 1; }
+  .modal h3 { font-size: 18px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+  .modal .sub-hint { font-size: 13px; color: var(--muted); margin-bottom: 20px; line-height: 1.5; }
+  .modal label { display: block; font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 4px; margin-top: 12px; }
+  .modal label .req { color: #DC2626; }
+  .modal input, .modal textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--pill-border); border-radius: 8px; font-size: 14px; font-family: inherit; color: var(--text); outline: none; transition: border-color 0.15s; }
+  .modal input:focus, .modal textarea:focus { border-color: var(--accent); }
+  .modal textarea { resize: vertical; min-height: 60px; }
+  .modal .sub-submit { width: 100%; margin-top: 20px; padding: 12px; background: var(--accent); color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+  .modal .sub-submit:hover { background: var(--accent-l); }
+  .modal .sub-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .modal .sub-msg { font-size: 13px; margin-top: 10px; text-align: center; display: none; }
+  .modal .sub-msg.success { color: #059669; display: block; }
+  .modal .sub-msg.error { color: #DC2626; display: block; }
+  .sub-row { display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 0; padding: 0 0 12px; }
+
   @media (max-width: 600px) {
     body { padding: 12px; font-size: 15px; }
     .site-header { padding: 20px 0 0; }
@@ -67,7 +90,32 @@
 
   <nav class="cat-nav" id="cat-nav"></nav>
 
+  <div class="sub-row"><button class="sub-btn" id="sub-btn">订阅更新</button></div>
+
   <div id="article-list"></div>
+
+  <!-- Subscription Modal -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <button class="modal-close" id="modal-close">&times;</button>
+      <h3>订阅 novora</h3>
+      <p class="sub-hint">新文章发布时，邮件通知你。<br>每周 1-2 篇，无广告，可随时退订。</p>
+      <form id="sub-form">
+        <label>姓名 <span class="req">*</span></label>
+        <input type="text" name="name" placeholder="你的姓名" required>
+        <label>城市</label>
+        <input type="text" name="city" placeholder="所在城市">
+        <label>邮箱</label>
+        <input type="email" name="email" placeholder="your@email.com">
+        <label>手机 <span class="req">*</span></label>
+        <input type="tel" name="phone" placeholder="手机号码" required>
+        <label>留言</label>
+        <textarea name="message" placeholder="想了解什么话题？（选填）"></textarea>
+        <button type="submit" class="sub-submit" id="sub-submit">提交订阅</button>
+        <div class="sub-msg" id="sub-msg"></div>
+      </form>
+    </div>
+  </div>
 
   <footer class="site-footer">
     novora · 包装｜材料｜制造｜质量｜AI｜可持续发展｜阅读
@@ -135,6 +183,49 @@
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script>
+  // ── Subscribe Modal ──
+  (function(){
+    var btn = document.getElementById('sub-btn');
+    var ov = document.getElementById('modal-overlay');
+    var close = document.getElementById('modal-close');
+    var form = document.getElementById('sub-form');
+    var msg = document.getElementById('sub-msg');
+    var submitBtn = document.getElementById('sub-submit');
+
+    btn.addEventListener('click', function(){ ov.classList.add('show'); });
+    close.addEventListener('click', function(){ ov.classList.remove('show'); });
+    ov.addEventListener('click', function(e){ if (e.target === ov) ov.classList.remove('show'); });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = '提交中...';
+      msg.className = 'sub-msg'; msg.textContent = '';
+
+      var data = new FormData(form);
+
+      fetch('https://formsubmit.co/ajax/53432885@qq.com', {
+        method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+      })
+      .then(function(r){
+        if (r.ok) {
+          msg.className = 'sub-msg success';
+          msg.textContent = '订阅成功！';
+          form.reset();
+          submitBtn.textContent = '已订阅';
+        } else {
+          return r.json().then(function(d){ throw new Error(d.error || '提交失败'); });
+        }
+      })
+      .catch(function(err){
+        msg.className = 'sub-msg error';
+        msg.textContent = '提交失败，请稍后重试';
+        submitBtn.disabled = false;
+        submitBtn.textContent = '提交订阅';
+      });
+    });
+  })();
+
   // Auto-refresh: check for new version on load & tab return
   (function() {
     var VER = 'https://coadyke.github.io/novora-site/version.txt';
