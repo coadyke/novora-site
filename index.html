@@ -41,30 +41,39 @@
     display: flex; align-items: center; justify-content: space-between;
     gap: 12px; margin-top: 4px;
   }
-  .head-row2-right {
-    display: flex; align-items: center; gap: 12px; flex-shrink: 0;
-  }
   .head-stats {
     font-size: 11px; color: var(--faint); white-space: nowrap;
     display: flex; align-items: center; gap: 6px;
   }
   .head-stats .sep { color: #D1D5DB; }
-  .megee-link {
-    font-size: 12px; font-weight: 500; letter-spacing: 0.2px;
-    color: var(--muted); text-decoration: none; white-space: nowrap;
-    transition: color 0.15s;
+  .megee-capsule {
+    display: inline-flex; align-items: center;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1px;
+    padding: 4px 10px; border-radius: 999px;
+    color: #486174; background: #EEF3F7;
+    border: 1px solid #DDE7EF;
+    text-decoration: none; white-space: nowrap;
+    transition: all 0.15s;
   }
-  .megee-link:hover { color: var(--accent); }
+  .megee-capsule:hover {
+    color: var(--accent); background: #E4EDF5;
+    border-color: #C9D8E5;
+  }
+  .cat-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 7px;
+  }
   .head-sub-btn {
     font-size: 11px; font-weight: 500; padding: 2px 10px;
     border-radius: 10px; border: 1px solid var(--accent);
     color: var(--accent); background: transparent; cursor: pointer;
     transition: all 0.15s; white-space: nowrap; letter-spacing: 0.2px;
+    flex-shrink: 0;
   }
   .head-sub-btn:hover { background: var(--accent); color: #fff; }
 
   .cat-nav {
-    display: flex; gap: 5px; margin-top: 7px; flex-wrap: wrap;
+    display: flex; gap: 5px; flex-wrap: wrap;
   }
   .cat-pill {
     font-size: 11px; font-weight: 500; padding: 3px 12px;
@@ -118,9 +127,10 @@
     .site-logo { font-size: 20px; }
     .site-sub { font-size: 10px; }
     .head-stats { font-size: 10px; }
-    .megee-link { font-size: 11px; }
+    .megee-capsule { font-size: 10px; padding: 3px 8px; }
     .head-sub-btn { font-size: 10px; padding: 2px 8px; }
     .head-row2 { gap: 8px; }
+    .cat-row { gap: 6px; }
     .cat-nav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
     .cat-nav::-webkit-scrollbar { display: none; }
     .cat-pill { flex-shrink: 0; font-size: 10px; padding: 3px 10px; }
@@ -138,12 +148,12 @@
     </div>
     <div class="head-row2">
       <span class="head-stats" id="site-stats"></span>
-      <div class="head-row2-right">
-        <a href="https://megee.design" class="megee-link" target="_blank" rel="noopener">megee⁺, packaging and more.</a>
-        <button class="head-sub-btn" id="sub-btn">订阅</button>
-      </div>
+      <a href="https://megee.design" class="megee-capsule" target="_blank" rel="noopener">megee⁺, packaging and more.</a>
     </div>
-    <nav class="cat-nav" id="cat-nav"></nav>
+    <div class="cat-row">
+      <nav class="cat-nav" id="cat-nav"></nav>
+      <button class="head-sub-btn" id="sub-btn">订阅</button>
+    </div>
   </div>
 </div>
 
