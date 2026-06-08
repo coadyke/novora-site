@@ -137,7 +137,7 @@
   <div class="sticky-head-inner">
     <div class="head-row1">
       <span class="site-logo">novora</span>
-      <span class="site-sub">包装｜材料｜制造｜质量｜AI｜可持续发展｜阅读</span>
+      <span class="site-sub">包装｜材料｜制造｜质量｜AI｜可持续发展｜洞察</span>
     </div>
     <div class="head-row2">
       <span class="head-stats" id="site-stats"></span>
@@ -172,7 +172,7 @@
   </div>
 
   <footer class="site-footer">
-    novora · 包装｜材料｜制造｜质量｜AI｜可持续发展｜阅读
+    novora · 包装｜材料｜制造｜质量｜AI｜可持续发展｜洞察
   </footer>
 
 </div>
@@ -182,7 +182,7 @@
     { title: "Airless Pump 如何进行真空保持测试？", date: "2026-06-08", summary: "高端品牌做供应商审核时必考的项目。从三重密封结构到28天全周期检测，从负压挑战到温差循环，全面解析真空保持测试的方法论与判定标准。", tags: ["包装","制造","质量"], topics: ["Airless Pump","化妆品包装"], file: "articles/2026-06-08-airless-vacuum.html" },
     { title: "色母粒的分散性：为什么它决定了你产品的成败", date: "2026-06-08", summary: "因色母粒分散不良导致的质量问题占客诉60%以上。从颜料选择到分散剂配方到加工工艺，一文讲透分散性的四大关键因素，附三种实用检测方法。", tags: ["材料","制造","质量"], topics: ["色母粒"], file: "articles/2026-06-08-dispersion.html" },
     { title: "色母粒销售技巧与叙事体系", date: "2026-06-07", summary: "11章完整弹药库：从核心叙事框架到30条异议处理，从10个场景化故事到30个短视频标题库。不卖色母粒，而是解决塑料企业的生产问题。", tags: ["材料"], topics: ["色母粒","B2B销售"], file: "articles/sales-skills.html" },
-    { title: "世界文学名著典藏 · 280部导读", date: "2026-06-07", summary: "17卷分卷：从古希腊荷马史诗到现代经典，涵盖英国、法国、俄国、德国、意大利、拉美、亚洲等全球文学。", tags: ["阅读"], topics: [], file: "articles/classics.html" },
+    { title: "世界文学名著典藏 · 280部导读", date: "2026-06-07", summary: "17卷分卷：从古希腊荷马史诗到现代经典，涵盖英国、法国、俄国、德国、意大利、拉美、亚洲等全球文学。", tags: [], topics: [], file: "articles/classics.html" },
     { title: "色母粒到底是什么？一分钟搞懂", date: "2026-06-07", summary: "从零开始的色母粒科普：为什么不用色粉直接染色？色母粒和色粉的本质区别是什么？", tags: ["材料","制造"], topics: ["色母粒"], file: "articles/what-is-masterbatch.html" },
     { title: "瓶子发黄怎么办？塑料厂急诊室", date: "2026-06-07", summary: "PET瓶发黄、注塑件黑点、吹塑件破裂——这些看似不同的质量问题，往往指向同一个幕后黑手。完整诊断框架与解决方案。", tags: ["材料","制造","质量"], topics: ["色母粒","注塑制造"], file: "articles/yellow-bottles.html" },
     { title: "为什么低价色母粒最后反而更贵？", date: "2026-06-07", summary: "三组算账对比：便宜色母粒VS高品质色母粒，添加量、不良率、停机率——真正的省钱是什么？", tags: ["材料","制造"], topics: ["色母粒"], file: "articles/cheap-masterbatch.html" },
@@ -194,7 +194,7 @@
   document.getElementById('site-stats').innerHTML = articles.length + '篇<span class="sep">·</span>8栏目<span class="sep">·</span><span id="busuanzi_container_site_uv" style="display:inline;">No.<span id="busuanzi_value_site_uv"></span></span><span class="sep">·</span> ↗ <a href="https://megee.design" class="megee-inline" target="_blank" rel="noopener">megee⁺, packaging and more.</a>';
 
   // ── 7 categories ──
-  const categories = ['全部', '包装', '材料', '制造', '质量', '可持续发展', 'AI', '阅读'];
+  const categories = ['全部', '包装', '材料', '制造', '质量', '可持续发展', 'AI', '洞察'];
   const catNav = document.getElementById('cat-nav');
   const catCounts = {}; categories.forEach(c => { catCounts[c] = 0; });
   articles.forEach(a => { catCounts['全部']++; a.tags.forEach(t => { if (categories.includes(t)) catCounts[t]++; }); });
