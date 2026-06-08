@@ -88,7 +88,7 @@
     { title: "Silgan Dispensing 深度调研报告", date: "2026-05-16", summary: "西尔格分配系统全球最完整深度分析。14页覆盖：集团架构、中国市场28年深耕、5笔重大收购、核心技术平台。", tags: ["包装","制造"], topics: ["化妆品包装","定量泵系统"], file: "articles/silgan-dispensing.html" }
   ];
 
-  document.getElementById('site-stats').innerHTML = articles.length + '篇文章<span class="sep">·</span>8个栏目<span class="sep">·</span>持续更新';
+  document.getElementById('site-stats').innerHTML = articles.length + '篇文章<span class="sep">·</span>8个栏目<span class="sep">·</span>持续更新<span class="sep">·</span><span id="busuanzi_container_site_pv">访问量 <span id="busuanzi_value_site_pv"></span></span>';
 
   // ── 7 categories ──
   const categories = ['全部', '包装', '材料', '制造', '质量', '可持续发展', 'AI', '阅读'];
@@ -132,5 +132,6 @@
   renderCategories();
 </script>
 
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </body>
 </html>
