@@ -78,6 +78,22 @@
   .cat-pill:hover { background: #E5E7EB; border-color: #D1D5DB; }
   .cat-pill.active { background: var(--pill-active-bg); color: var(--pill-active-text); border-color: var(--pill-active-bg); }
 
+  /* ── Tag Filters ── */
+  .tag-nav {
+    display: flex; gap: 4px; flex-wrap: wrap; margin-top: 5px;
+    max-height: 60px; overflow-y: auto; padding-bottom: 2px;
+  }
+  .tag-nav::-webkit-scrollbar { display: none; }
+  .tag-chip {
+    font-size: 10px; font-weight: 500; padding: 2px 10px;
+    border-radius: 8px; border: 1px solid transparent;
+    cursor: pointer; transition: all 0.15s;
+    background: #F9FAFB; color: var(--muted);
+    white-space: nowrap; user-select: none;
+  }
+  .tag-chip:hover { background: #E5E7EB; color: var(--text); }
+  .tag-chip.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
   /* page content below header */
   .page-content { padding-top: 16px; }
 
@@ -127,6 +143,7 @@
     .cat-nav { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
     .cat-nav::-webkit-scrollbar { display: none; }
     .cat-pill { flex-shrink: 0; font-size: 10px; padding: 3px 10px; }
+    .tag-chip { font-size: 9px; padding: 2px 8px; }
     .article-card { padding: 18px 16px; border-radius: 14px; }
     .article-card h2 { font-size: 18px; }
   }
@@ -146,6 +163,7 @@
       <nav class="cat-nav" id="cat-nav"></nav>
       <button class="head-sub-btn" id="sub-btn">获取更新</button>
     </div>
+    <nav class="tag-nav" id="tag-nav"></nav>
   </div>
 </div>
 
@@ -201,6 +219,7 @@
   articles.forEach(a => { catCounts['全部']++; a.tags.forEach(t => { if (categories.includes(t)) catCounts[t]++; }); });
 
   let activeCat = '全部';
+  let activeTags = new Set();
 
   function renderCategories() {
     const visible = categories.filter(c => catCounts[c] > 0 || c === '全部');
@@ -208,7 +227,27 @@
     catNav.querySelectorAll('.cat-pill').forEach(p => {
       p.addEventListener('click', function() {
         activeCat = this.getAttribute('data-cat');
-        renderCategories(); applyFilters();
+        renderCategories(); applyFilters(); renderTags();
+      });
+    });
+  }
+
+  function renderTags() {
+    // Collect all tags from visible articles for current category
+    const allTags = new Set();
+    document.querySelectorAll('.article-card').forEach(card => {
+      const tags = (card.getAttribute('data-tags') || '').split(',').filter(t => t.trim());
+      const topics = (card.getAttribute('data-topics') || '').split(',').filter(t => t.trim());
+      tags.concat(topics).forEach(t => { if (t.trim()) allTags.add(t.trim()); });
+    });
+    const sorted = [...allTags].sort((a,b) => a.localeCompare(b, 'zh'));
+    const tagNav = document.getElementById('tag-nav');
+    tagNav.innerHTML = sorted.map(t => '<span class="tag-chip' + (activeTags.has(t) ? ' active' : '') + '" data-tag="' + t + '">' + t + '</span>').join('');
+    tagNav.querySelectorAll('.tag-chip').forEach(chip => {
+      chip.addEventListener('click', function() {
+        const tag = this.getAttribute('data-tag');
+        if (activeTags.has(tag)) { activeTags.delete(tag); } else { activeTags.add(tag); }
+        renderTags(); applyFilters();
       });
     });
   }
@@ -216,8 +255,12 @@
   function applyFilters() {
     document.querySelectorAll('.article-card').forEach(card => {
       const tags = card.getAttribute('data-tags').split(',');
-      const show = activeCat === '全部' || tags.some(t => t.trim() === activeCat);
-      card.classList.toggle('hidden', !show);
+      const catMatch = activeCat === '全部' || tags.some(t => t.trim() === activeCat);
+      const tagMatch = activeTags.size === 0 || [...activeTags].every(selTag => {
+        const allCardTags = tags.concat((card.getAttribute('data-topics')||'').split(','));
+        return allCardTags.some(t => t.trim() === selTag);
+      });
+      card.classList.toggle('hidden', !catMatch || !tagMatch);
     });
   }
 
@@ -234,6 +277,7 @@
   });
 
   renderCategories();
+  renderTags();
 </script>
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>

@@ -535,5 +535,34 @@
   };
 })();
 </script>
+
+<!-- Share -->
+<div class="share-bar" style="max-width:720px; margin:40px auto 0; padding:0 20px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+  <button class="share-btn" onclick="copyLink()" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:8px;padding:8px 16px;cursor:pointer;transition:all .2s;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+    复制链接
+  </button>
+  <button class="share-btn" onclick="shareWechat()" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:8px;padding:8px 16px;cursor:pointer;transition:all .2s;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="#07C160"><path d="M8.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-7.5 4c-3.3 0-6-2.2-6-5 0-2.3 1.8-4.2 4.5-4.8C5.2 2.8 8.4 1 12 1c4.7 0 8.5 3.1 8.5 7 0 1.7-.7 3.2-1.8 4.4.2.4.3.9.3 1.4 0 2.2-1.8 4-4 4-.6 0-1.2-.1-1.7-.4A6.5 6.5 0 0 1 6 15z"/></svg>
+    微信分享
+  </button>
+</div>
+<div id="share-toast" style="position:fixed;bottom:40px;left:50%;transform:translateX(-50%);background:#0F2747;color:#fff;padding:10px 24px;border-radius:8px;font-size:14px;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none;">&#10004; 链接已复制</div>
+<script>
+function copyLink(){
+  navigator.clipboard.writeText(location.href).then(function(){
+    var t=document.getElementById('share-toast');
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';},2000);
+  });
+}
+function shareWechat(){
+  navigator.clipboard.writeText(location.href).then(function(){
+    var t=document.getElementById('share-toast');
+    t.textContent='\u2705 \u94fe\u63a5\u5df2\u590d\u5236\uff0c\u6253\u5f00\u5fae\u4fe1\u7c98\u8d34\u5373\u53ef\u5206\u4eab';
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';t.textContent='\u2705 \u94fe\u63a5\u5df2\u590d\u5236';},2500);
+  });
+}
+</script>
+
 </body>
 </html>
