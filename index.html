@@ -20,7 +20,7 @@
 })();
 </script>
 
-<meta name="version" content="20260609v23">
+<meta name="version" content="20260609v24">
 <meta property="og:title" content="novora — 探索制造与创新的边界">
 <meta property="og:description" content="包装与制造产业知识库。聚焦包装、材料、制造、质量、可持续发展与AI应用。">
 <meta property="og:url" content="https://coadyke.github.io/novora-site/">
@@ -331,7 +331,7 @@
       }
     }
     shuffle(unique);
-    var count = Math.min(unique.length, 45 + Math.floor(Math.random() * 16));
+    var count = Math.min(unique.length, 60 + Math.floor(Math.random() * 16));
     var picked = unique.slice(0, count);
 
     // Color palette: cold gray-blue tones only
@@ -382,9 +382,9 @@
           left = g.x + Math.random() * Math.max(0, g.w - estW - 8);
           top  = Math.random() * 90;
           tries++;
-        } while (tries < 30 && placed.some(function(p) {
-          return Math.abs(left - p.left) < (estW + p.width) / 2 + 20
-              && Math.abs(top - p.top)  < (estH + p.height) / 2 + 12;
+        } while (tries < 50 && placed.some(function(p) {
+          return Math.abs(left - p.left) < (estW + p.width) / 2 + 12
+              && Math.abs(top - p.top)  < (estH + p.height) / 2 + 8;
         }));
 
         placed.push({ left: left, top: top, width: estW, height: estH });
