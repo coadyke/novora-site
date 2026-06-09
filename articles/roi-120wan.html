@@ -20,7 +20,7 @@
 })();
 </script>
 
-<meta name="version" content="20260609v27">
+<meta name="version" content="20260609v28">
 <meta property="og:title" content="湖州工厂试产：与时间来一场赛跑">
 <meta property="og:description" content="南浔美集项目进入试产冲刺。设备调试、用工保障、政企协同全速推进。现场视频直击。">
 <meta property="og:url" content="https://coadyke.github.io/novora-site/articles/2026-06-09-huzhou-trial-production.html">
@@ -218,12 +218,26 @@ function shareMoments(){
   var title = document.title;
   var idx = title.lastIndexOf(' — ');
   var cleanTitle = idx > -1 ? title.substring(0, idx) : title;
-  // Try native share API (works in WeChat in-app browser on mobile)
-  if (navigator.share) {
-    navigator.share({ title: cleanTitle, url: location.href }).catch(function(){});
+  // Always show panel on desktop; on mobile, try native share first
+  if (/Mobi|Android|iPhone/i.test(navigator.userAgent) && navigator.share) {
+    navigator.share({ title: cleanTitle, url: location.href }).then(function(){
+      // Shared successfully
+    }).catch(function(e){
+      // User cancelled or share failed, show panel
+      showSharePanel(cleanTitle);
+    });
     return;
   }
-  // Desktop fallback: show copy-link panel
+  // Desktop or no native share: show panel
+  showSharePanel(cleanTitle);
+}
+function shareWechat(){
+  var title = document.title;
+  var idx = title.lastIndexOf(' — ');
+  var cleanTitle = idx > -1 ? title.substring(0, idx) : title;
+  showSharePanel(cleanTitle);
+}
+function showSharePanel(cleanTitle){
   document.getElementById('share-panel-title').textContent = cleanTitle;
   document.getElementById('share-panel-url').textContent = location.href;
   document.getElementById('share-overlay').classList.add('show');
@@ -241,6 +255,8 @@ function copyLinkFromPanel(){
 function closeShareOverlay(){
   document.getElementById('share-overlay').classList.remove('show');
 }
+
+  
 
   
 
