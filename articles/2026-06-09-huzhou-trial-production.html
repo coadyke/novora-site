@@ -20,7 +20,7 @@
 })();
 </script>
 
-<meta name="version" content="20260609v16">
+<meta name="version" content="20260609v17">
 <meta property="og:title" content="湖州工厂试产：与时间来一场赛跑">
 <meta property="og:description" content="南浔美集项目进入试产冲刺。设备调试、用工保障、政企协同全速推进。现场视频直击。">
 <meta property="og:url" content="https://coadyke.github.io/novora-site/articles/2026-06-09-huzhou-trial-production.html">
@@ -47,18 +47,17 @@
 <style>
   :root { --bdf: #0F2747; --bdf-l: #1A3F6E; --bdf-pale: #EEF3F9; --text: #1F2937; --muted: #6B7280; --bg: #F7F7F7; --card: #FFFFFF; --gray-1: #E5E7EB; --gray-3: #9CA3B8; }
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-  body { padding:20px; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; font-size:15px; line-height:1.75; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased;  }
+  body { padding:8px 20px; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; font-size:15px; line-height:1.75; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased;  }
 
   /* -- Site Header -- */
   .site-hd { max-width:720px; margin:0 auto 2px; padding:0 4px; display:flex; align-items:baseline; gap:8px; }
   .site-hd .site-logo { font-size:18px; font-weight:700; color:var(--bdf); letter-spacing:-0.3px; white-space:nowrap; text-decoration:none; }
-  .site-hd .site-sub { font-size:10px;
+  .site-hd .site-sub { font-size:10px; color:var(--muted); letter-spacing:0.2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; min-width:0; }
   .logo-l { display: inline-block; }
   @keyframes logo-nudge { 0% { transform: translateX(0); } 40% { transform: translateX(1px); } 100% { transform: translateX(0); } }
   @keyframes logo-rebound { 0% { transform: translateX(0); } 35% { transform: translateX(1px); } 65% { transform: translateX(-0.5px); } 100% { transform: translateX(0); } }
   .lnudge { animation: logo-nudge 0.2s ease-in-out; }
-  .lrebound { animation: logo-rebound 0.35s ease-in-out; } color:var(--muted); letter-spacing:0.2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; min-width:0; }
-
+  .lrebound { animation: logo-rebound 0.35s ease-in-out; }
 
   /* -- Hero -- */
   .article-hero { padding:8px 20px 6px; text-align:center; }
@@ -294,6 +293,23 @@ function shareWechat(){
 function closeShareOverlay(){
   document.getElementById('share-overlay').classList.remove('show');
 }
+
+  // -- novora logo micro-collision (5s) --
+  (function logoChain() {
+    var delay = 5000;
+    setTimeout(function() {
+      var letters = document.querySelectorAll('.site-hd .logo-l');
+      if (!letters.length) { logoChain(); return; }
+      letters.forEach(function(l, i) {
+        setTimeout(function() {
+          var cls = i === letters.length - 1 ? 'lrebound' : 'lnudge';
+          l.classList.add(cls);
+          setTimeout(function() { l.classList.remove(cls); }, i === letters.length - 1 ? 350 : 200);
+        }, i * 130);
+      });
+      logoChain();
+    }, delay);
+  })();
 </script>
 </body>
 </html>
