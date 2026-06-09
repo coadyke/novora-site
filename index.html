@@ -52,6 +52,9 @@
     transition: color 0.15s;
   }
   .megee-inline:hover { color: var(--accent); }
+
+  @keyframes wink { 0%,100% { transform: translate(0,0); } 50% { transform: translate(1px,-1px); } }
+  .wink-anim { animation: wink 0.2s ease; }
   .cat-row {
     display: flex; align-items: center; justify-content: space-between;
     margin-top: 7px;
@@ -192,7 +195,7 @@
     { title: "Silgan Dispensing 深度调研报告", date: "2026-05-16", summary: "西尔格分配系统全球最完整深度分析。14页覆盖：集团架构、中国市场28年深耕、5笔重大收购、核心技术平台。", tags: ["包装","制造"], topics: ["化妆品包装","定量泵系统"], file: "articles/silgan-dispensing.html" }
   ];
 
-  document.getElementById('site-stats').innerHTML = articles.length + '篇<span class="sep">·</span>8栏目<span class="sep">·</span><span id="busuanzi_container_site_uv" style="display:inline;">No.<span id="busuanzi_value_site_uv"></span></span><span class="sep">·</span> ↗ <a href="https://megee.design" class="megee-inline" target="_blank" rel="noopener">megee⁺, packaging and more.</a>';
+  document.getElementById('site-stats').innerHTML = articles.length + '篇<span class="sep">·</span>8栏目<span class="sep">·</span><span id="busuanzi_container_site_uv" style="display:inline;">No.<span id="busuanzi_value_site_uv"></span></span><span class="sep">·</span> <span id="megee-wink" style="display:inline-block">↗</span> <a href="https://megee.design" class="megee-inline" target="_blank" rel="noopener">megee⁺, packaging and more.</a>';
 
   // ── 7 categories ──
   const categories = ['全部', '包装', '材料', '制造', '质量', '可持续发展', 'AI', '洞察', '阅读'];
@@ -234,6 +237,18 @@
   });
 
   renderCategories();
+
+  // ── megee wink: barely-there micro-interaction on the ↗ arrow ──
+  (function wink() {
+    var el = document.getElementById('megee-wink');
+    if (!el) return;
+    var delay = 20000 + Math.random() * 10000; // 20-30s
+    setTimeout(function() {
+      el.classList.add('wink-anim');
+      setTimeout(function() { el.classList.remove('wink-anim'); }, 200);
+      wink(); // schedule next
+    }, delay);
+  })();
 </script>
 
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
