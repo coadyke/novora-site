@@ -9,18 +9,32 @@
   var meta = document.querySelector('meta[name="version"]');
   if (!meta) return;
   var localV = meta.content;
+  var retries = parseInt(sessionStorage.getItem('nv_ver_retry')||'0');
+  if (retries > 3) { sessionStorage.removeItem('nv_ver_retry'); return; }
   fetch('/novora-site/version.json?t=' + Date.now(), {cache:'no-store'})
     .then(function(r){ return r.json(); })
     .then(function(d){
       if (d.version && d.version !== localV) {
-        location.reload(true);
+        sessionStorage.setItem('nv_ver_retry', String(retries + 1));
+        var u = location.href.split('?')[0] + '?v=' + d.version + '&t=' + Date.now();
+        location.replace(u);
+      } else {
+        sessionStorage.removeItem('nv_ver_retry');
+        // Inject cache buster into all article links
+        var bust = '?v=' + d.version + '&t=' + Date.now();
+        document.querySelectorAll('.article-card').forEach(function(card){
+          var href = card.getAttribute('href');
+          if (href && href.indexOf('?v=') === -1) {
+            card.setAttribute('href', href + bust);
+          }
+        });
       }
     })
     .catch(function(){});
 })();
 </script>
 
-<meta name="version" content="20260610v35">
+<meta name="version" content="20260610v37">
 <meta property="og:title" content="novora — 探索制造与创新的边界">
 <meta property="og:description" content="包装与制造产业知识库。聚焦包装、材料、制造、质量、可持续发展与AI应用。">
 <meta property="og:url" content="https://coadyke.github.io/novora-site/">
@@ -558,7 +572,10 @@
           v = v.trim();
           var old = localStorage.getItem(KEY);
           localStorage.setItem(KEY, v);
-          if (old && old !== v) location.reload();
+          if (old && old !== v) {
+            var u = location.href.split('?')[0] + '?v=' + v + '&t=' + Date.now();
+            location.replace(u);
+          }
         })
         .catch(function(){}); // offline: silent
     }

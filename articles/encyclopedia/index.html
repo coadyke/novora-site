@@ -3,7 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
-<meta name="version" content="20260610v35">
+<meta name="version" content="20260610v37">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<meta name="version" content="20260610v37">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Novora 百科 — 工业知识词条</title>
 <style>
@@ -23,6 +25,27 @@ h1 { font-size:22px; font-weight:700; color:var(--bdf); margin-bottom:8px; }
 .art-foot { text-align:center; padding:32px 0; color:var(--muted); font-size:14px; }
 .art-foot a { color:var(--bdf); text-decoration:none; }
 </style>
+<script>
+(function(){
+  var meta = document.querySelector('meta[name="version"]');
+  if (!meta) return;
+  var localV = meta.content;
+  var retries = parseInt(sessionStorage.getItem('nv_ver_retry')||'0');
+  if (retries > 3) { sessionStorage.removeItem('nv_ver_retry'); return; }
+  fetch('/novora-site/version.json?t=' + Date.now(), {cache:'no-store'})
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d.version && d.version !== localV) {
+        sessionStorage.setItem('nv_ver_retry', String(retries + 1));
+        var u = location.href.split('?')[0] + '?v=' + d.version + '&t=' + Date.now();
+        location.replace(u);
+      } else {
+        sessionStorage.removeItem('nv_ver_retry');
+      }
+    })
+    .catch(function(){});
+})();
+</script>
 </head>
 <body>
 
