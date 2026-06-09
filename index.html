@@ -20,7 +20,7 @@
 })();
 </script>
 
-<meta name="version" content="20260609v29">
+<meta name="version" content="20260609v30">
 <meta property="og:title" content="novora — 探索制造与创新的边界">
 <meta property="og:description" content="包装与制造产业知识库。聚焦包装、材料、制造、质量、可持续发展与AI应用。">
 <meta property="og:url" content="https://coadyke.github.io/novora-site/">
@@ -183,6 +183,24 @@
 </style>
 </head>
 <body>
+<div id="v-refresh" style="display:none;position:fixed;top:0;left:0;right:0;z-index:99999;background:#0F2747;color:#fff;text-align:center;padding:8px;font-size:13px;cursor:pointer;" onclick="location.replace(location.href.split('?')[0]+'?v=29')">
+  有新版本可用 — 点此刷新 🔄
+</div>
+<script>
+(function(){
+  var local = document.querySelector('meta[name="version"]');
+  if (!local) return;
+  fetch('/novora-site/version.json?t='+Date.now(),{cache:'no-store'})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if (d.version && d.version !== local.content) {
+        document.getElementById('v-refresh').style.display = 'block';
+      }
+    })
+    .catch(function(){});
+})();
+</script>
+
 <div class="side-cloud" id="side-cloud"></div>
 <div class="sticky-head">
   <div class="sticky-head-inner">

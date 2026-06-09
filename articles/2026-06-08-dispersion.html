@@ -13,14 +13,14 @@
     .then(function(r){ return r.json(); })
     .then(function(d){
       if (d.version && d.version !== localV) {
-        location.reload(true);
+        location.replace(location.href.split('?')[0] + '?v=' + d.version);
       }
     })
     .catch(function(){});
 })();
 </script>
 
-<meta name="version" content="20260609v29">
+<meta name="version" content="20260609v30">
 <meta property="og:title" content="湖州工厂试产：与时间来一场赛跑">
 <meta property="og:description" content="南浔美集项目进入试产冲刺。设备调试、用工保障、政企协同全速推进。现场视频直击。">
 <meta property="og:url" content="https://coadyke.github.io/novora-site/articles/2026-06-09-huzhou-trial-production.html">
@@ -124,6 +124,24 @@
 </style>
 </head>
 <body>
+<div id="v-refresh" style="display:none;position:fixed;top:0;left:0;right:0;z-index:99999;background:#0F2747;color:#fff;text-align:center;padding:8px;font-size:13px;cursor:pointer;" onclick="location.replace(location.href.split('?')[0]+'?v=29')">
+  有新版本可用 — 点此刷新 🔄
+</div>
+<script>
+(function(){
+  var local = document.querySelector('meta[name="version"]');
+  if (!local) return;
+  fetch('/novora-site/version.json?t='+Date.now(),{cache:'no-store'})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      if (d.version && d.version !== local.content) {
+        document.getElementById('v-refresh').style.display = 'block';
+      }
+    })
+    .catch(function(){});
+})();
+</script>
+
 
 <!-- Site Header -->
 <div class="site-hd">
