@@ -37,10 +37,10 @@
 
   @keyframes logo-nudge { 0% { transform: translateX(0); } 40% { transform: translateX(1px); } 100% { transform: translateX(0); } }
   @keyframes logo-rebound { 0% { transform: translateX(0); } 35% { transform: translateX(1px); } 65% { transform: translateX(-0.5px); } 100% { transform: translateX(0); } }
-  @keyframes wink { 0%,100% { transform: translate(0,0); } 50% { transform: translate(1px,-1px); } }
+  @keyframes wink { 0% { transform: translate(0,0); color: inherit; font-weight: 400; } 30% { transform: translate(1px,-1px); color: #E53935; font-weight: 700; } 70% { transform: translate(1px,-1px); color: #E53935; font-weight: 700; } 100% { transform: translate(0,0); color: inherit; font-weight: 400; } }
   .lnudge { animation: logo-nudge 0.2s ease-in-out; }
   .lrebound { animation: logo-rebound 0.35s ease-in-out; }
-  .wink-anim { animation: wink 0.2s ease; }
+  .wink-anim { animation: wink 0.35s ease; }
   .site-sub {
     font-size: 11px; color: var(--faint); letter-spacing: 0.3px;
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
@@ -268,7 +268,7 @@
     var delay = 5000;
     setTimeout(function() {
       el.classList.add('wink-anim');
-      setTimeout(function() { el.classList.remove('wink-anim'); }, 200);
+      setTimeout(function() { el.classList.remove('wink-anim'); }, 350);
       wink();
     }, delay);
   })();
