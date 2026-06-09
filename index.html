@@ -20,7 +20,7 @@
 })();
 </script>
 
-<meta name="version" content="20260609v21">
+<meta name="version" content="20260609v22">
 <meta property="og:title" content="novora — 探索制造与创新的边界">
 <meta property="og:description" content="包装与制造产业知识库。聚焦包装、材料、制造、质量、可持续发展与AI应用。">
 <meta property="og:url" content="https://coadyke.github.io/novora-site/">
@@ -161,16 +161,7 @@
 
   /* ── Side Topic Cloud ── */
   .side-cloud { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 0; overflow: hidden; }
-  .side-cloud .cw { position: absolute; white-space: nowrap; color: #94A3B8; font-weight: 400; pointer-events: none; will-change: transform, opacity; }
-  @keyframes cw-drift {
-    0% { transform: translate(0,0) rotate(var(--rot)); }
-    50% { transform: translate(var(--dx),var(--dy)) rotate(var(--rot)); }
-    100% { transform: translate(0,0) rotate(var(--rot)); }
-  }
-  @keyframes cw-breathe {
-    0%, 100% { opacity: var(--op); }
-    50% { opacity: calc(var(--op) * 1.4); }
-  }
+  .side-cloud .cw { position: absolute; white-space: nowrap; font-weight: 400; pointer-events: none; transform: rotate(var(--rot)); transition: opacity 1s ease-in-out; }
   @media (max-width: 768px) { .side-cloud { display: none; } }
 
   @media (max-width: 600px) {
@@ -302,28 +293,37 @@
     if (!el || window.innerWidth < 769) return;
 
     var words = [
+      // Brand — top tier
       'novora','megee','bdf','megee⁺',
+      // Categories — mid tier
       '包装','材料','制造','质量','AI','可持续发展','洞察','阅读',
+      // Industry — dispensing & pumps
       'Airless Pump','Fine Mist','Lotion Pump','Foamer Pump','Dispensing System',
       '定量泵系统','真空泵','细雾泵','泡沫泵',
-      'Serum Bottle','Cream Jar','Dropper Bottle','Refill System','Dual Chamber',
+      // Industry — packaging
+      'Serum Bottle','Cream Jar','Refill System','Dual Chamber',
       'Cosmetic Packaging','Mono-material','PCR Packaging','Sustainable Pkg',
       '精华瓶','膏霜罐','替换包装','单一材料','化妆品包装',
-      '色母粒','高分子材料','材料兼容性','PET','PP','PE','PCR',
-      'Masterbatch','Polymer','Material Science',
+      // Industry — materials
+      '色母粒','高分子材料','材料兼容性','PET','PP','PCR',
+      'Masterbatch','Polymer',
+      // Industry — manufacturing
       '注塑制造','Injection Molding','模具开发','自动化','智能制造',
-      'Assembly','Decoration','Quality Control',
+      'Assembly','Decoration',
+      // Industry — quality
       'CPK','SPC','AQL','检测方法','可靠性测试','供应商审核',
       '真空保持测试','包装测试','GMP','ISO',
-      'ESG','循环经济','轻量化','零填埋','碳足迹','Carbon Footprint',
-      '供应链','出海','品牌代工','OEM','ODM','Private Label',
-      'Beauty Tech','Clean Beauty','Indie Brand'
+      // Industry — trends
+      'ESG','循环经济','轻量化','碳足迹',
+      '供应链','出海','OEM','ODM',
+      'Clean Beauty'
     ];
 
+    // Deduplicate
     var seen = {}, unique = [];
     words.forEach(function(w){ if (!seen[w]) { seen[w] = 1; unique.push(w); } });
 
-    var count = Math.min(unique.length, 35 + Math.floor(Math.random() * 16));
+    // Shuffle and pick 30-45 words — not filling, plenty of white space
     function shuffle(a) {
       for (var i = a.length - 1; i > 0; i--) {
         var j = Math.floor(Math.random() * (i + 1));
@@ -331,10 +331,17 @@
       }
     }
     shuffle(unique);
+    var count = Math.min(unique.length, 30 + Math.floor(Math.random() * 16));
     var picked = unique.slice(0, count);
+
+    // Color palette: cold gray-blue tones only
+    var colors = ['#94A3B8','#64748B','#8593A8','#9CA3AF'];
+
+    var allSpans = [];
 
     function layout() {
       el.innerHTML = '';
+      allSpans = [];
       var vw = window.innerWidth;
       var cw = 700;
       if (vw <= cw + 40) return;
@@ -345,45 +352,88 @@
         { side: 'right', x: vw - gutterW, w: gutterW }
       ];
 
+      var placed = []; // {top, left, width, height, row}
+
       picked.forEach(function(word) {
         var g = gutters[Math.floor(Math.random() * 2)];
+
+        // Tiered sizing
+        var isBrand    = word === 'novora' || word === 'megee' || word === 'bdf' || word === 'megee⁺';
+        var isShort    = word.length <= 3;
+        var size = isBrand ? (18 + Math.floor(Math.random() * 8))
+                 : isShort ? (14 + Math.floor(Math.random() * 10))
+                 : (11 + Math.floor(Math.random() * 11)); // 11-21px
+
+        var opacity = 0.08 + Math.random() * 0.08; // 8-16%
+        var rotation = -15 + Math.random() * 30;     // -15° to +15°
+        var color = colors[Math.floor(Math.random() * colors.length)];
+
+        // Weight: mostly 400, occasionally 500
+        var weight = Math.random() < 0.2 ? 500 : 400;
+
+        // Estimate text width: ~0.6 * size * charCount for CJK, ~0.5 for Latin
+        var isLatin = /^[A-Za-z]/.test(word);
+        var estW = isLatin ? size * word.length * 0.55 : size * word.length * 0.7;
+        var estH = size * 1.3;
+
+        // Find a position that doesn't overlap — try up to 30 times
+        var left, top, tries = 0;
+        do {
+          left = g.x + Math.random() * Math.max(0, g.w - estW - 8);
+          top  = Math.random() * 90;
+          tries++;
+        } while (tries < 30 && placed.some(function(p) {
+          return Math.abs(left - p.left) < (estW + p.width) / 2 + 20
+              && Math.abs(top - p.top)  < (estH + p.height) / 2 + 12;
+        }));
+
+        placed.push({ left: left, top: top, width: estW, height: estH });
+
         var span = document.createElement('span');
         span.className = 'cw';
         span.textContent = word;
-
-        var size = 10 + Math.floor(Math.random() * 13);
-        var opacity = 0.04 + Math.random() * 0.06;
-        var rotation = -18 + Math.random() * 36;
-        var dx = (Math.random() - 0.5) * 3;
-        var dy = (Math.random() - 0.5) * 3;
-        var dur = 20 + Math.random() * 40;
-        var delay = Math.random() * 30;
-        var weight = Math.random() < 0.3 ? 600 : 400;
-
-        var left = g.x + Math.random() * (g.w - size * word.length * 0.7);
-        var top  = Math.random() * 90;
+        span.setAttribute('data-opacity', opacity.toFixed(2));
 
         span.style.cssText =
           'font-size:' + size + 'px;' +
           'font-weight:' + weight + ';' +
+          'color:' + color + ';' +
           'left:' + left + 'px;' +
           'top:' + top + '%;' +
           '--rot:' + rotation + 'deg;' +
-          '--dx:' + dx + 'px;' +
-          '--dy:' + dy + 'px;' +
-          '--op:' + opacity + ';' +
-          'opacity:' + opacity + ';' +
-          'animation: cw-drift ' + dur + 's ease-in-out infinite, cw-breathe ' + (dur * 0.6) + 's ease-in-out infinite;' +
-          'animation-delay:' + delay + 's';
+          'opacity:' + opacity + ';';
 
         el.appendChild(span);
+        allSpans.push(span);
       });
     }
 
+    // ── Single-word breathe: every 30-60s, one random word pulses ──
+    function pulseOne() {
+      if (!allSpans.length) return;
+      var idx = Math.floor(Math.random() * allSpans.length);
+      var span = allSpans[idx];
+      var baseOp = parseFloat(span.getAttribute('data-opacity'));
+      var peakOp = Math.min(0.22, baseOp * 1.5); // peak ~12-22%, never too bright
+
+      // Rise
+      span.style.opacity = peakOp;
+      // Fall back after 1s
+      setTimeout(function() {
+        span.style.opacity = baseOp;
+      }, 1000);
+
+      // Schedule next
+      var next = 30000 + Math.random() * 30000; // 30-60s
+      setTimeout(pulseOne, next);
+    }
+
     layout();
+    setTimeout(pulseOne, 5000); // first pulse after 5s delay
+
     window.addEventListener('resize', function(){
       clearTimeout(window._scTimer);
-      window._scTimer = setTimeout(layout, 400);
+      window._scTimer = setTimeout(layout, 500);
     });
   })();
 
