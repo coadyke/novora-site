@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
-<meta name="version" content="20260609v3">
+<meta name="version" content="20260609v4">
 <meta property="og:title" content="湖州工厂试产：与时间来一场赛跑">
 <meta property="og:description" content="南浔美集项目进入试产冲刺。设备调试、用工保障、政企协同全速推进。现场视频直击。">
 <meta property="og:url" content="https://coadyke.github.io/novora-site/articles/2026-06-09-huzhou-trial-production.html">
@@ -38,6 +38,7 @@
   .art-hd .back:hover { color:var(--bdf); }
   .art-hd h1 { font-size:26px; font-weight:700; color:var(--bdf); line-height:1.4; margin:16px 0 8px; letter-spacing:-0.3px; }
   .art-hd .meta { font-size:13px; color:var(--muted); }
+  .share-btn-top:hover { border-color:#BFCAD8; color:var(--bdf); }
   .art-body { background:var(--card); border-radius:16px; padding:32px 36px; border:1px solid rgba(0,0,0,0.04); }
   .art-body h2 { font-size:20px; font-weight:700; color:var(--bdf); margin:36px 0 12px; padding-bottom:8px; border-bottom:1px solid var(--gray-1); }
   .art-body h3 { font-size:17px; font-weight:600; color:var(--bdf-l); margin:24px 0 8px; }
@@ -74,6 +75,20 @@
   </div>
   <h1>湖州工厂试产：与时间来一场赛跑</h1>
   <p class="meta">2026年6月9日 · 现场直击 · 工厂建设</p>
+  <div class="share-bar-top" style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin-top:14px;">
+    <button class="share-btn-top" onclick="copyLink()" style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:8px;padding:7px 14px;cursor:pointer;transition:all .2s;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      复制链接
+    </button>
+    <button class="share-btn-top" onclick="shareMoments()" style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:8px;padding:7px 14px;cursor:pointer;transition:all .2s;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E53935" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+      分享至朋友圈
+    </button>
+    <button class="share-btn-top" onclick="shareWechat()" style="display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:8px;padding:7px 14px;cursor:pointer;transition:all .2s;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="#07C160"><path d="M8.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-7.5 4c-3.3 0-6-2.2-6-5 0-2.3 1.8-4.2 4.5-4.8C5.2 2.8 8.4 1 12 1c4.7 0 8.5 3.1 8.5 7 0 1.7-.7 3.2-1.8 4.4.2.4.3.9.3 1.4 0 2.2-1.8 4-4 4-.6 0-1.2-.1-1.7-.4A6.5 6.5 0 0 1 6 15z"/></svg>
+      微信好友
+    </button>
+  </div>
 </div>
 
 <div class="art-body">
@@ -196,14 +211,18 @@
 </div><!-- .ctr -->
 
 <!-- Share -->
-<div class="share-bar" style="max-width:720px; margin:40px auto 0; padding:0 20px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
-  <button class="share-btn" onclick="copyLink()" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:8px;padding:8px 16px;cursor:pointer;transition:all .2s;">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+<div class="share-bar" style="max-width:720px; margin:20px auto 0; padding:0 20px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+  <button class="share-btn" onclick="copyLink()" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:8px;padding:7px 14px;cursor:pointer;transition:all .2s;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
     复制链接
   </button>
-  <button class="share-btn" onclick="shareWechat()" style="display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:8px;padding:8px 16px;cursor:pointer;transition:all .2s;">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="#07C160"><path d="M8.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-7.5 4c-3.3 0-6-2.2-6-5 0-2.3 1.8-4.2 4.5-4.8C5.2 2.8 8.4 1 12 1c4.7 0 8.5 3.1 8.5 7 0 1.7-.7 3.2-1.8 4.4.2.4.3.9.3 1.4 0 2.2-1.8 4-4 4-.6 0-1.2-.1-1.7-.4A6.5 6.5 0 0 1 6 15z"/></svg>
-    微信分享
+  <button class="share-btn" onclick="shareMoments()" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#E53935;background:#FFF5F5;border:1px solid #EF9A9A;border-radius:8px;padding:7px 14px;cursor:pointer;transition:all .2s;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+    分享至朋友圈
+  </button>
+  <button class="share-btn" onclick="shareWechat()" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:8px;padding:7px 14px;cursor:pointer;transition:all .2s;">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="#07C160"><path d="M8.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-7.5 4c-3.3 0-6-2.2-6-5 0-2.3 1.8-4.2 4.5-4.8C5.2 2.8 8.4 1 12 1c4.7 0 8.5 3.1 8.5 7 0 1.7-.7 3.2-1.8 4.4.2.4.3.9.3 1.4 0 2.2-1.8 4-4 4-.6 0-1.2-.1-1.7-.4A6.5 6.5 0 0 1 6 15z"/></svg>
+    微信好友
   </button>
 </div>
 <div id="share-toast" style="position:fixed;bottom:40px;left:50%;transform:translateX(-50%);background:#0F2747;color:#fff;padding:10px 24px;border-radius:8px;font-size:14px;z-index:9999;opacity:0;transition:opacity .3s;pointer-events:none;">&#10004; 链接已复制</div>
@@ -219,6 +238,15 @@ function shareWechat(){
     var t=document.getElementById('share-toast');
     t.textContent='\u2705 \u94fe\u63a5\u5df2\u590d\u5236\uff0c\u6253\u5f00\u5fae\u4fe1\u7c98\u8d34\u5373\u53ef\u5206\u4eab';
     t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';t.textContent='\u2705 \u94fe\u63a5\u5df2\u590d\u5236';},2500);
+  });
+}
+function shareMoments(){
+  var title = document.querySelector('h1').textContent;
+  var text = title + ' \u2014 novora\n' + location.href + '\n\n\u6253\u5f00\u5fae\u4fe1 \u2192 \u53d1\u73b0 \u2192 \u53d1\u5e03\u5230\u670b\u53cb\u5708';
+  navigator.clipboard.writeText(text).then(function(){
+    var t=document.getElementById('share-toast');
+    t.innerHTML = '\u2705 \u6807\u9898+\u94fe\u63a5\u5df2\u590d\u5236\uff0c\u6253\u5f00\u5fae\u4fe1\u53d1\u670b\u53cb\u5708\u7c98\u8d34';
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';t.innerHTML='\u2705 \u94fe\u63a5\u5df2\u590d\u5236';},3000);
   });
 }
 </script>
