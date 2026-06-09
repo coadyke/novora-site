@@ -20,7 +20,7 @@
 })();
 </script>
 
-<meta name="version" content="20260609v26">
+<meta name="version" content="20260609v27">
 <meta property="og:title" content="湖州工厂试产：与时间来一场赛跑">
 <meta property="og:description" content="南浔美集项目进入试产冲刺。设备调试、用工保障、政企协同全速推进。现场视频直击。">
 <meta property="og:url" content="https://coadyke.github.io/novora-site/articles/2026-06-09-huzhou-trial-production.html">
@@ -110,17 +110,17 @@
   }
   .like-count { font-variant-numeric:tabular-nums; }
   /* Share toast & overlay */
-  .share-toast { position:fixed; bottom:40px; left:50%; transform:translateX(-50%); background:#0F2747; color:#fff; padding:10px 24px; border-radius:8px; font-size:14px; z-index:9999; opacity:0; transition:opacity .3s; pointer-events:none; white-space:nowrap; }
-  .share-overlay { position:fixed; inset:0; background:rgba(15,39,71,0.7); z-index:9998; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .25s; }
+  .share-toast { position:fixed; bottom:40px; left:50%; transform:translateX(-50%); background:#0F2747; color:#fff; padding:10px 24px; border-radius:8px; font-size:14px; z-index:10001; opacity:0; transition:opacity .3s; pointer-events:none; white-space:nowrap; }
+  .share-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.55); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; z-index:10000; opacity:0; pointer-events:none; transition:opacity .25s; }
   .share-overlay.show { opacity:1; pointer-events:auto; }
-  .share-card { background:#fff; border-radius:12px; overflow:hidden; max-width:320px; width:90%; box-shadow:0 20px 60px rgba(0,0,0,0.25); }
-  .share-card-img { width:100%; aspect-ratio:16/9; overflow:hidden; background:#0F2747; }
-  .share-card-img img { width:100%; height:100%; object-fit:cover; display:block; }
-  .share-card-body { padding:16px 18px 6px; }
-  .share-card-title { font-size:16px; font-weight:700; color:#1F2937; line-height:1.5; margin:0; }
-  .share-card-brand { padding:0 18px 8px; font-size:12px; color:#0F2747; font-weight:600; letter-spacing:1px; }
-  .share-card-tip { padding:10px 18px 16px; font-size:12px; color:#9CA3B8; text-align:center; border-top:1px solid #F3F4F6; margin:0; }
-  .share-card-close { display:block; width:100%; padding:12px; font-size:13px; color:#6B7280; background:#F9FAFB; border:none; border-top:1px solid #F3F4F6; cursor:pointer; font-weight:500; }
+  .share-panel { background:#fff; border-radius:16px; padding:32px 28px 24px; max-width:400px; width:88vw; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.25); }
+  .share-panel-icon { font-size:40px; margin-bottom:8px; }
+  .share-panel-title { font-size:17px; font-weight:700; color:#0F2747; margin:0 0 6px; }
+  .share-panel-sub { font-size:13px; color:#5f6b7a; margin:0 0 20px; line-height:1.6; }
+  .share-panel-url { display:flex; gap:8px; align-items:center; background:#f4f6f9; border-radius:10px; padding:10px 14px; font-size:12px; color:#3b4556; word-break:break-all; margin-bottom:16px; }
+  .share-panel-copy { display:inline-flex; align-items:center; gap:6px; background:#0F2747; color:#fff; border:none; border-radius:8px; padding:10px 22px; font-size:14px; font-weight:600; cursor:pointer; }
+  .share-panel-copy:hover { background:#1a3560; }
+  .share-panel-close { display:block; margin:16px auto 0; background:none; border:none; color:#8c97a8; font-size:13px; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -2785,43 +2785,56 @@
 
 </div><!-- .ctr/art-body -->
 
-<div class="share-toast" id="share-toast">&#10003; 链接已复制</div>
+<div class="share-toast" id="share-toast">&#10003; 链接已复制，去微信粘贴即可</div>
 <div class="share-overlay" id="share-overlay" onclick="if(event.target===this)closeShareOverlay()">
-  <div class="share-card">
-    <div class="share-card-img">
-      <img src="/novora-site/og-image.png" alt="novora">
-    </div>
-    <div class="share-card-body">
-      <h3 class="share-card-title" id="share-card-title"></h3>
-    </div>
-    <div class="share-card-brand">novora</div>
-    <p class="share-card-tip">长按保存图片，分享到朋友圈</p>
-    <button class="share-card-close" onclick="closeShareOverlay()">关闭</button>
+  <div class="share-panel">
+    <div class="share-panel-icon">&#128279;</div>
+    <h3 class="share-panel-title" id="share-panel-title"></h3>
+    <p class="share-panel-sub">复制链接后，打开微信粘贴发送，<br>即可在朋友圈看到可点击的文章卡片</p>
+    <div class="share-panel-url" id="share-panel-url"></div>
+    <button class="share-panel-copy" onclick="copyLinkFromPanel()">&#128203; 复制文章链接</button>
+    <button class="share-panel-close" onclick="closeShareOverlay()">关闭</button>
   </div>
 </div><script>
 function copyLink(){
   navigator.clipboard.writeText(location.href).then(function(){
     var t=document.getElementById('share-toast');
-    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';},2000);
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';},2500);
   }).catch(function(){
     var t=document.getElementById('share-toast');
-    t.textContent='\u2717 \u590d\u5236\u5931\u8d25\uff0c\u8bf7\u624b\u52a8\u590d\u5236';
-    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';t.textContent='\u2713 \u94fe\u63a5\u5df2\u590d\u5236';},2000);
+    t.textContent='✗ 复制失败，请手动复制';
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';t.textContent='✓ 链接已复制，去微信粘贴即可';},2500);
   });
 }
 function shareMoments(){
-  var overlay = document.getElementById('share-overlay');
-  var titleEl = document.getElementById('share-card-title');
-  if (titleEl) {
-    var title = document.title;
-    var idx = title.lastIndexOf(' — ');
-    titleEl.textContent = idx > -1 ? title.substring(0, idx) : title;
+  var title = document.title;
+  var idx = title.lastIndexOf(' — ');
+  var cleanTitle = idx > -1 ? title.substring(0, idx) : title;
+  // Try native share API (works in WeChat in-app browser on mobile)
+  if (navigator.share) {
+    navigator.share({ title: cleanTitle, url: location.href }).catch(function(){});
+    return;
   }
-  overlay.classList.add('show');
+  // Desktop fallback: show copy-link panel
+  document.getElementById('share-panel-title').textContent = cleanTitle;
+  document.getElementById('share-panel-url').textContent = location.href;
+  document.getElementById('share-overlay').classList.add('show');
+}
+function copyLinkFromPanel(){
+  navigator.clipboard.writeText(location.href).then(function(){
+    var t=document.getElementById('share-toast');
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';},2500);
+  }).catch(function(){
+    var t=document.getElementById('share-toast');
+    t.textContent='✗ 复制失败，请手动复制';
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';t.textContent='✓ 链接已复制，去微信粘贴即可';},2500);
+  });
 }
 function closeShareOverlay(){
   document.getElementById('share-overlay').classList.remove('show');
 }
+
+  
 
   // -- novora logo micro-collision (5s) --
   (function logoChain() {
