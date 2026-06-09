@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="version" content="20260609v1">
+<title>包装专题 — novora</title>
+<style>
+  :root {
+    --bg: #F7F7F7; --card: #FFFFFF; --text: #1F2937; --muted: #6B7280; --faint: #9CA3AF;
+    --accent: #0F2747; --accent-l: #1A3F6E; --tag-bg: #EEF3F9; --tag-text: #1A3F6E;
+    --pill-bg: #F3F4F6; --pill-active-bg: #0F2747; --pill-active-text: #FFFFFF;
+    --pill-text: #6B7280; --pill-border: #E5E7EB;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; font-size: 16px; line-height: 1.75; color: var(--text); background: var(--bg); -webkit-font-smoothing: antialiased; }
+  .container { max-width: 700px; margin: 0 auto; padding: 0 20px; }
+
+  /* Header */
+  .page-hd {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,247,247,0.95); backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 12px 20px; display: flex; align-items: center; gap: 14px;
+  }
+  .page-hd .logo { font-size: 20px; font-weight: 700; color: var(--accent); text-decoration: none; letter-spacing: -0.4px; }
+  .page-hd .crumb { font-size: 12px; color: var(--faint); }
+  .page-hd .back { font-size: 13px; color: var(--muted); text-decoration: none; font-weight: 500; margin-left: auto; transition: color .15s; }
+  .page-hd .back:hover { color: var(--accent); }
+
+  /* Topic hero */
+  .topic-hero {
+    text-align: center; padding: 40px 20px 32px;
+  }
+  .topic-hero h1 { font-size: 26px; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+  .topic-hero .en { font-size: 13px; color: var(--faint); font-weight: 500; letter-spacing: 0.2px; }
+  .topic-hero .count { font-size: 13px; color: var(--muted); margin-top: 8px; }
+
+  /* Article cards — same as index */
+  .article-card { background: var(--card); border: 1px solid rgba(0,0,0,0.05); border-radius: 16px; padding: 24px 28px; margin-bottom: 12px; cursor: pointer; transition: all 0.2s; display: block; text-decoration: none; color: inherit; }
+  .article-card:hover { transform: translateY(-1px); border-color: rgba(0,0,0,0.1); box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+  .article-card .meta { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .article-card .date { font-size: 13px; color: var(--faint); font-weight: 500; }
+  .article-card .tags { display: flex; gap: 5px; flex-wrap: wrap; }
+  .article-card .tag { font-size: 11px; padding: 2px 8px; background: var(--tag-bg); color: var(--tag-text); border-radius: 3px; font-weight: 500; }
+  .article-card h2 { font-size: 20px; font-weight: 700; line-height: 1.4; margin-bottom: 6px; color: var(--accent); }
+  .article-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* All topics nav */
+  .all-topics {
+    max-width: 700px; margin: 0 auto; padding: 0 20px 12px;
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .all-topics a {
+    font-size: 12px; font-weight: 500; padding: 4px 12px;
+    border-radius: 12px; border: 1px solid var(--pill-border);
+    background: var(--pill-bg); color: var(--pill-text);
+    text-decoration: none; transition: all .15s; white-space: nowrap;
+  }
+  .all-topics a:hover { background: #E5E7EB; }
+  .all-topics a.cur { background: var(--pill-active-bg); color: var(--pill-active-text); border-color: var(--pill-active-bg); }
+
+  /* Empty state */
+  .empty { text-align: center; padding: 48px 20px; color: var(--muted); font-size: 14px; }
+  .empty a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  .empty a:hover { text-decoration: underline; }
+
+  /* Footer */
+  .page-ft { text-align: center; padding: 40px 20px; color: var(--faint); font-size: 12px; }
+
+  @media (max-width: 600px) {
+    .container { padding: 0 12px; }
+    .topic-hero h1 { font-size: 22px; }
+    .article-card { padding: 18px 16px; border-radius: 14px; }
+    .article-card h2 { font-size: 18px; }
+    .all-topics { gap: 6px; }
+    .all-topics a { font-size: 11px; padding: 3px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-hd">
+  <a href="/novora-site/" class="logo">novora</a>
+  <span class="crumb">包装专题</span>
+  <a href="/novora-site/" class="back">← 返回首页</a>
+</div>
+
+<div class="topic-hero" id="topic-hero">
+  <h1 id="topic-title"></h1>
+  <div class="en" id="topic-en"></div>
+  <div class="count" id="topic-count"></div>
+</div>
+
+<div class="all-topics" id="all-topics"></div>
+
+<div class="container" id="article-list">
+  <div class="empty" id="empty-state">
+    未找到相关文章。<br><a href="/novora-site/">← 返回首页</a>
+  </div>
+</div>
+
+<footer class="page-ft">
+  novora · 包装专题 · <a href="/novora-site/">返回首页</a>
+</footer>
+
+<script>
+// ── Article Data ──
+var articles = [
+  { title: "为什么你的CPK总在1.0以下？注塑车间被忽视的5个系统性偏差", date: "2026-06-09", summary: "客户审核CPK报告0.82不及格。真正问题不在设备不在模具——取样策略、测量系统、模腔差异、材料批次、参数漂移，五个系统性偏差逐层拆解。附两个真实车间诊断案例。", tags: ["质量","制造"], topics: ["CPK","SPC","注塑制造","质量管理"], file: "articles/2026-06-09-cpk-injection.html" },
+  { title: "Airless Pump 如何进行真空保持测试？", date: "2026-06-08", summary: "高端品牌做供应商审核时必考的项目。从三重密封结构到28天全周期检测，从负压挑战到温差循环，全面解析真空保持测试的方法论与判定标准。", tags: ["包装","制造","质量"], topics: ["Airless Pump","化妆品包装"], file: "articles/2026-06-08-airless-vacuum.html" },
+  { title: "色母粒的分散性：为什么它决定了你产品的成败", date: "2026-06-08", summary: "因色母粒分散不良导致的质量问题占客诉60%以上。从颜料选择到分散剂配方到加工工艺，一文讲透分散性的四大关键因素，附三种实用检测方法。", tags: ["材料","制造","质量"], topics: ["色母粒"], file: "articles/2026-06-08-dispersion.html" },
+  { title: "色母粒销售技巧与叙事体系", date: "2026-06-07", summary: "11章完整弹药库：从核心叙事框架到30条异议处理，从10个场景化故事到30个短视频标题库。", tags: ["材料"], topics: ["色母粒","B2B销售"], file: "articles/sales-skills.html" },
+  { title: "世界文学名著典藏 · 280部导读", date: "2026-06-07", summary: "17卷分卷：从古希腊荷马史诗到现代经典，涵盖英国、法国、俄国、德国、意大利、拉美、亚洲等全球文学。", tags: ["阅读"], topics: [], file: "articles/classics.html" },
+  { title: "色母粒到底是什么？一分钟搞懂", date: "2026-06-07", summary: "从零开始的色母粒科普：为什么不用色粉直接染色？色母粒和色粉的本质区别是什么？", tags: ["材料","制造"], topics: ["色母粒"], file: "articles/what-is-masterbatch.html" },
+  { title: "瓶子发黄怎么办？塑料厂急诊室", date: "2026-06-07", summary: "PET瓶发黄、注塑件黑点、吹塑件破裂——这些看似不同的质量问题，往往指向同一个幕后黑手。完整诊断框架与解决方案。", tags: ["材料","制造","质量"], topics: ["色母粒","注塑制造"], file: "articles/yellow-bottles.html" },
+  { title: "为什么低价色母粒最后反而更贵？", date: "2026-06-07", summary: "三组算账对比：便宜色母粒VS高品质色母粒，添加量、不良率、停机率——真正的省钱是什么？", tags: ["材料","制造"], topics: ["色母粒"], file: "articles/cheap-masterbatch.html" },
+  { title: "一个配方，一年帮客户省了120万", date: "2026-06-07", summary: "真实案例：添加量从4%优化到2.5%效果不变。色母粒不是越便宜越好——关键是综合成本。", tags: ["材料","制造"], topics: ["色母粒"], file: "articles/roi-120wan.html" },
+  { title: "10万只瓶子报废，只因为颜色差了0.5%", date: "2026-06-07", summary: "客户验货当天，10万只瓶子直接退货。问题竟然出在色母粒添加比例上。", tags: ["材料","制造","质量"], topics: ["色母粒"], file: "articles/bottles-100k.html" },
+  { title: "Silgan Dispensing 深度调研报告", date: "2026-05-16", summary: "西尔格分配系统全球最完整深度分析。14页覆盖：集团架构、中国市场28年深耕、5笔重大收购、核心技术平台。", tags: ["包装","制造"], topics: ["化妆品包装","定量泵系统"], file: "articles/silgan-dispensing.html" }
+];
+
+// ── Topic Definitions ──
+var topics = [
+  { id: "airless-pump", zh: "真空泵", en: "Airless Pump", kw: ["airless","Airless Pump","真空泵","真空瓶","真空"] },
+  { id: "refill-system", zh: "替换系统", en: "Refill System", kw: ["refill","替换","替换包装","替换装"] },
+  { id: "pcr-packaging", zh: "回收材料", en: "PCR Packaging", kw: ["pcr","PCR","回收","再生","循环"] },
+  { id: "mono-material", zh: "单一材料", en: "Mono-material", kw: ["mono","单一材料","mono-material"] },
+  { id: "foamer-pump", zh: "泡沫泵", en: "Foamer Pump", kw: ["foamer","泡沫泵","泡沫","发泡"] },
+  { id: "dual-chamber", zh: "双腔包装", en: "Dual Chamber", kw: ["dual","双腔","双管","双层"] },
+  { id: "serum-bottle", zh: "精华瓶", en: "Serum Bottle", kw: ["serum","精华","精华瓶","滴管"] },
+  { id: "dispensing-system", zh: "分配系统", en: "Dispensing System", kw: ["dispensing","分配","定量泵","泵系统","Lotion Pump","Fine Mist"] },
+  { id: "cosmetic-packaging", zh: "化妆品包装", en: "Cosmetic Packaging", kw: ["化妆品包装","化妆品","cosmetic","包装设计","包材"] },
+  { id: "injection-molding", zh: "注塑制造", en: "Injection Molding", kw: ["注塑","injection","注塑制造","模具","成型"] }
+];
+
+// ── Read topic from URL ──
+var params = new URLSearchParams(location.search);
+var tid = params.get('t') || '';
+
+// Find matching topic
+var topic = null;
+for (var i = 0; i < topics.length; i++) {
+  if (topics[i].id === tid) { topic = topics[i]; break; }
+}
+
+// Default to airless-pump if no match
+if (!topic) {
+  tid = 'airless-pump';
+  topic = topics[0];
+  // Update URL without reload
+  if (history.replaceState) {
+    history.replaceState(null, '', '?t=' + tid);
+  }
+}
+
+// ── Set hero ──
+document.getElementById('topic-title').textContent = topic.zh;
+document.getElementById('topic-en').textContent = topic.en;
+
+// ── Match articles ──
+var matched = [];
+for (var i = 0; i < articles.length; i++) {
+  var a = articles[i];
+  var allText = (a.tags.join(' ') + ' ' + (a.topics||[]).join(' ') + ' ' + a.title + ' ' + a.summary).toLowerCase();
+  var match = false;
+  for (var k = 0; k < topic.kw.length; k++) {
+    if (allText.indexOf(topic.kw[k].toLowerCase()) !== -1) { match = true; break; }
+  }
+  if (match) matched.push(a);
+}
+
+document.getElementById('topic-count').textContent = matched.length + ' 篇相关文章';
+
+// ── Render articles ──
+var list = document.getElementById('article-list');
+list.innerHTML = '';
+if (matched.length === 0) {
+  list.innerHTML = '<div class="empty">该专题暂无相关文章。<br>更多内容正在建设中。<br><br><a href="/novora-site/">← 返回首页</a></div>';
+} else {
+  for (var i = 0; i < matched.length; i++) {
+    var a = matched[i];
+    var card = document.createElement('a');
+    card.className = 'article-card'; card.href = a.file;
+    card.innerHTML = '<div class="meta"><span class="date">' + a.date + '</span>' +
+      (a.tags.length ? '<span class="tags">' + a.tags.map(function(t){ return '<span class="tag">' + t + '</span>'; }).join('') + '</span>' : '') +
+      '</div><h2>' + a.title + '</h2><p>' + a.summary + '</p>';
+    list.appendChild(card);
+  }
+}
+
+// ── Render topic nav ──
+var nav = document.getElementById('all-topics');
+var html = '';
+for (var i = 0; i < topics.length; i++) {
+  var cls = topics[i].id === tid ? ' cur' : '';
+  html += '<a href="?t=' + topics[i].id + '" class="' + cls + '">' + topics[i].zh + '</a>';
+}
+nav.innerHTML = html;
+</script>
+</body>
+</html>

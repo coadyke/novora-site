@@ -119,80 +119,75 @@
   .modal .sub-msg.error { color: #DC2626; display: block; }
   .sub-row { display: none; } /* old, replaced by head-sub-btn */
 
-  /* ── Packaging Inspiration Scroll ── */
-  .inspo-section {
-    padding: 0; margin: 0 0 8px;
-  }
+  /* ── Packaging Topics Scroll ── */
+  .inspo-section { padding: 0; margin: 0 0 12px; }
   .inspo-hd {
-    max-width: 700px; margin: 0 auto; padding: 18px 20px 10px;
-    display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 6px;
+    max-width: 700px; margin: 0 auto; padding: 16px 20px 8px;
+    display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px;
   }
   .inspo-hd h3 {
-    font-size: 15px; font-weight: 700; color: var(--accent);
+    font-size: 14px; font-weight: 700; color: var(--accent);
     letter-spacing: -0.2px; margin: 0;
   }
   .inspo-hd .sub {
-    font-size: 12px; color: var(--faint); font-weight: 400;
+    font-size: 11px; color: var(--faint); font-weight: 400;
   }
   .inspo-track-wrap {
     overflow: hidden;
-    mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 3%, #000 97%, transparent);
   }
   .inspo-track {
-    display: flex; gap: 14px; width: max-content;
-    animation: inspo-scroll 50s linear infinite;
-    padding: 4px 20px 12px;
+    display: flex; gap: 12px; width: max-content;
+    animation: inspo-scroll 60s linear infinite;
+    padding: 2px 20px 8px;
   }
   .inspo-track:hover { animation-play-state: paused; }
   @keyframes inspo-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
   .inspo-card {
-    flex-shrink: 0; width: 178px; height: 222px;
-    border-radius: 16px; overflow: hidden;
-    position: relative; cursor: default;
+    flex-shrink: 0; width: 148px; height: 148px;
+    border-radius: 14px; overflow: hidden;
+    position: relative; cursor: pointer; text-decoration: none; display: block;
     border: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
-    transition: transform .25s, box-shadow .25s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    transition: transform .2s, box-shadow .2s;
   }
-  .inspo-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.07); }
+  .inspo-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
   .inspo-card .inspo-bg {
     position: absolute; inset: 0;
     display: flex; align-items: center; justify-content: center;
   }
-  .inspo-card .inspo-bg svg { width: 90px; height: 90px; opacity: 0.35; }
+  .inspo-card .inspo-bg svg { width: 64px; height: 64px; opacity: 0.3; }
   .inspo-card .inspo-label {
     position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 12px 14px;
-    background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 100%);
+    padding: 10px 12px;
+    background: linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 100%);
   }
   .inspo-card .inspo-label .en {
-    font-size: 13px; font-weight: 600; color: #fff; line-height: 1.3;
+    font-size: 12px; font-weight: 600; color: #fff; line-height: 1.3;
     letter-spacing: -0.1px;
   }
   .inspo-card .inspo-label .zh {
-    font-size: 10px; color: rgba(255,255,255,0.75); margin-top: 1px;
+    font-size: 9px; color: rgba(255,255,255,0.7); margin-top: 1px;
     font-weight: 400;
   }
 
-  /* Card gradients — each a distinct packaging mood */
-  .inspo-airless { background: linear-gradient(145deg, #1a2744 0%, #2d4a7a 50%, #1e3a5f 100%); }
-  .inspo-serum  { background: linear-gradient(145deg, #3d2613 0%, #6b4423 40%, #8b5e34 100%); }
-  .inspo-jar    { background: linear-gradient(145deg, #f5ebe0 0%, #e8d5c0 50%, #d4a98a 100%); }
-  .inspo-jar .inspo-label .en, .inspo-jar .inspo-label .zh { color: #2c1810; }
-  .inspo-jar .inspo-label .zh { color: rgba(44,24,16,0.7); }
-  .inspo-jar .inspo-label { background: linear-gradient(to top, rgba(255,255,255,0.7) 0%, transparent 100%); }
-  .inspo-jar .inspo-bg svg { opacity: 0.15; }
-  .inspo-refill { background: linear-gradient(145deg, #d4e8d4 0%, #a8d5a2 40%, #7ab87a 100%); }
-  .inspo-refill .inspo-label .en, .inspo-refill .inspo-label .zh { color: #1a3d1a; }
-  .inspo-refill .inspo-label .zh { color: rgba(26,61,26,0.7); }
-  .inspo-refill .inspo-label { background: linear-gradient(to top, rgba(255,255,255,0.6) 0%, transparent 100%); }
-  .inspo-refill .inspo-bg svg { opacity: 0.12; }
-  .inspo-mono   { background: linear-gradient(145deg, #8b8b83 0%, #a8a89e 40%, #c4c4b8 100%); }
-  .inspo-pcr    { background: linear-gradient(145deg, #2d4a2d 0%, #3d6b3d 40%, #4a7a4a 100%); }
-  .inspo-dropper{ background: linear-gradient(145deg, #2a1a4e 0%, #3d2b6b 40%, #4e3a80 100%); }
-  .inspo-luxury { background: linear-gradient(145deg, #1a1a1a 0%, #2a2a2a 50%, #3a3020 100%); }
-  .inspo-sust   { background: linear-gradient(145deg, #1a3a4a 0%, #2a5a6a 50%, #1e4a5a 100%); }
+  /* Topic card gradients — 10 distinct */
+  .t-airless { background: linear-gradient(145deg, #1a2744 0%, #2d4a7a 50%, #1e3a5f 100%); }
+  .t-refill  { background: linear-gradient(145deg, #c8e0c8 0%, #9ccf9c 40%, #6eb86e 100%); }
+  .t-refill .inspo-label .en, .t-refill .inspo-label .zh { color: #1a3d1a; }
+  .t-refill .inspo-label .zh { color: rgba(26,61,26,0.7); }
+  .t-refill .inspo-label { background: linear-gradient(to top, rgba(255,255,255,0.5) 0%, transparent 100%); }
+  .t-refill .inspo-bg svg { opacity: 0.15; stroke: #2d5a2d; }
+  .t-pcr     { background: linear-gradient(145deg, #2d4a2d 0%, #3d6b3d 40%, #4a7a4a 100%); }
+  .t-mono    { background: linear-gradient(145deg, #8b8b83 0%, #a8a89e 40%, #c4c4b8 100%); }
+  .t-foamer  { background: linear-gradient(145deg, #cc7855 0%, #e8956a 50%, #d4805a 100%); }
+  .t-dual    { background: linear-gradient(145deg, #1a3a4a 0%, #2a6a7a 50%, #1e5a6a 100%); }
+  .t-serum   { background: linear-gradient(145deg, #3d2613 0%, #6b4423 40%, #8b5e34 100%); }
+  .t-dispense{ background: linear-gradient(145deg, #3a4a5a 0%, #5a6a7a 40%, #4a5a6a 100%); }
+  .t-cosmo   { background: linear-gradient(145deg, #4a3a5a 0%, #6a5a7a 40%, #5a4a6a 100%); }
+  .t-inject  { background: linear-gradient(145deg, #5a3a2a 0%, #7a5a4a 40%, #6a4a3a 100%); }
 
   @media (max-width: 600px) {
     .container { padding: 0 12px; }
@@ -209,14 +204,16 @@
     .cat-pill { flex-shrink: 0; font-size: 10px; padding: 3px 10px; }
     .article-card { padding: 18px 16px; border-radius: 14px; }
     .article-card h2 { font-size: 18px; }
-    .inspo-card { width: 152px; height: 190px; }
-    .inspo-card .inspo-bg svg { width: 70px; height: 70px; }
+    .inspo-card { width: 130px; height: 130px; }
+    .inspo-card .inspo-bg svg { width: 52px; height: 52px; }
     .inspo-card .inspo-label .en { font-size: 11px; }
-    .inspo-track { gap: 10px; padding: 2px 12px 10px; }
+    .inspo-track { gap: 8px; padding: 2px 12px 6px; }
     .inspo-track-wrap {
       mask-image: linear-gradient(to right, transparent, #000 2%, #000 98%, transparent);
       -webkit-mask-image: linear-gradient(to right, transparent, #000 2%, #000 98%, transparent);
     }
+    .inspo-hd { padding: 12px 12px 6px; }
+    .inspo-hd h3 { font-size: 13px; }
   }
 </style>
 </head>
@@ -237,69 +234,75 @@
   </div>
 </div>
 
-<!-- ━━━━ Packaging Inspiration Scroll ━━━━ -->
+<!-- ━━━━ Packaging Topics Scroll ━━━━ -->
 <div class="inspo-section">
   <div class="inspo-hd">
-    <h3>包装灵感 <span class="sub">Packaging Inspiration &nbsp;·&nbsp; 从产品形态观察包装趋势</span></h3>
+    <h3>包装专题 <span class="sub">Packaging Topics &nbsp;·&nbsp; 从产品形态观察包装趋势</span></h3>
   </div>
   <div class="inspo-track-wrap">
     <div class="inspo-track" id="inspo-track">
 
-      <div class="inspo-card inspo-airless">
-        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="24" y="8" width="16" height="6" rx="3" fill="#fff"/><rect x="20" y="14" width="24" height="38" rx="5" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="32" cy="28" r="4" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="20" y1="42" x2="44" y2="42" stroke="#fff" stroke-width="1"/></svg></div>
+      <a class="inspo-card t-airless" href="topics.html?t=airless-pump">
+        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="24" y="10" width="16" height="6" rx="3" fill="#fff"/><rect x="20" y="16" width="24" height="36" rx="5" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="32" cy="30" r="4" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="20" y1="42" x2="44" y2="42" stroke="#fff" stroke-width="1"/></svg></div>
         <div class="inspo-label"><div class="en">Airless Pump</div><div class="zh">真空泵</div></div>
-      </div>
+      </a>
 
-      <div class="inspo-card inspo-serum">
-        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="23" y="10" width="18" height="38" rx="10" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="25" y="48" width="14" height="6" rx="3" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="32" cy="22" r="4" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="32" y1="8" x2="32" y2="8" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div>
-        <div class="inspo-label"><div class="en">Serum Bottle</div><div class="zh">精华瓶</div></div>
-      </div>
-
-      <div class="inspo-card inspo-jar">
-        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="10" y="22" width="44" height="28" rx="8" fill="none" stroke="#8b6914" stroke-width="1.5"/><rect x="22" y="12" width="20" height="10" rx="4" fill="none" stroke="#8b6914" stroke-width="1.5"/><circle cx="32" cy="36" r="8" fill="none" stroke="#8b6914" stroke-width="1.2"/></svg></div>
-        <div class="inspo-label"><div class="en">Cream Jar</div><div class="zh">膏霜罐</div></div>
-      </div>
-
-      <div class="inspo-card inspo-refill">
+      <a class="inspo-card t-refill" href="topics.html?t=refill-system">
         <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="18" y="14" width="28" height="36" rx="6" fill="none" stroke="#2d5a2d" stroke-width="1.5"/><path d="M32 6 L32 14" stroke="#2d5a2d" stroke-width="1.5" stroke-linecap="round"/><path d="M18 44 L46 44" stroke="#2d5a2d" stroke-width="1"/><circle cx="32" cy="32" r="3" fill="none" stroke="#2d5a2d" stroke-width="1.2"/></svg></div>
-        <div class="inspo-label"><div class="en">Refill Packaging</div><div class="zh">替换包装</div></div>
-      </div>
+        <div class="inspo-label"><div class="en">Refill System</div><div class="zh">替换系统</div></div>
+      </a>
 
-      <div class="inspo-card inspo-mono">
-        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="16" y="14" width="32" height="40" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="22" y="8" width="20" height="6" rx="2" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="16" y1="32" x2="48" y2="32" stroke="#fff" stroke-width="0.8" opacity="0.5"/><circle cx="22" cy="22" r="3" fill="#fff" opacity="0.6"/></svg></div>
-        <div class="inspo-label"><div class="en">Mono-material</div><div class="zh">单一材料</div></div>
-      </div>
-
-      <div class="inspo-card inspo-pcr">
+      <a class="inspo-card t-pcr" href="topics.html?t=pcr-packaging">
         <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="22" y="14" width="20" height="36" rx="6" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M16 20 Q22 30 16 40" fill="none" stroke="#fff" stroke-width="1.2"/><path d="M48 20 Q42 30 48 40" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="32" cy="32" r="5" fill="none" stroke="#fff" stroke-width="1" opacity="0.6"/></svg></div>
         <div class="inspo-label"><div class="en">PCR Packaging</div><div class="zh">回收材料</div></div>
-      </div>
+      </a>
 
-      <div class="inspo-card inspo-dropper">
-        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="26" y="18" width="12" height="32" rx="6" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="28" y="12" width="8" height="6" rx="2" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="32" y1="6" x2="32" y2="12" stroke="#fff" stroke-width="1.2"/><circle cx="32" cy="28" r="3" fill="none" stroke="#fff" stroke-width="1.2"/></svg></div>
-        <div class="inspo-label"><div class="en">Dropper Bottle</div><div class="zh">滴管瓶</div></div>
-      </div>
+      <a class="inspo-card t-mono" href="topics.html?t=mono-material">
+        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="16" y="14" width="32" height="40" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="22" y="8" width="20" height="6" rx="2" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="16" y1="32" x2="48" y2="32" stroke="#fff" stroke-width="0.8" opacity="0.5"/><circle cx="22" cy="22" r="3" fill="#fff" opacity="0.6"/></svg></div>
+        <div class="inspo-label"><div class="en">Mono-material</div><div class="zh">单一材料</div></div>
+      </a>
 
-      <div class="inspo-card inspo-luxury">
-        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="14" y="10" width="36" height="44" rx="12" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/><rect x="22" y="4" width="20" height="6" rx="3" fill="none" stroke="rgba(212,175,55,0.7)" stroke-width="1.5"/><circle cx="32" cy="24" r="6" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1"/></svg></div>
-        <div class="inspo-label"><div class="en">Luxury Skincare</div><div class="zh">奢华护肤</div></div>
-      </div>
+      <a class="inspo-card t-foamer" href="topics.html?t=foamer-pump">
+        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="22" y="14" width="20" height="36" rx="6" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="32" cy="22" r="3" fill="#fff" opacity="0.4"/><circle cx="30" cy="36" r="2" fill="#fff" opacity="0.3"/><circle cx="34" cy="40" r="1.5" fill="#fff" opacity="0.25"/><circle cx="29" cy="44" r="1" fill="#fff" opacity="0.2"/></svg></div>
+        <div class="inspo-label"><div class="en">Foamer Pump</div><div class="zh">泡沫泵</div></div>
+      </a>
 
-      <div class="inspo-card inspo-sust">
-        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="20" y="16" width="24" height="34" rx="8" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M20 24 Q32 16 44 24" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="32" cy="36" r="5" fill="none" stroke="#fff" stroke-width="1" opacity="0.5"/></svg></div>
-        <div class="inspo-label"><div class="en">Sustainable Pkg</div><div class="zh">可持续包装</div></div>
-      </div>
+      <a class="inspo-card t-dual" href="topics.html?t=dual-chamber">
+        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="8" y="14" width="20" height="40" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="36" y="14" width="20" height="40" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="18" y1="22" x2="18" y2="22" stroke="#fff" stroke-width="4" stroke-linecap="round"/><line x1="46" y1="22" x2="46" y2="22" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div>
+        <div class="inspo-label"><div class="en">Dual Chamber</div><div class="zh">双腔包装</div></div>
+      </a>
+
+      <a class="inspo-card t-serum" href="topics.html?t=serum-bottle">
+        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="23" y="10" width="18" height="38" rx="10" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="25" y="48" width="14" height="6" rx="3" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="32" cy="22" r="4" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="32" y1="8" x2="32" y2="8" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div>
+        <div class="inspo-label"><div class="en">Serum Bottle</div><div class="zh">精华瓶</div></div>
+      </a>
+
+      <a class="inspo-card t-dispense" href="topics.html?t=dispensing-system">
+        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="18" y="14" width="28" height="36" rx="6" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="18" y1="28" x2="46" y2="28" stroke="#fff" stroke-width="1"/><circle cx="32" cy="20" r="3" fill="none" stroke="#fff" stroke-width="1.2"/><path d="M32 48 L32 54" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <div class="inspo-label"><div class="en">Dispensing System</div><div class="zh">分配系统</div></div>
+      </a>
+
+      <a class="inspo-card t-cosmo" href="topics.html?t=cosmetic-packaging">
+        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="14" y="10" width="36" height="44" rx="12" fill="none" stroke="#fff" stroke-width="1.2"/><rect x="22" y="4" width="20" height="6" rx="3" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="32" cy="26" r="5" fill="none" stroke="#fff" stroke-width="1"/><rect x="18" y="40" width="28" height="4" rx="2" fill="none" stroke="#fff" stroke-width="0.8" opacity="0.5"/></svg></div>
+        <div class="inspo-label"><div class="en">Cosmetic Pkg</div><div class="zh">化妆品包装</div></div>
+      </a>
+
+      <a class="inspo-card t-inject" href="topics.html?t=injection-molding">
+        <div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="12" y="8" width="40" height="48" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="18" y="4" width="28" height="4" rx="1" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="18" y1="20" x2="46" y2="20" stroke="#fff" stroke-width="0.8" opacity="0.5"/><circle cx="32" cy="34" r="5" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="16" y1="44" x2="48" y2="44" stroke="#fff" stroke-width="0.8" opacity="0.4"/></svg></div>
+        <div class="inspo-label"><div class="en">Injection Molding</div><div class="zh">注塑制造</div></div>
+      </a>
 
       <!-- Duplicate for seamless loop -->
-      <div class="inspo-card inspo-airless"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="24" y="8" width="16" height="6" rx="3" fill="#fff"/><rect x="20" y="14" width="24" height="38" rx="5" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="32" cy="28" r="4" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="20" y1="42" x2="44" y2="42" stroke="#fff" stroke-width="1"/></svg></div><div class="inspo-label"><div class="en">Airless Pump</div><div class="zh">真空泵</div></div></div>
-      <div class="inspo-card inspo-serum"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="23" y="10" width="18" height="38" rx="10" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="25" y="48" width="14" height="6" rx="3" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="32" cy="22" r="4" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="32" y1="8" x2="32" y2="8" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div><div class="inspo-label"><div class="en">Serum Bottle</div><div class="zh">精华瓶</div></div></div>
-      <div class="inspo-card inspo-jar"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="10" y="22" width="44" height="28" rx="8" fill="none" stroke="#8b6914" stroke-width="1.5"/><rect x="22" y="12" width="20" height="10" rx="4" fill="none" stroke="#8b6914" stroke-width="1.5"/><circle cx="32" cy="36" r="8" fill="none" stroke="#8b6914" stroke-width="1.2"/></svg></div><div class="inspo-label"><div class="en">Cream Jar</div><div class="zh">膏霜罐</div></div></div>
-      <div class="inspo-card inspo-refill"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="18" y="14" width="28" height="36" rx="6" fill="none" stroke="#2d5a2d" stroke-width="1.5"/><path d="M32 6 L32 14" stroke="#2d5a2d" stroke-width="1.5" stroke-linecap="round"/><path d="M18 44 L46 44" stroke="#2d5a2d" stroke-width="1"/><circle cx="32" cy="32" r="3" fill="none" stroke="#2d5a2d" stroke-width="1.2"/></svg></div><div class="inspo-label"><div class="en">Refill Packaging</div><div class="zh">替换包装</div></div></div>
-      <div class="inspo-card inspo-mono"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="16" y="14" width="32" height="40" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="22" y="8" width="20" height="6" rx="2" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="16" y1="32" x2="48" y2="32" stroke="#fff" stroke-width="0.8" opacity="0.5"/><circle cx="22" cy="22" r="3" fill="#fff" opacity="0.6"/></svg></div><div class="inspo-label"><div class="en">Mono-material</div><div class="zh">单一材料</div></div></div>
-      <div class="inspo-card inspo-pcr"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="22" y="14" width="20" height="36" rx="6" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M16 20 Q22 30 16 40" fill="none" stroke="#fff" stroke-width="1.2"/><path d="M48 20 Q42 30 48 40" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="32" cy="32" r="5" fill="none" stroke="#fff" stroke-width="1" opacity="0.6"/></svg></div><div class="inspo-label"><div class="en">PCR Packaging</div><div class="zh">回收材料</div></div></div>
-      <div class="inspo-card inspo-dropper"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="26" y="18" width="12" height="32" rx="6" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="28" y="12" width="8" height="6" rx="2" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="32" y1="6" x2="32" y2="12" stroke="#fff" stroke-width="1.2"/><circle cx="32" cy="28" r="3" fill="none" stroke="#fff" stroke-width="1.2"/></svg></div><div class="inspo-label"><div class="en">Dropper Bottle</div><div class="zh">滴管瓶</div></div></div>
-      <div class="inspo-card inspo-luxury"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="14" y="10" width="36" height="44" rx="12" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"/><rect x="22" y="4" width="20" height="6" rx="3" fill="none" stroke="rgba(212,175,55,0.7)" stroke-width="1.5"/><circle cx="32" cy="24" r="6" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="1"/></svg></div><div class="inspo-label"><div class="en">Luxury Skincare</div><div class="zh">奢华护肤</div></div></div>
-      <div class="inspo-card inspo-sust"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="20" y="16" width="24" height="34" rx="8" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M20 24 Q32 16 44 24" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="32" cy="36" r="5" fill="none" stroke="#fff" stroke-width="1" opacity="0.5"/></svg></div><div class="inspo-label"><div class="en">Sustainable Pkg</div><div class="zh">可持续包装</div></div></div>
+      <a class="inspo-card t-airless" href="topics.html?t=airless-pump"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="24" y="10" width="16" height="6" rx="3" fill="#fff"/><rect x="20" y="16" width="24" height="36" rx="5" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="32" cy="30" r="4" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="20" y1="42" x2="44" y2="42" stroke="#fff" stroke-width="1"/></svg></div><div class="inspo-label"><div class="en">Airless Pump</div><div class="zh">真空泵</div></div></a>
+      <a class="inspo-card t-refill" href="topics.html?t=refill-system"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="18" y="14" width="28" height="36" rx="6" fill="none" stroke="#2d5a2d" stroke-width="1.5"/><path d="M32 6 L32 14" stroke="#2d5a2d" stroke-width="1.5" stroke-linecap="round"/><path d="M18 44 L46 44" stroke="#2d5a2d" stroke-width="1"/><circle cx="32" cy="32" r="3" fill="none" stroke="#2d5a2d" stroke-width="1.2"/></svg></div><div class="inspo-label"><div class="en">Refill System</div><div class="zh">替换系统</div></div></a>
+      <a class="inspo-card t-pcr" href="topics.html?t=pcr-packaging"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="22" y="14" width="20" height="36" rx="6" fill="none" stroke="#fff" stroke-width="1.5"/><path d="M16 20 Q22 30 16 40" fill="none" stroke="#fff" stroke-width="1.2"/><path d="M48 20 Q42 30 48 40" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="32" cy="32" r="5" fill="none" stroke="#fff" stroke-width="1" opacity="0.6"/></svg></div><div class="inspo-label"><div class="en">PCR Packaging</div><div class="zh">回收材料</div></div></a>
+      <a class="inspo-card t-mono" href="topics.html?t=mono-material"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="16" y="14" width="32" height="40" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="22" y="8" width="20" height="6" rx="2" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="16" y1="32" x2="48" y2="32" stroke="#fff" stroke-width="0.8" opacity="0.5"/><circle cx="22" cy="22" r="3" fill="#fff" opacity="0.6"/></svg></div><div class="inspo-label"><div class="en">Mono-material</div><div class="zh">单一材料</div></div></a>
+      <a class="inspo-card t-foamer" href="topics.html?t=foamer-pump"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="22" y="14" width="20" height="36" rx="6" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="32" cy="22" r="3" fill="#fff" opacity="0.4"/><circle cx="30" cy="36" r="2" fill="#fff" opacity="0.3"/><circle cx="34" cy="40" r="1.5" fill="#fff" opacity="0.25"/><circle cx="29" cy="44" r="1" fill="#fff" opacity="0.2"/></svg></div><div class="inspo-label"><div class="en">Foamer Pump</div><div class="zh">泡沫泵</div></div></a>
+      <a class="inspo-card t-dual" href="topics.html?t=dual-chamber"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="8" y="14" width="20" height="40" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="36" y="14" width="20" height="40" rx="4" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="18" y1="22" x2="18" y2="22" stroke="#fff" stroke-width="4" stroke-linecap="round"/><line x1="46" y1="22" x2="46" y2="22" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div><div class="inspo-label"><div class="en">Dual Chamber</div><div class="zh">双腔包装</div></div></a>
+      <a class="inspo-card t-serum" href="topics.html?t=serum-bottle"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="23" y="10" width="18" height="38" rx="10" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="25" y="48" width="14" height="6" rx="3" fill="none" stroke="#fff" stroke-width="1.2"/><circle cx="32" cy="22" r="4" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="32" y1="8" x2="32" y2="8" stroke="#fff" stroke-width="4" stroke-linecap="round"/></svg></div><div class="inspo-label"><div class="en">Serum Bottle</div><div class="zh">精华瓶</div></div></a>
+      <a class="inspo-card t-dispense" href="topics.html?t=dispensing-system"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="18" y="14" width="28" height="36" rx="6" fill="none" stroke="#fff" stroke-width="1.5"/><line x1="18" y1="28" x2="46" y2="28" stroke="#fff" stroke-width="1"/><circle cx="32" cy="20" r="3" fill="none" stroke="#fff" stroke-width="1.2"/><path d="M32 48 L32 54" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="inspo-label"><div class="en">Dispensing System</div><div class="zh">分配系统</div></div></a>
+      <a class="inspo-card t-cosmo" href="topics.html?t=cosmetic-packaging"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="14" y="10" width="36" height="44" rx="12" fill="none" stroke="#fff" stroke-width="1.2"/><rect x="22" y="4" width="20" height="6" rx="3" fill="none" stroke="#fff" stroke-width="1.5"/><circle cx="32" cy="26" r="5" fill="none" stroke="#fff" stroke-width="1"/><rect x="18" y="40" width="28" height="4" rx="2" fill="none" stroke="#fff" stroke-width="0.8" opacity="0.5"/></svg></div><div class="inspo-label"><div class="en">Cosmetic Pkg</div><div class="zh">化妆品包装</div></div></a>
+      <a class="inspo-card t-inject" href="topics.html?t=injection-molding"><div class="inspo-bg"><svg viewBox="0 0 64 64"><rect x="12" y="8" width="40" height="48" rx="2" fill="none" stroke="#fff" stroke-width="1.5"/><rect x="18" y="4" width="28" height="4" rx="1" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="18" y1="20" x2="46" y2="20" stroke="#fff" stroke-width="0.8" opacity="0.5"/><circle cx="32" cy="34" r="5" fill="none" stroke="#fff" stroke-width="1.2"/><line x1="16" y1="44" x2="48" y2="44" stroke="#fff" stroke-width="0.8" opacity="0.4"/></svg></div><div class="inspo-label"><div class="en">Injection Molding</div><div class="zh">注塑制造</div></div></a>
 
     </div>
   </div>
