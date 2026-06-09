@@ -20,7 +20,7 @@
 })();
 </script>
 
-<meta name="version" content="20260609v11">
+<meta name="version" content="20260609v12">
 <meta property="og:title" content="为什么你的CPK总在1.0以下？注塑车间被忽视的5个系统性偏差">
 <meta property="og:description" content="客户审核CPK报告0.82不及格。五个系统性偏差逐层拆解，附两个真实车间诊断案例。">
 <meta property="og:url" content="https://coadyke.github.io/novora-site/articles/2026-06-09-cpk-injection.html">
@@ -47,16 +47,20 @@
 <style>
   :root { --bdf: #0F2747; --bdf-l: #1A3F6E; --bdf-pale: #EEF3F9; --text: #1F2937; --muted: #6B7280; --bg: #F7F7F7; --card: #FFFFFF; --gray-1: #E5E7EB; --gray-3: #9CA3B8; }
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-  body { padding:20px; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; font-size:15px; line-height:1.75; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased; }
+  body { padding:20px; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; font-size:15px; line-height:1.75; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased;  }
+
+  /* -- Site Header -- */
+  .site-hd { max-width:720px; margin:0 auto 6px; padding:0 4px; display:flex; align-items:baseline; gap:8px; }
+  .site-hd .site-logo { font-size:18px; font-weight:700; color:var(--bdf); letter-spacing:-0.3px; white-space:nowrap; text-decoration:none; }
+  .site-hd .site-sub { font-size:10px; color:var(--muted); letter-spacing:0.2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; min-width:0; }
+
 
   /* -- Hero -- */
-  .article-hero { padding:28px 20px 12px; text-align:center; }
-  .article-hero .tag-row { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:10px; justify-content:center; }
-  .article-hero .tag { font-size:11px; padding:2px 8px; background:var(--bdf-pale); color:var(--bdf); border-radius:4px; font-weight:500; }
+  .article-hero { padding:16px 20px 8px; text-align:center; }
   .article-hero h1 { font-size:18px; font-weight:700; color:var(--bdf); line-height:1.3; margin:0 0 4px; letter-spacing:-0.3px; }
-  .article-hero .meta { font-size:12px; color:var(--muted); }
-  .article-hero .share-bar-top { display:flex; gap:5px; justify-content:center; flex-wrap:wrap; margin-top:10px; }
-  .share-btn-top { display:inline-flex; align-items:center; gap:4px; font-size:12px; font-weight:500; color:var(--muted); background:#fff; border:1px solid var(--gray-1); border-radius:6px; padding:5px 12px; cursor:pointer; transition:all .15s; }
+  .article-hero .meta { font-size:11px; color:var(--muted); }
+  .article-hero .share-bar-top { display:flex; gap:3px; justify-content:center; flex-wrap:wrap; margin-top:4px; }
+  .share-btn-top { display:inline-flex; align-items:center; gap:3px; font-size:11px; font-weight:500; color:var(--muted); background:#fff; border:1px solid var(--gray-1); border-radius:5px; padding:3px 10px; cursor:pointer; transition:all .15s; }
   .share-btn-top:hover { border-color:#BFCAD8; color:var(--bdf); }
 
   .ctr { max-width:720px; margin:0 auto; }
@@ -73,7 +77,7 @@
   .video-embed video { width:100%; display:block; }
 
   @media (max-width:600px) {
-    .article-hero { padding:22px 14px 8px; }
+    .article-hero { padding:14px 12px 6px; }
     .article-hero h1 { font-size:18px; }
     .art-body { padding:18px 14px; font-size:14px; }
     .art-body h2 { font-size:16px; }
@@ -84,11 +88,14 @@
 </head>
 <body>
 
+<!-- Site Header -->
+<div class="site-hd">
+  <a class="site-logo" href="/">novora</a>
+  <span class="site-sub">包装｜材料｜制造｜质量｜AI｜可持续发展｜洞察｜阅读</span>
+</div>
+
 <!-- Hero -->
 <div class="article-hero">
-  <div class="tag-row">
-    <span class="tag">质量</span><span class="tag">制造</span>
-  </div>
   <h1>为什么你的CPK总在1.0以下？注塑车间被忽视的5个系统性偏差</h1>
   <p class="meta">2026年6月9日 · 产业深度解析 · 质量管理</p>
 </div>
@@ -226,16 +233,16 @@ CPK &lt; 1.00 → 过程能力不足，必须改进
 
 <!-- Share -->
 <div class="share-bar" style="max-width:720px; margin:20px auto 0; padding:0 20px; display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
-  <button class="share-btn" onclick="copyLink()" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:8px;padding:7px 14px;cursor:pointer;transition:all .2s;">
+  <button class="share-btn" onclick="copyLink()" style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:5px;padding:3px 10px;cursor:pointer;transition:all .2s;">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
     复制链接
   </button>
-  <button class="share-btn" onclick="shareWechat()" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:8px;padding:7px 14px;cursor:pointer;transition:all .2s;">
+  <button class="share-btn" onclick="shareWechat()" style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:5px;padding:3px 10px;cursor:pointer;transition:all .2s;">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="#07C160"><path d="M8.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-7.5 4c-3.3 0-6-2.2-6-5 0-2.3 1.8-4.2 4.5-4.8C5.2 2.8 8.4 1 12 1c4.7 0 8.5 3.1 8.5 7 0 1.7-.7 3.2-1.8 4.4.2.4.3.9.3 1.4 0 2.2-1.8 4-4 4-.6 0-1.2-.1-1.7-.4A6.5 6.5 0 0 1 6 15z"/></svg>
     微信分享
   </button>
-  <button class="share-btn" onclick="shareMoments()" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#E53935;background:#FFF5F5;border:1px solid #EF9A9A;border-radius:8px;padding:7px 14px;cursor:pointer;transition:all .2s;">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+  <button class="share-btn" onclick="shareMoments()" style="display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:#E53935;background:#FFF5F5;border:1px solid #EF9A9A;border-radius:8px;padding:7px 14px;cursor:pointer;transition:all .2s;">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
     分享至朋友圈
   </button>
 </div>
