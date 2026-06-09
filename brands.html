@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="version" content="20260609v1">
+<title>品牌产品图鉴 — novora</title>
+<style>
+  :root {
+    --bg: #F7F7F7; --card: #FFFFFF; --text: #1F2937; --muted: #6B7280;
+    --accent: #0F2747; --accent-l: #1A3F6E;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 16px; line-height: 1.75; color: var(--text); background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── Header ── */
+  .page-hd {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,247,247,0.95); backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding: 12px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .page-hd a {
+    font-size: 20px; font-weight: 700; color: var(--accent);
+    text-decoration: none; letter-spacing: -0.4px;
+  }
+  .page-hd .back {
+    font-size: 13px; color: var(--muted); text-decoration: none;
+    font-weight: 500; transition: color .15s;
+  }
+  .page-hd .back:hover { color: var(--accent); }
+
+  /* ── Hero ── */
+  .hero {
+    text-align: center; padding: 48px 20px 24px; max-width: 720px; margin: 0 auto;
+  }
+  .hero h1 { font-size: 28px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+  .hero p { font-size: 14px; color: var(--muted); }
+
+  /* ── Marquee ── */
+  .marquee-wrap {
+    overflow: hidden; padding: 32px 0 40px;
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee-track {
+    display: flex; gap: 32px; width: max-content;
+    animation: scroll 40s linear infinite;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+  @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  .brand-card {
+    flex-shrink: 0; width: 220px; height: 280px;
+    border-radius: 16px; overflow: hidden;
+    background: var(--card); border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: transform .25s, box-shadow .25s;
+    cursor: default;
+  }
+  .brand-card:hover { transform: translateY(-4px); box-shadow: 0 8px 28px rgba(0,0,0,0.08); }
+  .brand-card .img {
+    height: 185px; display: flex; align-items: center; justify-content: center;
+    font-size: 42px; color: #fff; font-weight: 700; letter-spacing: 2px;
+  }
+  .brand-card .info { padding: 14px 16px; }
+  .brand-card .info .name { font-size: 15px; font-weight: 600; color: var(--accent); }
+  .brand-card .info .cat { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* ── Gallery Grid ── */
+  .gallery { max-width: 1100px; margin: 0 auto; padding: 0 20px 60px; }
+  .gallery h2 {
+    font-size: 20px; font-weight: 700; color: var(--accent);
+    margin-bottom: 24px; text-align: center;
+  }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  .product-card {
+    background: var(--card); border-radius: 16px; overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.03);
+    transition: transform .25s, box-shadow .25s;
+  }
+  .product-card:hover { transform: translateY(-3px); box-shadow: 0 6px 24px rgba(0,0,0,0.06); }
+  .product-card .p-img {
+    height: 200px; display: flex; align-items: center; justify-content: center;
+    font-size: 56px; color: #fff; font-weight: 700;
+  }
+  .product-card .p-info { padding: 16px 18px; }
+  .product-card .p-info .p-name { font-size: 15px; font-weight: 600; color: var(--accent); }
+  .product-card .p-info .p-spec { font-size: 12px; color: var(--muted); margin-top: 3px; }
+  .product-card .p-info .p-tags { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 10px; }
+  .product-card .p-info .p-tags span {
+    font-size: 10px; padding: 2px 8px; border-radius: 3px;
+    background: #EEF3F9; color: var(--accent-l); font-weight: 500;
+  }
+
+  /* ── Gradient palette for cards ── */
+  .g-c1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+  .g-c2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+  .g-c3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+  .g-c4 { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+  .g-c5 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+  .g-c6 { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+  .g-c7 { background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%); }
+  .g-c8 { background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); }
+  .g-c9 { background: linear-gradient(135deg, #faf0d7 0%, #8cb27e 100%); }
+  .g-c10 { background: linear-gradient(135deg, #96fbc4 0%, #f9f586 100%); }
+  .g-c11 { background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%); }
+  .g-c12 { background: linear-gradient(135deg, #fed6e3 0%, #a8edea 100%); }
+  .g-d1 { background: linear-gradient(135deg, #1A2980 0%, #26D0CE 100%); }
+  .g-d2 { background: linear-gradient(135deg, #0F2027 0%, #203A43 50%, #2C5364 100%); }
+  .g-d3 { background: linear-gradient(135deg, #141E30 0%, #243B55 100%); }
+
+  /* ── Footer ── */
+  .page-ft {
+    text-align: center; padding: 40px 20px; color: var(--muted);
+    font-size: 13px; border-top: 1px solid rgba(0,0,0,0.05);
+  }
+  .page-ft a { color: var(--accent); text-decoration: none; font-weight: 600; }
+  .page-ft a:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 22px; }
+    .brand-card { width: 180px; height: 240px; }
+    .brand-card .img { height: 150px; font-size: 32px; }
+    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+    .product-card .p-img { height: 160px; font-size: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-hd">
+  <a href="/novora-site/">novora</a>
+  <a href="/novora-site/" class="back">← 返回首页</a>
+</div>
+
+<div class="hero">
+  <h1>化妆品大牌产品图鉴</h1>
+  <p>全球一线品牌包装产品滚动展示 &nbsp;·&nbsp; 持续更新</p>
+</div>
+
+<!-- ━━━━ Marquee: Brand Showcase ━━━━ -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marquee">
+    <div class="brand-card"><div class="img g-d1">CHANDO</div><div class="info"><div class="name">自然堂</div><div class="cat">Airless Pump · 真空瓶</div></div></div>
+    <div class="brand-card"><div class="img g-c1">PROYA</div><div class="info"><div class="name">珀莱雅</div><div class="cat">Fine Mist · 喷雾泵</div></div></div>
+    <div class="brand-card"><div class="img g-c2">PEHCHAOLIN</div><div class="info"><div class="name">百雀羚</div><div class="cat">Lotion Pump · 乳液泵</div></div></div>
+    <div class="brand-card"><div class="img g-c3">WINONA</div><div class="info"><div class="name">薇诺娜</div><div class="cat">Airless Jar · 真空膏霜瓶</div></div></div>
+    <div class="brand-card"><div class="img g-c4">MARUBI</div><div class="info"><div class="name">丸美</div><div class="cat">Fine Mist · 喷雾泵</div></div></div>
+    <div class="brand-card"><div class="img g-c5">DANZ</div><div class="info"><div class="name">丹姿</div><div class="cat">Lotion Pump · 乳液泵</div></div></div>
+    <div class="brand-card"><div class="img g-d2">INOHERB</div><div class="info"><div class="name">相宜本草</div><div class="cat">Airless Pump · 真空泵</div></div></div>
+    <div class="brand-card"><div class="img g-c6">DR PLANT</div><div class="info"><div class="name">植物医生</div><div class="cat">Snap On Sprayer</div></div></div>
+    <!-- duplicate for seamless loop -->
+    <div class="brand-card"><div class="img g-d1">CHANDO</div><div class="info"><div class="name">自然堂</div><div class="cat">Airless Pump · 真空瓶</div></div></div>
+    <div class="brand-card"><div class="img g-c1">PROYA</div><div class="info"><div class="name">珀莱雅</div><div class="cat">Fine Mist · 喷雾泵</div></div></div>
+    <div class="brand-card"><div class="img g-c2">PEHCHAOLIN</div><div class="info"><div class="name">百雀羚</div><div class="cat">Lotion Pump · 乳液泵</div></div></div>
+    <div class="brand-card"><div class="img g-c3">WINONA</div><div class="info"><div class="name">薇诺娜</div><div class="cat">Airless Jar · 真空膏霜瓶</div></div></div>
+    <div class="brand-card"><div class="img g-c4">MARUBI</div><div class="info"><div class="name">丸美</div><div class="cat">Fine Mist · 喷雾泵</div></div></div>
+    <div class="brand-card"><div class="img g-c5">DANZ</div><div class="info"><div class="name">丹姿</div><div class="cat">Lotion Pump · 乳液泵</div></div></div>
+    <div class="brand-card"><div class="img g-d2">INOHERB</div><div class="info"><div class="name">相宜本草</div><div class="cat">Airless Pump · 真空泵</div></div></div>
+    <div class="brand-card"><div class="img g-c6">DR PLANT</div><div class="info"><div class="name">植物医生</div><div class="cat">Snap On Sprayer</div></div></div>
+  </div>
+</div>
+
+<!-- ━━━━ Product Gallery ━━━━ -->
+<div class="gallery">
+  <h2>产品系列速览</h2>
+  <div class="gallery-grid">
+
+    <!-- Airless -->
+    <div class="product-card">
+      <div class="p-img g-d1">40202</div>
+      <div class="p-info">
+        <div class="p-name">Airless 真空泵 40202</div>
+        <div class="p-spec">0.17/0.25cc · 全程密封隔气 · 11 零件双层瓶</div>
+        <div class="p-tags"><span>Airless</span><span>真空泵</span></div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="p-img g-d3">20601</div>
+      <div class="p-info">
+        <div class="p-name">Airless 真空膏霜瓶 20601</div>
+        <div class="p-spec">0.35/0.50cc · 双层瓶结构 · 无吸管</div>
+        <div class="p-tags"><span>Airless</span><span>膏霜瓶</span></div>
+      </div>
+    </div>
+
+    <!-- Fine Mist -->
+    <div class="product-card">
+      <div class="p-img g-c1">Y50</div>
+      <div class="p-info">
+        <div class="p-name">Fine Mist 细雾泵 Y50 泵头</div>
+        <div class="p-spec">0.13/0.20cc · Snap On 卡扣 · 起喷≤10次</div>
+        <div class="p-tags"><span>Fine Mist</span><span>喷雾</span></div>
+      </div>
+    </div>
+    <div class="product-card">
+      <div class="p-img g-c3">Y30</div>
+      <div class="p-info">
+        <div class="p-name">Fine Mist 细雾泵 Y30 泵头</div>
+        <div class="p-spec">0.13cc · 20/410 泵芯 · 50/60/100/120mL</div>
+        <div class="p-tags"><span>Fine Mist</span><span>喷雾</span></div>
+      </div>
+    </div>
+
+    <!-- Lotion Pump -->
+    <div class="product-card">
+      <div class="p-img g-c5">LP24</div>
+      <div class="p-info">
+        <div class="p-name">Lotion Pump 乳液泵 24/410</div>
+        <div class="p-spec">0.17/0.25cc(系统) · 0.50/1.0cc(泵头)</div>
+        <div class="p-tags"><span>Lotion Pump</span><span>乳液</span></div>
+      </div>
+    </div>
+
+    <!-- Jar -->
+    <div class="product-card">
+      <div class="p-img g-c7">J50</div>
+      <div class="p-info">
+        <div class="p-name">膏霜罐 J50 系列</div>
+        <div class="p-spec">50mL · PP/AS材质 · 内盖+外盖双层</div>
+        <div class="p-tags"><span>Jar</span><span>膏霜</span></div>
+      </div>
+    </div>
+
+    <!-- Bottle -->
+    <div class="product-card">
+      <div class="p-img g-c9">B100</div>
+      <div class="p-info">
+        <div class="p-name">PET 瓶身 100mL</div>
+        <div class="p-spec">透明/半透明 · PCR可选 · 兼容多泵头</div>
+        <div class="p-tags"><span>瓶身</span><span>PET</span></div>
+      </div>
+    </div>
+
+    <!-- Trigger Sprayer -->
+    <div class="product-card">
+      <div class="p-img g-c11">TS28</div>
+      <div class="p-info">
+        <div class="p-name">扳机喷雾器 28/410</div>
+        <div class="p-spec">1.2cc · PP全塑 · 可调喷嘴</div>
+        <div class="p-tags"><span>Trigger</span><span>喷雾</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="page-ft">
+  <a href="/novora-site/">← 返回 novora 首页</a>
+  &nbsp;·&nbsp; 图片为示意，真实产品照片请联系 <a href="https://megee.design" target="_blank">MEGEE</a>
+</footer>
+
+<script>
+// ── Duplicate marquee for seamless loop ──
+(function() {
+  const track = document.getElementById('marquee');
+  if (!track) return;
+  // CSS animation handles seamless loop via duplicated cards in HTML
+  // Pause on hover is handled by CSS
+})();
+</script>
+
+</body>
+</html>

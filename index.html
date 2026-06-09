@@ -37,6 +37,11 @@
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     flex: 1; min-width: 0;
   }
+  .site-sub .brands-link {
+    color: var(--accent); font-weight: 600; text-decoration: none;
+    transition: opacity .15s;
+  }
+  .site-sub .brands-link:hover { opacity: .7; }
   .head-row2 {
     display: flex; align-items: center; justify-content: space-between;
     gap: 12px; margin-top: 4px;
@@ -137,7 +142,7 @@
   <div class="sticky-head-inner">
     <div class="head-row1">
       <span class="site-logo">novora</span>
-      <span class="site-sub">包装｜材料｜制造｜质量｜AI｜可持续发展｜洞察｜阅读</span>
+      <span class="site-sub">包装｜材料｜制造｜质量｜AI｜可持续发展｜洞察｜阅读 &nbsp;·&nbsp; <a href="brands.html" class="brands-link">产品图鉴 →</a></span>
     </div>
     <div class="head-row2">
       <span class="head-stats" id="site-stats"></span>
