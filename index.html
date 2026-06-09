@@ -20,7 +20,7 @@
 })();
 </script>
 
-<meta name="version" content="20260609v24">
+<meta name="version" content="20260609v25">
 <meta property="og:title" content="novora — 探索制造与创新的边界">
 <meta property="og:description" content="包装与制造产业知识库。聚焦包装、材料、制造、质量、可持续发展与AI应用。">
 <meta property="og:url" content="https://coadyke.github.io/novora-site/">
@@ -293,30 +293,46 @@
     if (!el || window.innerWidth < 769) return;
 
     var words = [
-      // Brand — top tier
+      // Brand
       'novora','megee','bdf','megee⁺',
-      // Categories — mid tier
+      // Categories
       '包装','材料','制造','质量','AI','可持续发展','洞察','阅读',
-      // Industry — dispensing & pumps
+      // Dispensing & Pumps
       'Airless Pump','Fine Mist','Lotion Pump','Foamer Pump','Dispensing System',
-      '定量泵系统','真空泵','细雾泵','泡沫泵',
-      // Industry — packaging
-      'Serum Bottle','Cream Jar','Refill System','Dual Chamber',
-      'Cosmetic Packaging','Mono-material','PCR Packaging','Sustainable Pkg',
-      '精华瓶','膏霜罐','替换包装','单一材料','化妆品包装',
-      // Industry — materials
-      '色母粒','高分子材料','材料兼容性','PET','PP','PCR',
-      'Masterbatch','Polymer',
-      // Industry — manufacturing
+      '定量泵系统','真空泵','细雾泵','泡沫泵','分配系统',
+      // Packaging form factors
+      'Serum Bottle','Cream Jar','Refill System','Dual Chamber','Dropper Bottle',
+      'Airless Jar','Tottle','Tube Packaging','Jar Closure','Pump Overcap',
+      '精华瓶','膏霜罐','替换包装','双腔包装','滴管瓶','真空罐',
+      // Materials
+      '色母粒','高分子材料','材料兼容性','PCR','PET','PP','PE',
+      'Masterbatch','Polymer','Bioplastic','Bio-based','PHA','PLA',
+      'Mono-material','Ocean-bound Plastic','Upcycled Material',
+      // Manufacturing
       '注塑制造','Injection Molding','模具开发','自动化','智能制造',
-      'Assembly','Decoration',
-      // Industry — quality
+      'Assembly','Decoration','Industry 4.0','Digital Twin',
+      'Smart Factory','Cobot','Lights-out Mfg','Robot Arm',
+      // Quality & Testing
       'CPK','SPC','AQL','检测方法','可靠性测试','供应商审核',
-      '真空保持测试','包装测试','GMP','ISO',
-      // Industry — trends
-      'ESG','循环经济','轻量化','碳足迹',
-      '供应链','出海','OEM','ODM',
-      'Clean Beauty'
+      '真空保持测试','包装测试','GMP','ISO','ISO 22716',
+      'Digital QC','AI Vision','Traceability','Leak Test','Drop Test',
+      // Sustainability
+      'ESG','循环经济','轻量化','碳中和','碳足迹',
+      'Net Zero','Carbon Neutral','Science Based','LCA',
+      'Refill Revolution','Closed Loop','Recyclable',
+      // Beauty & Market Trends
+      'Clean Beauty','Vegan Beauty','Blue Beauty','Waterless Beauty',
+      'Dermocosmetics','Microbiome','Skinimalism','Slow Beauty',
+      'Indie Brand','K-Beauty','C-Beauty','J-Beauty','DTC',
+      'Skin Streaming','Cosmeceutical','Active Ingredient',
+      // Business & Supply Chain
+      '供应链','出海','OEM','ODM','Private Label',
+      'Nearshoring','Resilient Supply','China+1','Procurement',
+      'Co-development','Speed-to-Market','Low MOQ',
+      // Innovation
+      'Smart Packaging','Connected Pkg','NFC Packaging',
+      'Tamper Evident','Child Resistant','Airless Technology',
+      'Dose Accuracy','Anti-counterfeit','Mono-dose'
     ];
 
     // Deduplicate
@@ -331,7 +347,7 @@
       }
     }
     shuffle(unique);
-    var count = Math.min(unique.length, 60 + Math.floor(Math.random() * 16));
+    var count = Math.min(unique.length, 68 + Math.floor(Math.random() * 16));
     var picked = unique.slice(0, count);
 
     // Color palette: cold gray-blue tones only
