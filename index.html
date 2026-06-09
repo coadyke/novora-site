@@ -246,7 +246,7 @@
 
   // ── novora logo micro-collision (8-15s) ──
   (function logoChain() {
-    var delay = 8000 + Math.random() * 7000;
+    var delay = 5000;
     setTimeout(function() {
       var letters = document.querySelectorAll('.site-logo .logo-l');
       if (!letters.length) { logoChain(); return; }
@@ -265,7 +265,7 @@
   (function wink() {
     var el = document.getElementById('megee-wink');
     if (!el) return;
-    var delay = 10000 + Math.random() * 8000;
+    var delay = 5000;
     setTimeout(function() {
       el.classList.add('wink-anim');
       setTimeout(function() { el.classList.remove('wink-anim'); }, 200);
