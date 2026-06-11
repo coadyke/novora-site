@@ -1,5 +1,14 @@
 # novora.cc 每日文章更新 · 执行记录
 
+## 2026-06-11 — 已发布（补充 feed.json）
+- 文章：`articles/2026-06-11-gage-rr.html`（已存在，本次补全 feed.json）
+- 标题：CPK大于1.33就放心了？你可能被测量系统骗了——Gage R&R 完全指南
+- 标签：质量、制造
+- 栏目：周四 → 质量 Quality
+- 内容：MSA/Gage R&R 完整方法论，%GR&R/ndc/ANOVA，两个案例诊断
+- 操作：feed.json 补全文章元数据 + 更新日期 + push
+- 版本：v41（未变，文章在之前会话已发布）
+
 ## 2026-06-10 — 已更新（补充修复）
 - 文章：`articles/2026-06-10-injection-molding-automation.html`（已存在，仅修复）
 - 标题：注塑车间为什么越来越依赖自动化？从三班倒到无人值守的演进逻辑
