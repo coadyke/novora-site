@@ -4,9 +4,29 @@
     "url": "https://coadyke.github.io/novora-site/",
     "description": "包装与制造产业知识库。聚焦包装、材料、制造、质量、可持续发展与AI应用。",
     "language": "zh-CN",
-    "updated": "2026-06-11T07:00:00+08:00"
+    "updated": "2026-06-13T07:00:00+08:00"
   },
   "articles": [
+    {
+      "title": "韩国ODM凭什么统治了全球美妆供应链？——COSMAX与Kolmar商业模式深度拆解",
+      "date": "2026-06-13",
+      "summary": "从1990年代小作坊到全球美妆ODM寡头，COSMAX和Kolmar Korea如何用'研发即制造'模式改写了品牌与供应链的权力关系。R&BD模式拆解、防晒技术壁垒、对中国包材/制造企业的三条启示。",
+      "tags": ["洞察","制造"],
+      "topics": ["ODM","商业模式","COSMAX","供应链"],
+      "slug": "korean-odm",
+      "url": "https://coadyke.github.io/novora-site/articles/2026-06-13-korean-odm.html",
+      "image": "https://coadyke.github.io/novora-site/og-image.png"
+    },
+    {
+      "title": "工厂里来了AI Agent，但它不是来替代你的",
+      "date": "2026-06-12",
+      "summary": "从RPA到自主决策的三代演进，Agent四层架构拆解，注塑工艺调优/设备预判/跨系统问答三个真实落地场景，以及制造业AI项目最致命的三大陷阱。",
+      "tags": ["AI","制造"],
+      "topics": ["AI Agent","智能制造","知识系统"],
+      "slug": "ai-agent-manufacturing",
+      "url": "https://coadyke.github.io/novora-site/articles/2026-06-12-ai-agent-manufacturing.html",
+      "image": "https://coadyke.github.io/novora-site/og-image.png"
+    },
     {
       "title": "CPK大于1.33就放心了？你可能被测量系统骗了——Gage R&R 完全指南",
       "date": "2026-06-11",
