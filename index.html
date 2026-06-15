@@ -112,26 +112,6 @@
     transition: color 0.15s;
   }
   .megee-inline:hover { color: var(--accent); }
-  .megee-material-gate {
-    width: 18px; height: 18px; border-radius: 50%;
-    position: relative;
-    display: inline-flex; align-items: center; justify-content: center;
-    margin-left: 2px; flex-shrink: 0;
-    color: #94A3B8; text-decoration: none;
-    transition: transform 0.15s, color 0.15s;
-  }
-  .megee-material-gate::before,
-  .megee-material-gate::after {
-    content: ""; position: absolute; border-radius: 50%;
-    left: 50%; top: 50%; transform: translate(-50%, -50%);
-    border: 1px solid currentColor; opacity: 0.72;
-  }
-  .megee-material-gate::before { width: 13px; height: 13px; }
-  .megee-material-gate::after { width: 7px; height: 7px; }
-  .megee-material-gate:hover {
-    transform: translateY(-1px);
-    color: var(--accent);
-  }
   .cat-row {
     display: block;
     margin-top: 7px;
@@ -289,7 +269,7 @@
     { title: "Silgan Dispensing 深度调研报告", date: "2026-05-16", summary: "西尔格分配系统全球最完整深度分析。14页覆盖：集团架构、中国市场28年深耕、5笔重大收购、核心技术平台。", tags: ["包装","制造"], topics: ["化妆品包装","定量泵系统"], file: "articles/silgan-dispensing.html" }
   ];
 
-  document.getElementById('site-stats').innerHTML = articles.length + '篇<span class="sep">·</span>8栏目<span class="sep">·</span><span id="busuanzi_container_site_uv" style="display:inline;">No.<span id="busuanzi_value_site_uv"></span></span><span class="sep">·</span> <span id="megee-wink" style="display:inline-block">↗</span> <a href="https://megee.design" class="megee-inline" target="_blank" rel="noopener">megee⁺, packaging and more.</a><a href="https://megee.novora.cc/" class="megee-material-gate" target="_blank" rel="noopener" aria-label="MEGEE PRIME™" title="MEGEE PRIME™"></a><button class="head-sub-btn" id="sub-btn">updates</button>';
+  document.getElementById('site-stats').innerHTML = articles.length + '篇<span class="sep">·</span>8栏目<span class="sep">·</span><span id="busuanzi_container_site_uv" style="display:inline;">No.<span id="busuanzi_value_site_uv"></span></span><span class="sep">·</span> <span id="megee-wink" style="display:inline-block">↗</span> <a href="https://megee.design" class="megee-inline" target="_blank" rel="noopener">megee⁺, packaging and more.</a><span class="sep">·</span><button class="head-sub-btn" id="sub-btn">updates</button>';
 
   // ── 7 categories ──
   const categories = ['全部', '包装', '材料', '制造', '质量', '可持续发展', 'AI', '洞察', '阅读'];
