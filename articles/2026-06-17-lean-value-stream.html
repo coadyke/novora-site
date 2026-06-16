@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<script>
+(function(){
+  var meta = document.querySelector('meta[name="version"]');
+  if (!meta) return;
+  var localV = meta.content;
+  var retries = parseInt(sessionStorage.getItem('nv_ver_retry')||'0');
+  if (retries > 3) { sessionStorage.removeItem('nv_ver_retry'); return; }
+  fetch('/novora-site/version.json?t=' + Date.now(), {cache:'no-store'})
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d.version && d.version !== localV) {
+        sessionStorage.setItem('nv_ver_retry', String(retries + 1));
+        var u = location.href.split('?')[0] + '?v=' + d.version + '&t=' + Date.now();
+        location.replace(u);
+      } else {
+        sessionStorage.removeItem('nv_ver_retry');
+      }
+    })
+    .catch(function(){});
+})();
+</script>
+
+<meta name="version" content="20260617v53">
+<meta property="og:title" content="你的工厂90%的时间都在等待——价值流图析揭示的精益真相">
+<meta property="og:description" content="从原材料进厂到成品出厂，真正在创造价值的时间可能不到5%。精益生产不是"省"，而是"看见"——看见那些吞噬利润的浪费。本文用价值流图析的方法，拆解包装制造中隐藏最深的七种浪费。">
+<meta property="og:url" content="https://coadyke.github.io/novora-site/articles/2026-06-17-lean-value-stream.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="novora">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://coadyke.github.io/novora-site/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:published_time" content="2026-06-17">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="你的工厂90%的时间都在等待——价值流图析揭示的精益真相">
+<meta name="twitter:description" content="从原材料进厂到成品出厂，真正在创造价值的时间可能不到5%。精益生产不是"省"，而是"看见"。">
+<meta name="twitter:image" content="https://coadyke.github.io/novora-site/og-image.png">
+<meta name="description" content="从原材料进厂到成品出厂，真正在创造价值的时间可能不到5%。精益生产不是"省"，而是"看见"——看见那些吞噬利润的浪费。本文用价值流图析的方法，拆解包装制造中隐藏最深的七种浪费。">
+<meta itemprop="name" content="你的工厂90%的时间都在等待——价值流图析揭示的精益真相">
+<meta itemprop="description" content="从原材料进厂到成品出厂，真正在创造价值的时间可能不到5%。精益生产不是"省"，而是"看见"。">
+<meta itemprop="image" content="https://coadyke.github.io/novora-site/og-image.png">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "你的工厂90%的时间都在等待——价值流图析揭示的精益真相", "description": "从原材料进厂到成品出厂，真正在创造价值的时间可能不到5%。精益生产不是"省"，而是"看见"——看见那些吞噬利润的浪费。本文用价值流图析的方法，拆解包装制造中隐藏最深的七种浪费。", "image": "https://coadyke.github.io/novora-site/og-image.png", "datePublished": "2026-06-17", "publisher": {"@type": "Organization", "name": "novora", "url": "https://coadyke.github.io/novora-site/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://coadyke.github.io/novora-site/articles/2026-06-17-lean-value-stream.html"}}
+</script>
+
+<title>你的工厂90%的时间都在等待——价值流图析揭示的精益真相 — novora</title>
+<style>
+  :root { --bdf: #0F2747; --bdf-l: #1A3F6E; --bdf-pale: #EEF3F9; --text: #1F2937; --muted: #6B7280; --bg: #F7F7F7; --card: #FFFFFF; --gray-1: #E5E7EB; --gray-3: #9CA3B8; }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  body { padding:8px 20px; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; font-size:15px; line-height:1.75; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased;  }
+
+  .site-hd { max-width:720px; margin:0 auto 2px; padding:0 4px; display:flex; align-items:baseline; gap:8px; }
+  .site-hd .site-logo { font-size:18px; font-weight:700; color:var(--bdf); letter-spacing:-0.3px; white-space:nowrap; text-decoration:none; }
+  .site-hd .site-sub { font-size:10px; color:var(--muted); letter-spacing:0.2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; min-width:0; }
+  .logo-l { display: inline-block; }
+  @keyframes logo-nudge { 0% { transform: translateX(0); } 40% { transform: translateX(1px); } 100% { transform: translateX(0); } }
+  @keyframes logo-rebound { 0% { transform: translateX(0); } 35% { transform: translateX(1px); } 65% { transform: translateX(-0.5px); } 100% { transform: translateX(0); } }
+  .lnudge { animation: logo-nudge 0.2s ease-in-out; }
+  .lrebound { animation: logo-rebound 0.35s ease-in-out; }
+
+  .article-hero { padding:8px 20px 6px; text-align:center; }
+  .article-hero h1 { font-size:18px; font-weight:700; color:var(--bdf); line-height:1.3; margin:0 0 4px; letter-spacing:-0.3px; }
+  .article-hero .meta { font-size:11px; color:var(--muted); }
+  .article-hero .share-bar-top { display:flex; gap:3px; justify-content:center; flex-wrap:wrap; margin-top:4px; }
+  .share-btn-top { display:inline-flex; align-items:center; gap:3px; font-size:11px; font-weight:500; color:var(--muted); background:#fff; border:1px solid var(--gray-1); border-radius:5px; padding:3px 10px; cursor:pointer; transition:all .15s; }
+  .share-btn-top:hover { border-color:#BFCAD8; color:var(--bdf); }
+
+  .ctr { max-width:720px; margin:0 auto; }
+  .art-body { background:var(--card); border-radius:16px; padding:20px 24px; border:1px solid rgba(0,0,0,0.04); }
+  .art-body h2 { font-size:16px; font-weight:700; color:var(--bdf); margin:20px 0 8px; padding-bottom:8px; border-bottom:1px solid var(--gray-1); }
+  .art-body h3 { font-size:15px; font-weight:600; color:var(--bdf-l); margin:14px 0 4px; }
+  .art-body p { margin-bottom:12px; }
+  .art-body ul, .art-body ol { padding-left:22px; margin-bottom:16px; }
+  .art-body li { margin-bottom:6px; }
+  .callout { border-left:3px solid var(--bdf-l); background:var(--bdf-pale); padding:14px 18px; border-radius:0 8px 8px 0; margin:18px 0; font-size:15px; }
+  .art-foot { text-align:center; padding:24px 0 36px; color:var(--muted); font-size:14px; }
+  .art-foot a { color:var(--bdf); text-decoration:none; }
+
+  .like-section { max-width:720px; margin:0 auto; text-align:center; padding:16px 0 8px; }
+  .like-btn { display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid var(--gray-1); border-radius:20px; padding:8px 24px; cursor:pointer; font-size:16px; color:var(--muted); transition:all .2s; }
+  .like-btn:hover { border-color:#BFCAD8; }
+  .like-btn.liked { color:#E53935; border-color:#F8BBD0; background:#FFF5F5; }
+  .heart { font-size:20px; line-height:1; }
+  .like-count { font-size:15px; font-weight:500; }
+
+  @media (max-width:600px) {
+    .article-hero { padding:6px 12px 4px; }
+    .article-hero h1 { font-size:18px; }
+    .art-body { padding:18px 14px; font-size:14px; }
+    .art-body h2 { font-size:16px; }
+  }
+</style>
+
+</head>
+<body>
+
+<div class="site-hd">
+  <a class="site-logo" href="https://novora.cc"><span class="logo-l">n</span><span class="logo-l">o</span><span class="logo-l">v</span><span class="logo-l">o</span><span class="logo-l">r</span><span class="logo-l">a</span></a>
+  <span class="site-sub">包装｜材料｜制造｜质量｜AI｜可持续发展｜洞察｜阅读</span>
+</div>
+
+<div class="article-hero">
+  <h1>你的工厂90%的时间都在等待——价值流图析揭示的精益真相</h1>
+  <p class="meta">2026年6月17日 · 制造 · 精益生产</p>
+  <div class="share-bar-top" style="display:flex; gap:4px; justify-content:center; flex-wrap:wrap; margin-top:4px;">
+    <button class="share-btn-top" onclick="copyLink()" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:5px;padding:3px 10px;cursor:pointer;transition:all .2s;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      复制链接
+    </button>
+    <button class="share-btn-top" onclick="shareMoments()" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:5px;padding:3px 10px;cursor:pointer;transition:all .2s;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E53935" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+      分享至朋友圈
+    </button>
+    <button class="share-btn-top" onclick="shareWechat()" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:5px;padding:3px 10px;cursor:pointer;transition:all .2s;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="#07C160"><path d="M8.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-7.5 4c-3.3 0-6-2.2-6-5 0-2.3 1.8-4.2 4.5-4.8C5.2 2.8 8.4 1 12 1c4.7 0 8.5 3.1 8.5 7 0 1.7-.7 3.2-1.8 4.4.2.4.3.9.3 1.4 0 2.2-1.8 4-4 4-.6 0-1.2-.1-1.7-.4A6.5 6.5 0 0 1 6 15z"/></svg>
+      微信好友
+    </button>
+  </div>
+</div>
+
+<div class="ctr art-body">
+
+<h2>一、我们先算一笔账</h2>
+
+<p>找一个你熟悉的工厂产品，从客户下订单开始计时，一直到成品装车发出。这个过程需要多少天？</p>
+
+<p>然后问第二个问题：<strong>在这些天里，真正在对产品进行加工、改变其物理形态的时间有多少？</strong></p>
+
+<p>在绝大多数制造企业里，这两个数字之间的比例是惊人的。一批化妆品泵头的制造总周期可能是 15 天，但注塑、组装、检测、包装这些真正"触碰产品"的时间加起来，往往不到 4 小时。也就是说，<strong>增值时间占比不到 1.4%</strong>。剩下的 98.6% 是等待、搬运、堆放、返工和在制品库存。</p>
+
+<p>这不是管理不善。恰恰相反，很多管理水平不差的工厂拿到这个数据时都感到意外——因为他们从来没这样算过。</p>
+
+<p>1990 年，麻省理工学院的 James Womack 和 Daniel Jones 团队在《改变世界的机器》中首次向西方系统介绍了丰田生产系统，并创造了"精益生产"（Lean Production）这个词。而整个精益体系最核心的诊断工具——<strong>价值流图析</strong>（Value Stream Mapping, VSM）——做的工作本质上就是刚才说的这件事：让你"看见"那些不创造价值的时间。</p>
+
+<div class="callout">
+<strong>核心概念：增值比（VA Ratio）</strong><br>
+VA Ratio = 增值时间 ÷ 总制造周期<br>
+典型包装制造企业的 VA Ratio 在 0.5%–5% 之间。世界级精益企业可以做到 20% 以上。这意味着同样的设备和人员，产能可以提升数倍而不增加任何资本投入。
+</div>
+
+<h2>二、浪费不是"省"出来的，是"看见"出来的</h2>
+
+<p>精益思想中有一个不常被强调但至关重要的洞见：<strong>浪费不是靠"勒紧裤腰带"消灭的，而是靠"让问题可见"来消灭的。</strong></p>
+
+<p>大野耐一在丰田推行的"看板"系统、"安灯"系统、"5S"现场管理——所有这些工具的底层逻辑都不是直接"削减成本"，而是<strong>降低信息不对称</strong>：让工位之间知道彼此在做什么，让管理者知道产线在发生什么，让整条价值流上的每一个节点都能看到上下游的状态。</p>
+
+<p>丰田生产系统识别了七种经典浪费（TIMWOOD）：</p>
+
+<ul>
+  <li><strong>搬运（Transportation）</strong>——物料在不必要的路径上移动。包装厂里，注塑车间到组装车间的距离是 200 米还是一墙之隔，决定了每天有多少台叉车在空转。</li>
+  <li><strong>库存（Inventory）</strong>——成品、半成品、原材料堆在仓库和过道里。库存不是资产，库存是<strong>被冻结的现金加上掩盖问题的毯子</strong>。</li>
+  <li><strong>动作（Motion）</strong>——操作工人在拿取、转身、弯腰、寻找中消耗的无效动作。人因工程研究发现，组装线工人的无效动作可以占到总工作时间的 30%–50%。</li>
+  <li><strong>等待（Waiting）</strong>——设备等物料、物料等上道工序、质检等样本。等待是工厂里最常见的浪费，也是最容易被"习惯化"的浪费。</li>
+  <li><strong>过度加工（Over-processing）</strong>——做了客户不关心、也不愿意付钱的加工。比如把产品内壁的光洁度做到镜面级别，而客户只看外表面。</li>
+  <li><strong>过量生产（Over-production）</strong>——被丰田称为"万恶之源"的浪费。因为多做的每一件产品都消耗了材料、人工、能源，然后变成库存，再消耗仓储和管理。</li>
+  <li><strong>缺陷（Defects）</strong>——不合格品的返工、报废、客户投诉处理。每 1% 的不良率对应的隐性成本远不止 1% 的物料损失。</li>
+</ul>
+
+<p>这七种浪费单独看都有道理，但真正的杀伤力在于它们的<strong>连锁效应</strong>：过量生产导致库存，库存需要搬运，搬运产生等待，等待中可能出现缺陷。这不是七个独立的问题，而是一张纠缠在一起的网。</p>
+
+<p>而价值流图析的价值就在于：你没有办法在图上一张一张地掩盖这些问题。VSM 强迫你把整条流画出来，数据和问题当场暴露。</p>
+
+<h2>三、价值流图析怎么用——一个包装制造的真实推演</h2>
+
+<p>我们用化妆品包材行业的一个典型场景来走一遍 VSM 的逻辑。</p>
+
+<h3>3.1 当前状态图：数据不会说谎</h3>
+
+<p>假设一个外罩+内胆+泵芯三件套的组装线。我们沿着物料流走一遍：</p>
+
+<ul>
+  <li><strong>注塑</strong>：三台注塑机分别生产外罩、内胆、泵芯零件。节拍 18 秒/模（一模四穴）。换模时间 45 分钟。每天两班，每班有效工作时间 9.5 小时。</li>
+  <li><strong>半成品库存</strong>：注塑出的零件堆放在周转箱中，在组装区旁边堆成小山——这是典型的"推式生产"：注塑以自己的节奏满负荷运行，不管组装能不能消化。</li>
+  <li><strong>组装</strong>：12 个工位的流水线，理想节拍 3.6 秒/件。但实际节拍在 4.5–6 秒之间波动，因为经常缺某一个零件而停工等料。</li>
+  <li><strong>全检包装</strong>：抽检比例 10%，不合格率约 2.3%，不良品返工或降级。</li>
+</ul>
+
+<p>画成当前状态图后，几个数字自己跳出来了：</p>
+
+<ul>
+  <li><strong>增值时间</strong>：注塑 18s + 组装 120s（含缓存等待） + 全检包装 25s ≈ 163s（约 2.7 分钟）</li>
+  <li><strong>总制造周期</strong>：从注塑投料到成品入库，典型一批订单 9 个工作日（约 12,960 分钟）</li>
+  <li><strong>VA Ratio：2.7 ÷ 12,960 = 0.02%</strong> ——是的，万分之二。</li>
+</ul>
+
+<p>这个数字本身就是一个管理决策的触发器。你不需要任何精益理论来说服任何人——把这张图贴在会议室墙上就够了。</p>
+
+<h3>3.2 未来状态图：不是优化，是重构</h3>
+
+<p>精益的陷阱之一是把 VSM 当成"改善清单生成器"——找到浪费点，对每个点采取对策。但大野耐一的方法论更激进：<strong>不是优化现有流程，而是重构物料和信息的流动方式。</strong></p>
+
+<p>上面这个案例中，真正的瓶颈不是某个工位慢了 3 秒，而是<strong>注塑和组装之间的推式连接</strong>。注塑以最大化设备利用率（OEE）为目标拼命生产，组装则在"三缺一"的状态下等待某个零件。</p>
+
+<p>解决方案不是让注塑也降速，而是建立<strong>拉动系统</strong>：</p>
+
+<ul>
+  <li>在注塑和组装之间设置一个 FIFO（先进先出）通道，而不是开放式的堆放区域</li>
+  <li>FIFO 通道设置容量上限——满了就停注塑</li>
+  <li>注塑的换模时间从 45 分钟压缩到 15 分钟以内（SMED 快速换模），使小批量生产成为可能</li>
+  <li>组装工位建立"安灯"机制：缺料时拉灯，注塑侧立即可以看到</li>
+</ul>
+
+<p>在包装行业中，这通常意味着一条"注塑→组装连线"的<strong>连续流单元</strong>（continuous flow cell），而不是两个独立管理的车间。设备布局从按功能分区变成按产品族排列。</p>
+
+<p>一旦建立拉动，总制造周期可以从 9 天压缩到 1–2 天，半成品库存减少 80%，VA Ratio 提升一个数量级——<strong>不增加一台设备。</strong></p>
+
+<h2>四、为什么精益在包装行业推不动？</h2>
+
+<p>这个问题值得认真讨论。因为精益的理念从 1990 年代就传入中国，但你走进大多数包装厂，看到的依然是成堆的半成品、满负荷运转的注塑机和等料的组装线。</p>
+
+<p>原因不在工具本身，而在三个系统性障碍：</p>
+
+<h3>4.1 把精益当"运动"而不是"系统"</h3>
+
+<p>很多企业老板去丰田参观一圈回来，决定"搞精益"。于是办公室挂出价值流图，车间画上定置线，管理层开始喊"消除浪费"的口号。三个月后一切恢复原样。</p>
+
+<p>精益不是一套工具，是一套<strong>管理系统</strong>。它的运行需要：标准作业、目视化管理、异常响应机制、问题解决文化、领导者的现场行为——这五样缺一不可。只学工具不建系统，等于只买了方向盘不装发动机。</p>
+
+<h3>4.2 计件工资与拉动的矛盾</h3>
+
+<p>这是中国制造业最尖锐的结构性冲突。精益要求"只在需要的时候生产需要的数量"，但计件工资激励工人和班组长"多做多得"。注塑车间主任为什么不愿意停机等组装？因为他的绩效考核里没有"总制造周期"这个指标，只有"产量"和"设备利用率"。</p>
+
+<p>要推行拉动，必须改考核体系。而这种变革涉及的利益面太广，很多老板算过账之后选择了"维持现状"。</p>
+
+<h3>4.3 客户订单的不确定性</h3>
+
+<p>包装厂的上游是品牌方，品牌方的新品上市节奏高度不确定。今天催你三天交货，明天项目推迟两个月。在这种环境下，管理者天然倾向于"多做一些备着"——过量生产不是选择，是<strong>对不确定性的防御性反应</strong>。</p>
+
+<p>精益对这个问题的回答是<strong>柔性产能</strong>：通过快速换模、交叉培训、产能缓冲来吸收波动，而不是靠库存。但这需要投资，而投资需要信念。</p>
+
+<h2>五、从哪开始？——一个务实的清单</h2>
+
+<p>如果你管理的是一家包装制造企业，以下 5 步是可以在一个月内启动的精益切入点，不需要外部顾问，不需要停产改造：</p>
+
+<ol>
+  <li><strong>画一条产品族的当前状态图</strong>。选你产量最大、工序最典型的一条线。带一个秒表、一个本子，跟一天。把每个工序的节拍、换模时间、在制品数量、不良率记下来。你不画图永远不知道数据长什么样。</li>
+  <li><strong>找出最大的等待点</strong>。在 VSM 上用"库存三角形"标注每一个半成品堆积点。库存最大的地方，通常是上游和下游节奏不匹配的地方。这就是你的第一个改善点。</li>
+  <li><strong>做一次 SMED 视频分析</strong>。架一台手机拍换模全过程。然后把视频里的动作分成"内部作业"（必须停机）和"外部作业"（可以提前准备）。大部分工厂的换模时间有 40%–60% 可以转化为外部作业。</li>
+  <li><strong>建一个 FIFO 通道试点</strong>。在两个工序之间划出一块限定容量的区域（比如 6 箱），要求上游"满了就停"。这个动作会立即暴露之前被库存掩盖的问题，迫使你去解决它们。</li>
+  <li><strong>改一个考核指标</strong>。在一条试点线上，把班组的考核从"产量"改为"按时交付率 + 在制品库存量"。不需要全厂改，一条线就够了。观察三个月，数据会替你说话。</li>
+</ol>
+
+<div class="callout">
+<strong>精益的悖论</strong><br>
+精益最反直觉的地方是：它要求你先"慢下来"才能"快起来"。当你停止盲目满产、建立拉动时，短期内产量确实会下降。但如果这个"下降"让管理者恐慌并叫停改善，那精益就永远做不起来。因此，<strong>精益的第一公里不是技术问题，是领导力问题</strong>。
+</div>
+
+<h2>六、结语</h2>
+
+<p>回到文章开头那笔账。一家包装厂的增值时间占总制造周期的万分之二，这听起来像是管理失败。但从另一个角度看，这也意味着：<strong>哪怕只消除 50% 的等待和搬运，你的有效产能就能翻倍。</strong></p>
+
+<p>精益生产的本质不是"省钱"，而是<strong>把时间还给创造价值的过程</strong>。在大野耐一的逻辑里，任何不改变产品的形态、不增加产品功能、不被客户愿意付费的活动，都是浪费。这个定义可能极端，但正是这种极端让丰田从一个破产边缘的纺织机械厂变成了全球汽车工业的标杆。</p>
+
+<p>包装行业不需要照搬丰田，但需要借它的眼睛来看自己的工厂。价值流图析不是什么神秘武器，它只是一面镜子。问题是：你敢不敢照？</p>
+
+</div>
+
+<div class="like-section">
+  <button class="like-btn" id="like-btn" onclick="toggleLike()">
+    <span class="heart" id="heart">♡</span>
+    <span class="like-count" id="like-count">0</span>
+  </button>
+</div>
+<script>
+(function() {
+  var KEY = 'nv_like_lean-value-stream';
+  var liked = localStorage.getItem(KEY) === '1';
+  var count = parseInt(localStorage.getItem(KEY + '_c') || '0', 10);
+  var btn = document.getElementById('like-btn');
+  var heart = document.getElementById('heart');
+  var cnt = document.getElementById('like-count');
+  function render() {
+    if (liked) { btn.classList.add('liked'); heart.textContent = '♥'; }
+    else { btn.classList.remove('liked'); heart.textContent = '♡'; }
+    cnt.textContent = count;
+  }
+  render();
+  window.toggleLike = function() {
+    liked = !liked;
+    count = liked ? count + 1 : Math.max(0, count - 1);
+    localStorage.setItem(KEY, liked ? '1' : '0');
+    localStorage.setItem(KEY + '_c', count.toString());
+    render();
+  };
+})();
+</script>
+
+<div class="art-foot">
+  <a href="https://novora.cc">&larr; 返回 novora 首页</a>
+</div>
+
+<div class="share-toast" id="share-toast">&#10003; 链接已复制，去微信粘贴即可</div>
+<div class="share-overlay" id="share-overlay" onclick="if(event.target===this)closeShareOverlay()">
+  <div class="share-panel">
+    <div class="share-panel-icon">&#128279;</div>
+    <h3 class="share-panel-title" id="share-panel-title"></h3>
+    <p class="share-panel-sub">复制链接后，打开微信粘贴发送，<br>即可在朋友圈看到可点击的文章卡片</p>
+    <div class="share-panel-url" id="share-panel-url"></div>
+    <button class="share-panel-copy" onclick="copyLinkFromPanel()">&#128203; 复制文章链接</button>
+    <button class="share-panel-close" onclick="closeShareOverlay()">关闭</button>
+  </div>
+</div>
+<script>
+function copyLink(){
+  navigator.clipboard.writeText(location.href).then(function(){
+    var t=document.getElementById('share-toast');
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';},2500);
+  }).catch(function(){
+    var t=document.getElementById('share-toast');
+    t.textContent='✗ 复制失败，请手动复制';
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';t.textContent='✓ 链接已复制，去微信粘贴即可';},2500);
+  });
+}
+function shareMoments(){
+  var title = document.title;
+  var idx = title.lastIndexOf(' — ');
+  var cleanTitle = idx > -1 ? title.substring(0, idx) : title;
+  if (navigator.share) {
+    try { navigator.share({ title: cleanTitle, url: location.href }); return; }
+    catch(e) { showSharePanel(cleanTitle); return; }
+  }
+  showSharePanel(cleanTitle);
+}
+function shareWechat(){
+  var title = document.title;
+  var idx = title.lastIndexOf(' — ');
+  var cleanTitle = idx > -1 ? title.substring(0, idx) : title;
+  if (navigator.share) {
+    try { navigator.share({ title: cleanTitle, url: location.href }); return; }
+    catch(e) { showSharePanel(cleanTitle); return; }
+  }
+  showSharePanel(cleanTitle);
+}
+function showSharePanel(cleanTitle){
+  document.getElementById('share-panel-title').textContent = cleanTitle;
+  document.getElementById('share-panel-url').textContent = location.href;
+  document.getElementById('share-overlay').classList.add('show');
+}
+function copyLinkFromPanel(){
+  navigator.clipboard.writeText(location.href).then(function(){
+    var t=document.getElementById('share-toast');
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';},2500);
+  }).catch(function(){
+    var t=document.getElementById('share-toast');
+    t.textContent='✗ 复制失败，请手动复制';
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';t.textContent='✓ 链接已复制，去微信粘贴即可';},2500);
+  });
+}
+function closeShareOverlay(){
+  document.getElementById('share-overlay').classList.remove('show');
+}
+
+  (function logoChain() {
+    var delay = 5000;
+    setTimeout(function() {
+      var letters = document.querySelectorAll('.site-hd .logo-l');
+      if (!letters.length) { logoChain(); return; }
+      letters.forEach(function(l, i) {
+        setTimeout(function() {
+          var cls = i === letters.length - 1 ? 'lrebound' : 'lnudge';
+          l.classList.add(cls);
+          setTimeout(function() { l.classList.remove(cls); }, i === letters.length - 1 ? 350 : 200);
+        }, i * 130);
+      });
+      logoChain();
+    }, delay);
+  })();
+</script>
+</body>
+</html>
