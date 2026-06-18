@@ -11,7 +11,8 @@
   var localV = meta.content;
   var retries = parseInt(sessionStorage.getItem('nv_ver_retry')||'0');
   if (retries > 3) { sessionStorage.removeItem('nv_ver_retry'); return; }
-  fetch('/novora-site/version.json?t=' + Date.now(), {cache:'no-store'})
+  var basePath = (location.hostname.indexOf('github.io') > -1 || location.pathname.indexOf('/novora-site/') === 0) ? '/novora-site/' : '/';
+  fetch(basePath + 'version.json?t=' + Date.now(), {cache:'no-store'})
     .then(function(r){ return r.json(); })
     .then(function(d){
       if (d.version && d.version !== localV) {
@@ -25,8 +26,19 @@
     .catch(function(){});
 })();
 </script>
+<script>
+(function(){
+  function syncFramePath() {
+    if (!window.parent || window.parent === window) return;
+    var path = location.pathname.replace(/^\/novora-site\/?/, '/');
+    window.parent.postMessage({ type:'faste_sync', title:document.title, path:path + location.search + location.hash }, '*');
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncFramePath);
+  else syncFramePath();
+})();
+</script>
 
-<meta name="version" content="20260618v69">
+<meta name="version" content="20260618v73">
 <meta property="og:title" content="致美集全员的一封信｜把TOP精神写进每一天">
 <meta property="og:description" content="写给每一位正在新工厂、项目现场、客户一线和管理岗位上共同前行的美集人：让诚信成为底线，让超越成为习惯，让完美成为持续迭代的方向。">
 <meta property="og:url" content="https://novora.cc/articles/2026-06-18-megee-top-spirit.html">
@@ -771,21 +783,23 @@
     color:var(--ink);
   }
   .premium-letter .article-hero {
-    min-height:100vh;
+    min-height:760px;
     align-items:center;
     color:var(--ink);
-    background:var(--acid);
+    background:
+      radial-gradient(circle at 82% 18%, rgba(216,255,62,.32), transparent 30%),
+      linear-gradient(135deg,#F7F7F0 0%,#F2F1EA 54%,#EAF7B5 100%);
     overflow:hidden;
     isolation:isolate;
   }
   .premium-letter .article-hero::before {
     content:"TOP";
     position:absolute;
-    left:-2vw;
-    bottom:-7vw;
+    left:-1.5vw;
+    bottom:-5vw;
     z-index:0;
-    color:rgba(16,18,15,.08);
-    font:900 clamp(180px,32vw,520px)/.72 var(--sans);
+    color:rgba(16,18,15,.045);
+    font:900 clamp(150px,26vw,420px)/.72 var(--sans);
     letter-spacing:-.09em;
   }
   .premium-letter .article-hero::after {
@@ -793,15 +807,15 @@
     pointer-events:none;
   }
   .premium-letter .hero-bg {
-    inset:120px 3.2vw 38px auto;
-    width:min(46vw,700px);
+    inset:118px 4.6vw 80px auto;
+    width:min(40vw,620px);
     height:auto;
-    border-radius:48% 48% 8px 8px;
+    border-radius:16px;
     object-position:center center;
-    box-shadow:0 38px 80px rgba(16,18,15,.28);
+    box-shadow:0 28px 68px rgba(16,18,15,.18);
     filter:saturate(1.02) contrast(1.04);
     z-index:1;
-    animation:hero-float 9s ease-in-out infinite;
+    animation:none;
   }
   .premium-letter .site-hd {
     width:calc(100vw - 6.4vw);
@@ -817,10 +831,10 @@
     color:rgba(16,18,15,.68);
   }
   .premium-letter .hero-copy {
-    width:calc(100vw - 6.4vw);
-    grid-template-columns:minmax(0,720px) minmax(240px,1fr);
-    gap:clamp(28px,5vw,84px);
-    padding:130px 0 120px;
+    width:min(1180px, calc(100vw - 7vw));
+    grid-template-columns:minmax(0,610px) minmax(240px,1fr);
+    gap:clamp(28px,4.5vw,72px);
+    padding:132px 0 104px;
     z-index:2;
   }
   .premium-letter .kicker {
@@ -828,10 +842,10 @@
     margin-bottom:24px;
   }
   .premium-letter .article-hero h1 {
-    max-width:760px;
+    max-width:650px;
     color:var(--ink);
-    font:850 clamp(48px,8.3vw,128px)/.86 var(--sans);
-    letter-spacing:-.045em;
+    font:820 clamp(42px,5.8vw,84px)/1.01 var(--sans);
+    letter-spacing:-.026em;
   }
   .premium-letter .article-hero h1 em {
     font-family:var(--serif);
@@ -840,9 +854,9 @@
     letter-spacing:0;
   }
   .premium-letter .deck {
-    max-width:640px;
+    max-width:590px;
     color:rgba(16,18,15,.78);
-    font-size:clamp(16px,1.7vw,22px);
+    font-size:clamp(16px,1.25vw,19px);
     line-height:1.76;
     font-family:var(--cn-serif);
     font-weight:450;
@@ -863,24 +877,24 @@
   }
   .premium-letter .hero-mantra {
     align-self:end;
-    width:min(360px,100%);
-    margin-bottom:36px;
+    width:min(310px,100%);
+    margin-bottom:54px;
     border:1px solid rgba(16,18,15,.22);
-    border-radius:50%;
-    aspect-ratio:1;
-    padding:42px 34px;
+    border-radius:22px;
+    aspect-ratio:auto;
+    padding:30px 28px;
     display:flex;
     flex-direction:column;
     justify-content:center;
     color:rgba(16,18,15,.72);
-    background:rgba(255,255,255,.18);
+    background:rgba(255,255,255,.28);
     backdrop-filter:blur(10px);
   }
   .premium-letter .hero-mantra span {
     color:var(--ink);
   }
   .premium-letter .hero-metrics {
-    width:calc(100vw - 6.4vw);
+    width:min(1180px, calc(100vw - 7vw));
     background:var(--ink);
     color:#fff;
     border-color:rgba(255,255,255,.15);
@@ -1304,25 +1318,42 @@
   }
   @media (max-width:900px) {
     .premium-letter .article-hero {
-      min-height:100svh;
+      min-height:auto;
       display:block;
+      overflow:visible;
+      background:
+        radial-gradient(circle at 82% 8%, rgba(216,255,62,.22), transparent 34%),
+        linear-gradient(180deg,#F8F8F3 0%,#EEF2DA 62%,#F5F3EA 100%);
+    }
+    .premium-letter .article-hero::before {
+      display:none;
+    }
+    .premium-letter .site-hd {
+      display:none;
     }
     .premium-letter .hero-bg {
       position:relative;
       inset:auto;
       width:calc(100vw - 36px);
-      height:36vh;
-      min-height:240px;
-      margin:72px auto 0;
+      height:auto;
+      aspect-ratio:16 / 9;
+      min-height:0;
+      margin:28px auto 0;
       display:block;
+      border-radius:8px;
+      object-fit:cover;
+      box-shadow:0 18px 42px rgba(16,18,15,.18);
+      animation:none;
     }
     .premium-letter .hero-copy {
       display:block;
-      padding:24px 0 22px;
+      padding:26px 0 24px;
     }
     .premium-letter .article-hero h1 {
-      font-size:clamp(44px,11.2vw,72px);
-      line-height:.92;
+      max-width:100%;
+      font-size:clamp(32px,8.8vw,46px);
+      line-height:1.08;
+      letter-spacing:-.024em;
     }
     .premium-letter .hero-mantra {
       display:none;
@@ -1332,6 +1363,50 @@
       background:transparent;
       border-left:0;
       border-right:0;
+    }
+    .premium-letter .deck {
+      max-width:100%;
+      font-size:15.5px;
+      line-height:1.86;
+      margin-top:20px;
+    }
+    .premium-letter .meta {
+      margin-top:16px;
+      font-size:10px;
+    }
+    .premium-letter .kicker {
+      max-width:100%;
+      margin-bottom:18px;
+      font-size:9px;
+      line-height:1.7;
+      letter-spacing:.14em;
+    }
+    .premium-letter .festival-chip {
+      margin-bottom:18px;
+    }
+    .premium-letter .festival-chip::before {
+      display:none;
+    }
+    .premium-letter .hero-metrics {
+      position:relative;
+      left:auto;
+      bottom:auto;
+      transform:none;
+      width:calc(100vw - 36px);
+      margin:0 auto 34px;
+      grid-template-columns:1fr;
+      border-radius:8px;
+      border-bottom:1px solid rgba(255,255,255,.15);
+      box-shadow:0 22px 48px rgba(16,18,15,.18);
+    }
+    .premium-letter .hero-metrics div {
+      min-height:auto;
+      padding:17px 18px;
+      border-right:0;
+      border-bottom:1px solid rgba(255,255,255,.12);
+    }
+    .premium-letter .hero-metrics div:last-child {
+      border-bottom:0;
     }
     .signature-shell,
     .culture-head,
@@ -1353,11 +1428,51 @@
   @media (max-width:560px) {
     .premium-letter .hero-bg {
       width:calc(100vw - 28px);
-      height:34vh;
-      min-height:220px;
+      aspect-ratio:16 / 8.7;
+      min-height:0;
+      margin-top:22px;
     }
     .premium-letter .article-hero h1 {
-      font-size:clamp(42px,12.2vw,58px);
+      font-size:clamp(31px,8.9vw,38px);
+      line-height:1.1;
+    }
+    .premium-letter .hero-copy,
+    .premium-letter .hero-metrics {
+      width:calc(100vw - 28px);
+    }
+    .premium-letter .deck {
+      font-size:15px;
+      line-height:1.82;
+    }
+    .premium-letter .share-bar-top {
+      margin-top:18px;
+      gap:8px;
+    }
+    .premium-letter .share-btn-top {
+      min-height:32px;
+      padding:6px 11px;
+      font-size:11px;
+    }
+    .premium-letter .lead {
+      font-size:clamp(21px,6vw,28px);
+      line-height:1.48;
+      text-wrap:auto;
+    }
+    .premium-letter .story-copy p:not(.lead),
+    .premium-letter .letter-copy p {
+      font-size:15px;
+      line-height:2;
+      letter-spacing:.015em;
+    }
+    .premium-letter .method-copy h2,
+    .premium-letter .closing-copy h2,
+    .premium-letter .letter-copy h2,
+    .premium-letter .pillars-head h2,
+    .premium-letter .culture-head h2,
+    .premium-letter .signature-copy h2 {
+      font-size:clamp(30px,8.4vw,42px);
+      line-height:1.08;
+      letter-spacing:-.04em;
     }
     .signature-band,
     .culture-cards,
@@ -1389,7 +1504,7 @@
 <header class="article-hero">
   <img class="hero-bg" src="megee-top-spirit-assets/new-campus-front.jpg" alt="美集新工厂园区正面">
   <div class="site-hd">
-    <a class="site-logo" href="https://novora.cc"><span class="logo-l">n</span><span class="logo-l">o</span><span class="logo-l">v</span><span class="logo-l">o</span><span class="logo-l">r</span><span class="logo-l">a</span></a>
+    <a class="site-logo" href="https://novora.cc/" target="_top"><span class="logo-l">n</span><span class="logo-l">o</span><span class="logo-l">v</span><span class="logo-l">o</span><span class="logo-l">r</span><span class="logo-l">a</span></a>
     <span class="site-sub">MEGEE COSPACK · LETTER TO ALL</span>
   </div>
   <div class="hero-copy">
@@ -1626,7 +1741,7 @@
 </div>
 
 <div class="art-foot">
-  <a href="https://novora.cc">&larr; 返回 novora 首页</a>
+  <a href="https://novora.cc/" target="_top">&larr; 返回 novora 首页</a>
 </div>
 
 <div class="share-toast" id="share-toast">&#10003; 链接已复制，去微信粘贴即可</div>

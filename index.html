@@ -11,7 +11,8 @@
   var localV = meta.content;
   var retries = parseInt(sessionStorage.getItem('nv_ver_retry')||'0');
   if (retries > 3) { sessionStorage.removeItem('nv_ver_retry'); return; }
-  fetch('/novora-site/version.json?t=' + Date.now(), {cache:'no-store'})
+  var basePath = (location.hostname.indexOf('github.io') > -1 || location.pathname.indexOf('/novora-site/') === 0) ? '/novora-site/' : '/';
+  fetch(basePath + 'version.json?t=' + Date.now(), {cache:'no-store'})
     .then(function(r){ return r.json(); })
     .then(function(d){
       if (d.version && d.version !== localV) {
@@ -33,28 +34,37 @@
     .catch(function(){});
 })();
 </script>
+<script>
+(function(){
+  function syncFramePath() {
+    if (!window.parent || window.parent === window) return;
+    var path = location.pathname.replace(/^\/novora-site\/?/, '/');
+    if (!path || path === '/index.html') path = '/';
+    window.parent.postMessage({ type:'faste_sync', title:document.title, path:path + location.search + location.hash }, '*');
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncFramePath);
+  else syncFramePath();
+})();
+</script>
 
-<meta name="version" content="20260618v54">
+<meta name="version" content="20260618v73">
 <meta property="og:title" content="novora — 探索制造与创新的边界">
 <meta property="og:description" content="包装与制造产业知识库。聚焦包装、材料、制造、质量、可持续发展与AI应用。">
-<meta property="og:url" content="https://coadyke.github.io/novora-site/">
+<meta property="og:url" content="https://novora.cc/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="novora">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://coadyke.github.io/novora-site/og-image.png">
+<meta property="og:image" content="https://novora.cc/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="novora — 探索制造与创新的边界">
 <meta name="twitter:description" content="包装与制造产业知识库。聚焦包装、材料、制造、质量、可持续发展与AI应用。">
-<meta name="twitter:image" content="https://coadyke.github.io/novora-site/og-image.png">
+<meta name="twitter:image" content="https://novora.cc/og-image.png">
 <meta name="description" content="包装与制造产业知识库。聚焦包装、材料、制造、质量、可持续发展与AI应用。">
 <meta itemprop="name" content="novora">
 <meta itemprop="description" content="包装与制造产业知识库。聚焦包装、材料、制造、质量、可持续发展与AI应用。">
-<meta itemprop="image" content="https://coadyke.github.io/novora-site/og-image.png">
-<meta property="og:locale" content="zh_CN">
-<meta name="twitter:card" content="summary">
-<meta name="description" content="包装与制造产业知识库。聚焦包装、材料、制造、质量、可持续发展与AI应用。">
+<meta itemprop="image" content="https://novora.cc/og-image.png">
 <title>novora — 探索制造与创新的边界</title>
 <style>
   :root {
@@ -301,9 +311,17 @@
   }
 
   const list = document.getElementById('article-list');
+  function isLocalPreview() {
+    return location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:';
+  }
+  function articleHref(file) {
+    if (isLocalPreview()) return file;
+    return 'https://novora.cc/' + file.replace(/^\/+/, '');
+  }
   articles.forEach(a => {
     const card = document.createElement('a');
-    card.className = 'article-card'; card.href = a.file;
+    card.className = 'article-card'; card.href = articleHref(a.file);
+    if (!isLocalPreview()) card.target = '_top';
     card.setAttribute('data-tags', a.tags.join(','));
     card.setAttribute('data-topics', (a.topics||[]).join(','));
     card.innerHTML = '<div class="meta"><span class="date">' + a.date + '</span>' +
@@ -557,7 +575,7 @@
 
   // Auto-refresh: check for new version on load & tab return
   (function() {
-    var VER = 'https://coadyke.github.io/novora-site/version.txt';
+    var VER = 'version.txt';
     var KEY = 'nv_v';
     function check() {
       fetch(VER + '?t=' + Date.now(), {cache: 'no-store'})
