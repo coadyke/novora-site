@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<script>
+(function(){
+  var meta = document.querySelector('meta[name="version"]');
+  if (!meta) return;
+  var localV = meta.content;
+  var retries = parseInt(sessionStorage.getItem('nv_ver_retry')||'0');
+  if (retries > 3) { sessionStorage.removeItem('nv_ver_retry'); return; }
+  fetch('/novora-site/version.json?t=' + Date.now(), {cache:'no-store'})
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d.version && d.version !== localV) {
+        sessionStorage.setItem('nv_ver_retry', String(retries + 1));
+        var u = location.href.split('?')[0] + '?v=' + d.version + '&t=' + Date.now();
+        location.replace(u);
+      } else {
+        sessionStorage.removeItem('nv_ver_retry');
+      }
+    })
+    .catch(function(){});
+})();
+</script>
+
+<meta name="version" content="20260618v65">
+<meta property="og:title" content="致美集全员的一封信｜把TOP精神写进每一天">
+<meta property="og:description" content="写给每一位正在新工厂、项目现场、客户一线和管理岗位上共同前行的美集人：让诚信成为底线，让超越成为习惯，让完美成为持续迭代的方向。">
+<meta property="og:url" content="https://novora.cc/articles/2026-06-18-megee-top-spirit.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="novora">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://novora.cc/articles/megee-top-spirit-assets/new-campus-front.jpg">
+<meta property="og:image:width" content="1920">
+<meta property="og:image:height" content="1280">
+<meta property="article:published_time" content="2026-06-18">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="致美集全员的一封信｜把TOP精神写进每一天">
+<meta name="twitter:description" content="写给每一位正在新工厂、项目现场、客户一线和管理岗位上共同前行的美集人：让诚信成为底线，让超越成为习惯，让完美成为持续迭代的方向。">
+<meta name="twitter:image" content="https://novora.cc/articles/megee-top-spirit-assets/new-campus-front.jpg">
+<meta name="description" content="写给每一位正在新工厂、项目现场、客户一线和管理岗位上共同前行的美集人：让诚信成为底线，让超越成为习惯，让完美成为持续迭代的方向。">
+<meta itemprop="name" content="致美集全员的一封信｜把TOP精神写进每一天">
+<meta itemprop="description" content="写给每一位正在新工厂、项目现场、客户一线和管理岗位上共同前行的美集人：让诚信成为底线，让超越成为习惯，让完美成为持续迭代的方向。">
+<meta itemprop="image" content="https://novora.cc/articles/megee-top-spirit-assets/new-campus-front.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"致美集全员的一封信｜把TOP精神写进每一天","description":"写给每一位正在新工厂、项目现场、客户一线和管理岗位上共同前行的美集人：让诚信成为底线，让超越成为习惯，让完美成为持续迭代的方向。","image":"https://novora.cc/articles/megee-top-spirit-assets/new-campus-front.jpg","datePublished":"2026-06-18","publisher":{"@type":"Organization","name":"novora","url":"https://novora.cc/"},"mainEntityOfPage":{"@type":"WebPage","@id":"https://novora.cc/articles/2026-06-18-megee-top-spirit.html"}}
+</script>
+
+<title>致美集全员的一封信｜把TOP精神写进每一天 — novora</title>
+<style>
+  :root {
+    --acid:#D8FF3E;
+    --ink:#10140F;
+    --night:#111610;
+    --moss:#496F5D;
+    --leaf:#B7E778;
+    --paper:#F2F1EA;
+    --porcelain:#FAFAF5;
+    --muted:#7C837A;
+    --line:rgba(17,22,16,.16);
+    --glass:rgba(250,250,245,.72);
+    --dark-glass:rgba(17,22,16,.58);
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    --mono:"SFMono-Regular","Roboto Mono","DM Mono",monospace;
+    --serif:Georgia,"Times New Roman","Songti SC",serif;
+    --cn-serif:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong",Georgia,serif;
+  }
+  *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+  html { scroll-behavior:smooth; }
+  body {
+    min-width:320px;
+    color:var(--ink);
+    background:var(--paper);
+    font-family:var(--sans);
+    line-height:1.78;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    font-kerning:normal;
+    overflow-x:hidden;
+  }
+  a { color:inherit; text-decoration:none; }
+  .noise {
+    position:fixed;
+    inset:0;
+    z-index:200;
+    pointer-events:none;
+    opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
+  }
+  .site-hd {
+    position:absolute;
+    z-index:20;
+    top:22px;
+    left:50%;
+    transform:translateX(-50%);
+    width:min(1120px,calc(100vw - 36px));
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    color:#fff;
+  }
+  .site-logo {
+    display:inline-flex;
+    align-items:baseline;
+    gap:8px;
+    font-size:19px;
+    font-weight:800;
+    letter-spacing:0;
+  }
+  .site-sub {
+    font:400 10px/1.2 var(--mono);
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    opacity:.78;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .logo-l { display:inline-block; }
+  @keyframes logo-nudge { 0% { transform:translateX(0); } 40% { transform:translateX(1px); } 100% { transform:translateX(0); } }
+  @keyframes logo-rebound { 0% { transform:translateX(0); } 35% { transform:translateX(1px); } 65% { transform:translateX(-0.5px); } 100% { transform:translateX(0); } }
+  @keyframes hero-float { 0%, 100% { transform:translateY(0); } 50% { transform:translateY(-5px); } }
+  @keyframes leaf-breathe {
+    0%, 100% { transform:rotate(-17deg) scale(1); box-shadow:0 0 0 0 rgba(73,111,93,0); }
+    50% { transform:rotate(-17deg) scale(1.08); box-shadow:0 0 0 8px rgba(73,111,93,.13); }
+  }
+  @keyframes wish-rise {
+    0%, 100% { opacity:.34; transform:translate(0,3px); }
+    45% { opacity:.72; transform:translate(6px,-4px); }
+  }
+  @keyframes tag-glow { 0%, 100% { color:var(--acid); } 50% { color:#F3FF9A; } }
+  @keyframes quiet-scan { 0% { transform:translateX(-120%); } 100% { transform:translateX(120%); } }
+  .lnudge { animation:logo-nudge .2s ease-in-out; }
+  .lrebound { animation:logo-rebound .35s ease-in-out; }
+  .article-hero {
+    min-height:96vh;
+    position:relative;
+    display:grid;
+    align-items:end;
+    overflow:hidden;
+    color:#fff;
+    background:#111610;
+  }
+  .article-hero::before {
+    content:"";
+    position:absolute;
+    z-index:2;
+    top:82px;
+    right:clamp(18px,6vw,96px);
+    width:min(34vw,380px);
+    height:190px;
+    pointer-events:none;
+    opacity:.48;
+    background:
+      linear-gradient(122deg, transparent 0 44%, rgba(216,255,62,.78) 44.6% 45.4%, transparent 46% 100%),
+      linear-gradient(58deg, transparent 0 55%, rgba(255,255,255,.3) 55.6% 56.4%, transparent 57% 100%),
+      linear-gradient(0deg, transparent 0 calc(100% - 1px), rgba(216,255,62,.5) calc(100% - 1px) 100%);
+    border-right:1px solid rgba(216,255,62,.34);
+    transform:skewY(-7deg);
+  }
+  .hero-bg {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 56%;
+    filter:saturate(1.04) contrast(1.03);
+  }
+  .article-hero::after {
+    content:"";
+    position:absolute;
+    z-index:1;
+    inset:0;
+    background:
+      linear-gradient(90deg, rgba(10,14,11,.78) 0%, rgba(10,14,11,.42) 42%, rgba(10,14,11,.1) 100%),
+      linear-gradient(180deg, rgba(10,14,11,.15) 0%, rgba(10,14,11,.05) 45%, rgba(10,14,11,.86) 100%);
+  }
+  .hero-copy {
+    position:relative;
+    z-index:3;
+    width:min(1120px,calc(100vw - 36px));
+    margin:0 auto;
+    padding:130px 0 72px;
+    display:grid;
+    grid-template-columns:minmax(0,760px) minmax(220px,1fr);
+    gap:48px;
+    align-items:end;
+  }
+  .kicker {
+    font:500 10px/1.2 var(--mono);
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--acid);
+    margin-bottom:18px;
+  }
+  .article-hero h1 {
+    max-width:860px;
+    font-size:clamp(42px,6.1vw,88px);
+    line-height:1.04;
+    letter-spacing:0;
+    font-weight:850;
+    text-wrap:balance;
+  }
+  .deck {
+    margin-top:26px;
+    max-width:640px;
+    font-size:clamp(17px,2.1vw,26px);
+    line-height:1.62;
+    color:rgba(255,255,255,.88);
+  }
+  .meta {
+    margin-top:22px;
+    font:400 11px/1.7 var(--mono);
+    letter-spacing:.05em;
+    color:rgba(255,255,255,.68);
+  }
+  .share-bar-top {
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:24px;
+  }
+  .share-btn-top {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    min-height:36px;
+    padding:7px 14px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.28);
+    color:#fff;
+    background:rgba(255,255,255,.12);
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    font-size:12px;
+    cursor:pointer;
+    transition:transform .2s ease, background .2s ease, border-color .2s ease;
+  }
+  .share-btn-top:hover { transform:translateY(-1px); background:rgba(255,255,255,.2); border-color:rgba(216,255,62,.55); }
+  .share-btn-top svg { width:13px; height:13px; flex:0 0 auto; }
+  .share-btn-top:hover svg { transform:translateX(1px) rotate(-2deg); }
+  .hero-mantra {
+    justify-self:end;
+    width:min(320px,100%);
+    border-top:1px solid rgba(255,255,255,.32);
+    border-bottom:1px solid rgba(255,255,255,.22);
+    padding:20px 0;
+    color:rgba(255,255,255,.78);
+  }
+  .hero-mantra span {
+    display:block;
+    font:400 10px/1.3 var(--mono);
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--acid);
+    margin-bottom:12px;
+  }
+  .hero-mantra p {
+    font-size:14px;
+    line-height:1.7;
+  }
+  .hero-metrics {
+    position:absolute;
+    z-index:3;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+    width:min(1120px,calc(100vw - 36px));
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    background:rgba(16,20,15,.66);
+    border:1px solid rgba(255,255,255,.16);
+    border-bottom:0;
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+  }
+  .hero-metrics div {
+    min-height:92px;
+    padding:18px 20px;
+    border-right:1px solid rgba(255,255,255,.14);
+  }
+  .hero-metrics div:last-child { border-right:0; }
+  .hero-metrics b {
+    display:block;
+    color:var(--acid);
+    font:500 10px/1.2 var(--mono);
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .hero-metrics span {
+    display:block;
+    font-size:14px;
+    color:rgba(255,255,255,.82);
+  }
+  .story-band {
+    position:relative;
+    background:var(--paper);
+    padding:110px 18px;
+  }
+  .story-shell {
+    width:min(1120px,100%);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:minmax(0,1.04fr) minmax(360px,.96fr);
+    gap:70px;
+    align-items:center;
+  }
+  .story-copy {
+    max-width:650px;
+  }
+  .lead {
+    font-size:clamp(23px,3.2vw,42px);
+    line-height:1.28;
+    letter-spacing:0;
+    color:var(--night);
+    margin:0 0 24px;
+    font-weight:650;
+  }
+  .story-copy p:not(.lead), .method-copy p, .closing-copy p {
+    color:#424A3F;
+    font-size:16px;
+    line-height:1.9;
+    margin-bottom:14px;
+  }
+  .compact-note {
+    margin-top:28px;
+    padding:22px 24px;
+    border-left:4px solid var(--acid);
+    background:#171B15;
+    color:#F4F7EF;
+    font-size:15px;
+    line-height:1.8;
+    border-radius:0 8px 8px 0;
+  }
+  .story-visual {
+    position:relative;
+    min-height:620px;
+  }
+  .story-visual img {
+    position:absolute;
+    width:68%;
+    height:66%;
+    object-fit:cover;
+    border-radius:8px;
+    box-shadow:0 30px 70px rgba(17,22,16,.22);
+  }
+  .story-visual img:first-child {
+    top:0;
+    right:0;
+  }
+  .story-visual img:last-child {
+    left:0;
+    bottom:0;
+    width:58%;
+    height:48%;
+    border:9px solid var(--paper);
+  }
+  .method-band {
+    background:#141914;
+    color:#F4F5EE;
+    padding:118px 18px;
+    overflow:hidden;
+  }
+  .method-shell {
+    width:min(1120px,100%);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:minmax(340px,.92fr) minmax(0,1.08fr);
+    gap:70px;
+    align-items:center;
+  }
+  .method-media {
+    height:620px;
+    overflow:hidden;
+    border-radius:8px;
+    position:relative;
+  }
+  .method-media::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(20,25,20,0) 45%, rgba(20,25,20,.45));
+  }
+  .method-media img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:saturate(.9) contrast(1.06);
+  }
+  .method-copy h2, .closing-copy h2 {
+    font-size:clamp(36px,5.2vw,76px);
+    line-height:.98;
+    letter-spacing:0;
+    font-weight:780;
+    margin:0 0 30px;
+    text-wrap:balance;
+  }
+  .method-copy h2 em, .closing-copy h2 em {
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:400;
+    color:var(--acid);
+  }
+  .method-copy p {
+    color:#D5D9CF;
+    max-width:680px;
+  }
+  .letter-band {
+    background:#F7F7F0;
+    padding:112px 18px;
+  }
+  .letter-shell {
+    width:min(1120px,100%);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:minmax(0,.98fr) minmax(360px,1.02fr);
+    gap:70px;
+    align-items:start;
+  }
+  .letter-label {
+    display:block;
+    margin-bottom:18px;
+    font:500 10px/1.4 var(--mono);
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--moss);
+  }
+  .letter-copy h2 {
+    font-size:clamp(34px,5vw,72px);
+    line-height:1.02;
+    letter-spacing:0;
+    font-weight:820;
+    margin:0 0 26px;
+    color:var(--night);
+    text-wrap:balance;
+  }
+  .letter-copy p {
+    color:#3F473D;
+    font-size:16px;
+    line-height:1.95;
+    margin-bottom:15px;
+  }
+  .letter-copy strong {
+    color:#141914;
+    font-weight:760;
+  }
+  .letter-sign {
+    margin-top:26px;
+    padding-top:20px;
+    border-top:1px solid rgba(17,22,16,.16);
+    color:#596255;
+    font-size:14px;
+    line-height:1.8;
+  }
+  .letter-photo {
+    position:sticky;
+    top:28px;
+  }
+  .letter-photo img {
+    display:block;
+    width:100%;
+    height:620px;
+    object-fit:cover;
+    border-radius:8px;
+    box-shadow:0 26px 62px rgba(17,22,16,.16);
+  }
+  .letter-caption {
+    margin-top:12px;
+    color:#737B70;
+    font-size:13px;
+    line-height:1.7;
+  }
+  .commitment-grid {
+    width:min(1120px,100%);
+    margin:48px auto 0;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+  }
+  .commitment {
+    background:#fff;
+    border:1px solid rgba(17,22,16,.1);
+    border-radius:8px;
+    padding:24px 22px;
+    min-height:210px;
+    box-shadow:0 14px 34px rgba(17,22,16,.06);
+  }
+  .commitment b {
+    display:block;
+    margin-bottom:12px;
+    color:var(--night);
+    font-size:19px;
+    line-height:1.25;
+  }
+  .commitment span {
+    display:block;
+    font:500 9px/1.4 var(--mono);
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:var(--moss);
+    margin-bottom:12px;
+  }
+  .commitment p {
+    color:#485146;
+    font-size:14px;
+    line-height:1.78;
+  }
+  .pillars {
+    background:var(--porcelain);
+    padding:110px 18px 120px;
+  }
+  .pillars-head {
+    width:min(1120px,100%);
+    margin:0 auto 38px;
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:24px;
+    border-bottom:1px solid var(--line);
+    padding-bottom:22px;
+  }
+  .pillars-head h2 {
+    max-width:760px;
+    font-size:clamp(38px,5.8vw,88px);
+    line-height:.96;
+    letter-spacing:0;
+    font-weight:820;
+  }
+  .pillars-head span {
+    font:400 10px/1.4 var(--mono);
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--moss);
+  }
+  .pillar-grid {
+    width:min(1120px,100%);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+  }
+  .principle {
+    background:#fff;
+    border:1px solid rgba(17,22,16,.1);
+    border-radius:8px;
+    overflow:hidden;
+    min-height:620px;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 18px 42px rgba(17,22,16,.08);
+  }
+  .principle figure {
+    height:260px;
+    overflow:hidden;
+  }
+  .principle img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .principle-body {
+    padding:28px 24px 26px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+  }
+  .principle-head {
+    margin-bottom:16px;
+  }
+  .principle-title {
+    font-size:24px;
+    line-height:1.18;
+    font-weight:820;
+    color:var(--night);
+  }
+  .principle-en {
+    display:block;
+    margin-top:7px;
+    font:500 9px/1.4 var(--mono);
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--moss);
+  }
+  .principle p {
+    color:#394238;
+    font-size:15px;
+    line-height:1.78;
+  }
+  .practice {
+    margin:18px 0 0;
+    padding-left:18px;
+    color:#495247;
+    font-size:14px;
+    line-height:1.72;
+  }
+  .practice li {
+    margin-bottom:8px;
+    padding-left:3px;
+  }
+  .practice li::marker { color:var(--moss); }
+  .closing-band {
+    position:relative;
+    min-height:100vh;
+    display:grid;
+    align-items:center;
+    color:#fff;
+    background:#111610;
+    overflow:hidden;
+  }
+  .closing-band img {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:.52;
+    filter:saturate(.8) contrast(1.08);
+  }
+  .closing-band::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+      linear-gradient(90deg, rgba(17,22,16,.86) 0%, rgba(17,22,16,.58) 48%, rgba(17,22,16,.22) 100%),
+      linear-gradient(180deg, rgba(17,22,16,.08) 0%, rgba(17,22,16,.82) 100%);
+  }
+  .closing-copy {
+    position:relative;
+    z-index:1;
+    width:min(900px,calc(100vw - 36px));
+    margin:0 auto;
+    padding:120px 0;
+  }
+  .closing-copy p {
+    color:rgba(255,255,255,.82);
+    max-width:720px;
+  }
+  .closing {
+    margin-top:34px;
+    padding:22px 0 0;
+    border-top:1px solid rgba(216,255,62,.36);
+    color:#fff;
+    font-size:18px;
+    line-height:1.78;
+  }
+  .like-section {
+    position:relative;
+    z-index:2;
+    margin-top:-34px;
+    text-align:center;
+    padding:0 0 18px;
+  }
+  .like-btn {
+    background:rgba(255,255,255,.86);
+    border:1px solid rgba(17,22,16,.16);
+    border-radius:999px;
+    padding:7px 18px;
+    font-size:13px;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    color:#4C554A;
+    backdrop-filter:blur(16px);
+    transition:all .15s;
+  }
+  .like-btn:hover { color:var(--night); border-color:rgba(17,22,16,.3); }
+  .like-btn.liked { border-color:#E57373; color:#E53935; background:#FEF5F5; }
+  .heart { font-size:16px; line-height:1; }
+  .like-count { font-variant-numeric:tabular-nums; }
+  .art-foot {
+    text-align:center;
+    padding:18px 0 42px;
+    color:#697062;
+    font-size:14px;
+    background:var(--paper);
+  }
+  .share-toast {
+    position:fixed;
+    bottom:40px;
+    left:50%;
+    transform:translateX(-50%);
+    background:#111610;
+    color:#fff;
+    padding:10px 24px;
+    border-radius:8px;
+    font-size:14px;
+    z-index:10001;
+    opacity:0;
+    transition:opacity .3s;
+    pointer-events:none;
+    white-space:nowrap;
+  }
+  .share-overlay {
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:10000;
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .25s;
+  }
+  .share-overlay.show { opacity:1; pointer-events:auto; }
+  .share-panel { background:#fff; border-radius:8px; padding:28px 24px 22px; max-width:400px; width:88vw; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,.25); }
+  .share-panel-title { font-size:17px; font-weight:700; color:#111610; margin:0 0 6px; }
+  .share-panel-sub { font-size:13px; color:#5F6B7A; margin:0 0 18px; line-height:1.6; }
+  .share-panel-url { background:#F4F6F9; border-radius:8px; padding:10px 14px; font-size:12px; color:#3B4556; word-break:break-all; margin-bottom:16px; text-align:left; }
+  .share-panel-copy { display:inline-flex; align-items:center; gap:6px; background:#111610; color:#fff; border:none; border-radius:7px; padding:10px 20px; font-size:14px; font-weight:600; cursor:pointer; }
+  .share-panel-close { display:block; margin:14px auto 0; background:none; border:none; color:#8C97A8; font-size:13px; cursor:pointer; }
+  @media (max-width:900px) {
+    .site-hd { top:16px; }
+    .site-sub { max-width:56vw; }
+    .hero-copy { grid-template-columns:1fr; gap:26px; padding:105px 0 126px; }
+    .hero-mantra { justify-self:start; width:min(380px,100%); }
+    .hero-metrics { grid-template-columns:1fr; }
+    .hero-metrics div { min-height:auto; padding:13px 16px; border-right:0; border-bottom:1px solid rgba(255,255,255,.12); }
+    .story-band, .method-band, .letter-band, .pillars { padding:76px 18px; }
+    .story-shell, .method-shell, .letter-shell { grid-template-columns:1fr; gap:42px; }
+    .story-visual { min-height:480px; order:-1; }
+    .method-media { height:430px; }
+    .letter-photo { position:relative; top:auto; order:-1; }
+    .letter-photo img { height:440px; }
+    .commitment-grid { grid-template-columns:1fr; }
+    .pillars-head { display:block; }
+    .pillars-head span { display:block; margin-bottom:14px; }
+    .pillar-grid { grid-template-columns:1fr; }
+    .principle { min-height:auto; }
+    .principle figure { height:260px; }
+  }
+  @media (max-width:560px) {
+    .site-logo { font-size:18px; }
+    .site-sub { font-size:8px; }
+    .article-hero { min-height:92vh; }
+    .article-hero h1 { font-size:42px; }
+    .deck { font-size:16px; }
+    .share-btn-top { min-height:34px; }
+    .story-band, .method-band, .letter-band, .pillars { padding:58px 14px; }
+    .story-visual { min-height:390px; }
+    .story-visual img:first-child { width:76%; height:62%; }
+    .story-visual img:last-child { width:64%; height:44%; border-width:6px; }
+    .method-media { height:360px; }
+    .letter-photo img { height:360px; }
+    .commitment { min-height:auto; }
+    .principle figure { height:210px; }
+    .principle-body { padding:22px 18px; }
+    .closing-copy { padding:84px 0 112px; }
+  }
+  /* MEGEE premium override: break out of Novora article styling. */
+  :root {
+    --acid:#D8FF3E;
+    --ink:#10120F;
+    --cream:#F2F1EA;
+    --charcoal:#11140F;
+    --violet:#6D76FF;
+    --chrome:#E8E9EC;
+  }
+  body.premium-letter {
+    background:var(--cream);
+    color:var(--ink);
+  }
+  .premium-letter .article-hero {
+    min-height:100vh;
+    align-items:center;
+    color:var(--ink);
+    background:var(--acid);
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .premium-letter .article-hero::before {
+    content:"TOP";
+    position:absolute;
+    left:-2vw;
+    bottom:-7vw;
+    z-index:0;
+    color:rgba(16,18,15,.08);
+    font:900 clamp(180px,32vw,520px)/.72 var(--sans);
+    letter-spacing:-.09em;
+  }
+  .premium-letter .article-hero::after {
+    display:none;
+    pointer-events:none;
+  }
+  .premium-letter .hero-bg {
+    inset:120px 3.2vw 38px auto;
+    width:min(46vw,700px);
+    height:auto;
+    border-radius:48% 48% 8px 8px;
+    object-position:center center;
+    box-shadow:0 38px 80px rgba(16,18,15,.28);
+    filter:saturate(1.02) contrast(1.04);
+    z-index:1;
+    animation:hero-float 9s ease-in-out infinite;
+  }
+  .premium-letter .site-hd {
+    width:calc(100vw - 6.4vw);
+    color:var(--ink);
+    top:26px;
+  }
+  .premium-letter .site-logo {
+    font-size:22px;
+    letter-spacing:.38em;
+  }
+  .premium-letter .site-sub {
+    font-size:10px;
+    color:rgba(16,18,15,.68);
+  }
+  .premium-letter .hero-copy {
+    width:calc(100vw - 6.4vw);
+    grid-template-columns:minmax(0,720px) minmax(240px,1fr);
+    gap:clamp(28px,5vw,84px);
+    padding:130px 0 120px;
+    z-index:2;
+  }
+  .premium-letter .kicker {
+    color:rgba(16,18,15,.7);
+    margin-bottom:24px;
+  }
+  .premium-letter .article-hero h1 {
+    max-width:760px;
+    color:var(--ink);
+    font:850 clamp(48px,8.3vw,128px)/.86 var(--sans);
+    letter-spacing:-.045em;
+  }
+  .premium-letter .article-hero h1 em {
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:400;
+    letter-spacing:0;
+  }
+  .premium-letter .deck {
+    max-width:640px;
+    color:rgba(16,18,15,.78);
+    font-size:clamp(16px,1.7vw,22px);
+    line-height:1.76;
+    font-family:var(--cn-serif);
+    font-weight:450;
+    letter-spacing:.025em;
+  }
+  .premium-letter .meta {
+    color:rgba(16,18,15,.58);
+  }
+  .premium-letter .share-btn-top {
+    color:var(--ink);
+    background:rgba(255,255,255,.35);
+    border-color:rgba(16,18,15,.2);
+  }
+  .premium-letter .share-btn-top:hover {
+    background:var(--ink);
+    color:var(--acid);
+    border-color:var(--ink);
+  }
+  .premium-letter .hero-mantra {
+    align-self:end;
+    width:min(360px,100%);
+    margin-bottom:36px;
+    border:1px solid rgba(16,18,15,.22);
+    border-radius:50%;
+    aspect-ratio:1;
+    padding:42px 34px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    color:rgba(16,18,15,.72);
+    background:rgba(255,255,255,.18);
+    backdrop-filter:blur(10px);
+  }
+  .premium-letter .hero-mantra span {
+    color:var(--ink);
+  }
+  .premium-letter .hero-metrics {
+    width:calc(100vw - 6.4vw);
+    background:var(--ink);
+    color:#fff;
+    border-color:rgba(255,255,255,.15);
+  }
+  .premium-letter .hero-metrics span {
+    color:rgba(255,255,255,.78);
+  }
+  .signature-band {
+    position:relative;
+    min-height:100vh;
+    padding:14vh 5vw;
+    display:grid;
+    align-content:center;
+    background:#121411;
+    color:#F4F3ED;
+    overflow:hidden;
+  }
+  .signature-band::before {
+    content:"TRUSTING OUTPERFORMING PERFECTING";
+    position:absolute;
+    inset:auto 0 3vh;
+    color:rgba(216,255,62,.08);
+    font:800 10vw/.8 var(--sans);
+    letter-spacing:-.08em;
+    white-space:nowrap;
+  }
+  .signature-shell {
+    position:relative;
+    z-index:1;
+    width:min(1180px,100%);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:7vw;
+    align-items:center;
+  }
+  .signature-copy h2 {
+    margin:28px 0 34px;
+    font:800 clamp(52px,7.5vw,118px)/.9 var(--sans);
+    letter-spacing:-.065em;
+  }
+  .signature-copy h2 em {
+    color:var(--acid);
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:400;
+  }
+  .signature-copy p {
+    max-width:620px;
+    color:#C4C8BF;
+    font-size:16px;
+    line-height:1.9;
+    margin:0 0 16px;
+  }
+  .signature-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:#4A4F46;
+    border:1px solid #4A4F46;
+  }
+  .signature-tile {
+    min-height:260px;
+    position:relative;
+    overflow:hidden;
+    background:#ECEBE5;
+  }
+  .signature-tile::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:linear-gradient(105deg, transparent 0 38%, rgba(255,255,255,.16) 48%, transparent 58% 100%);
+    transform:translateX(-120%);
+  }
+  .signature-tile:hover::after {
+    animation:quiet-scan 1.8s ease;
+  }
+  .signature-tile.product {
+    min-height:300px;
+    background:
+      radial-gradient(circle at 50% 48%, rgba(255,255,255,.82), transparent 58%),
+      #ECEBE5;
+  }
+  .signature-tile:first-child {
+    grid-column:1 / -1;
+    min-height:360px;
+  }
+  .signature-tile img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:saturate(.82) contrast(1.04);
+    transition:transform .8s ease, filter .8s ease;
+  }
+  .signature-tile:hover img {
+    transform:scale(1.018);
+    filter:saturate(.95) contrast(1.06);
+  }
+  .signature-tile.product img {
+    object-fit:contain;
+    object-position:center;
+    padding:7.5% 9% 8%;
+    transform:scale(.96);
+  }
+  .signature-tile.product:hover img {
+    transform:scale(.985);
+  }
+  .signature-tile span {
+    position:absolute;
+    left:18px;
+    bottom:16px;
+    padding:6px 8px;
+    background:rgba(17,20,15,.82);
+    color:var(--acid);
+    font:500 9px/1 var(--mono);
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    z-index:2;
+    animation:tag-glow 5.6s ease-in-out infinite;
+  }
+  .culture-cards {
+    background:var(--acid);
+    padding:13vh 5vw;
+    color:var(--ink);
+  }
+  .culture-head {
+    width:min(1180px,100%);
+    margin:0 auto 54px;
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:6vw;
+    align-items:end;
+  }
+  .culture-head h2 {
+    font:850 clamp(48px,7vw,108px)/.9 var(--sans);
+    letter-spacing:-.06em;
+    margin:24px 0 0;
+  }
+  .culture-head h2 em {
+    font-family:var(--serif);
+    font-style:italic;
+    font-weight:400;
+  }
+  .culture-head p {
+    max-width:480px;
+    font-size:15px;
+    line-height:1.8;
+    color:rgba(16,18,15,.72);
+  }
+  .culture-grid {
+    width:min(1180px,100%);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:1.2fr .8fr .8fr;
+    gap:1px;
+    background:rgba(16,18,15,.35);
+    border:1px solid rgba(16,18,15,.35);
+  }
+  .culture-card {
+    background:#F2F1EA;
+    min-height:430px;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
+  .culture-card figure {
+    height:220px;
+    overflow:hidden;
+    margin:0;
+    background:#E7E6DF;
+  }
+  .culture-card img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    filter:saturate(.9);
+  }
+  .culture-card:first-child figure {
+    height:300px;
+  }
+  .culture-body {
+    padding:26px 24px 30px;
+  }
+  .culture-body span {
+    color:#496F5D;
+    font:500 9px/1.4 var(--mono);
+    letter-spacing:.16em;
+    text-transform:uppercase;
+  }
+  .culture-body h3 {
+    margin:12px 0 14px;
+    font-size:clamp(26px,2.8vw,42px);
+    line-height:1;
+    letter-spacing:-.035em;
+  }
+  .culture-body p {
+    color:#495247;
+    font-size:14px;
+    line-height:1.8;
+    margin:0;
+  }
+  .festival-chip {
+    display:inline-flex;
+    align-items:center;
+    gap:12px;
+    margin:0 0 22px;
+    padding:9px 14px;
+    border:1px solid rgba(16,18,15,.22);
+    border-radius:999px;
+    background:rgba(255,255,255,.32);
+    color:var(--ink);
+    font:600 10px/1.2 var(--mono);
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    backdrop-filter:blur(10px);
+    position:relative;
+    overflow:visible;
+  }
+  .festival-chip::before {
+    content:"平安顺遂";
+    position:absolute;
+    right:-56px;
+    top:-9px;
+    color:rgba(16,18,15,.7);
+    font:700 10px/1 var(--sans);
+    letter-spacing:.16em;
+    white-space:nowrap;
+    pointer-events:none;
+    animation:wish-rise 4.8s ease-in-out infinite;
+  }
+  .festival-chip::after {
+    content:"";
+    width:24px;
+    height:10px;
+    flex:0 0 auto;
+    border:1px solid rgba(16,18,15,.34);
+    border-radius:100% 0 100% 0;
+    background:rgba(216,255,62,.48);
+    transform:rotate(-17deg);
+    animation:leaf-breathe 4.8s ease-in-out infinite;
+  }
+  .festival-chip b {
+    font:760 14px/1 var(--sans);
+    letter-spacing:0;
+  }
+  .festival-blessing {
+    background:#D8FF3E;
+    color:#10120F;
+    padding:76px 5vw;
+    position:relative;
+    overflow:hidden;
+  }
+  .festival-blessing::before {
+    content:"DUANWU ANKANG";
+    position:absolute;
+    right:-2vw;
+    bottom:-2.5vw;
+    color:rgba(16,18,15,.08);
+    font:900 clamp(78px,14vw,210px)/.8 var(--sans);
+    letter-spacing:-.08em;
+    white-space:nowrap;
+  }
+  .festival-blessing::after {
+    content:"";
+    position:absolute;
+    left:5vw;
+    top:30px;
+    width:190px;
+    height:86px;
+    opacity:.2;
+    pointer-events:none;
+    background:
+      linear-gradient(118deg, transparent 0 48%, #10120F 49% 51%, transparent 52% 100%),
+      linear-gradient(62deg, transparent 0 48%, #10120F 49% 51%, transparent 52% 100%);
+    border-top:1px solid #10120F;
+    border-left:1px solid #10120F;
+    transform:skewY(-8deg);
+  }
+  .festival-blessing .inner {
+    position:relative;
+    z-index:1;
+    width:min(1180px,100%);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:.75fr 1.25fr;
+    gap:6vw;
+    align-items:end;
+  }
+  .festival-blessing span {
+    display:block;
+    font:500 10px/1.4 var(--mono);
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    margin-bottom:12px;
+  }
+  .festival-blessing h2 {
+    margin:0;
+    font:850 clamp(40px,6vw,92px)/.95 var(--sans);
+    letter-spacing:-.055em;
+  }
+  .festival-blessing p {
+    margin:0;
+    max-width:680px;
+    font-size:17px;
+    line-height:1.9;
+    color:rgba(16,18,15,.76);
+  }
+  .premium-letter .story-band {
+    padding:13vh 5vw;
+    background:var(--cream);
+  }
+  .premium-letter .story-shell,
+  .premium-letter .method-shell,
+  .premium-letter .letter-shell,
+  .premium-letter .pillar-grid,
+  .premium-letter .pillars-head {
+    width:min(1180px,100%);
+  }
+  .premium-letter .lead {
+    font:620 clamp(32px,4.5vw,70px)/1.12 var(--cn-serif);
+    letter-spacing:-.018em;
+    color:#161C15;
+  }
+  .premium-letter .story-copy p:not(.lead),
+  .premium-letter .method-copy p,
+  .premium-letter .letter-copy p,
+  .premium-letter .culture-head p,
+  .premium-letter .culture-body p,
+  .premium-letter .commitment p,
+  .premium-letter .principle p,
+  .premium-letter .practice,
+  .premium-letter .closing-copy p,
+  .premium-letter .festival-blessing p,
+  .premium-letter .letter-caption {
+    font-family:var(--cn-serif);
+    font-weight:400;
+    letter-spacing:.025em;
+    text-wrap:pretty;
+  }
+  .premium-letter .story-copy p:not(.lead),
+  .premium-letter .letter-copy p {
+    color:#30382F;
+    font-size:clamp(16px,1.2vw,18px);
+    line-height:2.08;
+    margin-bottom:18px;
+  }
+  .premium-letter .method-copy p,
+  .premium-letter .closing-copy p {
+    color:rgba(242,245,235,.84);
+    font-size:clamp(16px,1.18vw,18px);
+    line-height:2.06;
+  }
+  .premium-letter .culture-head p,
+  .premium-letter .culture-body p,
+  .premium-letter .commitment p,
+  .premium-letter .principle p,
+  .premium-letter .practice {
+    color:#3C463D;
+    line-height:1.92;
+  }
+  .premium-letter .letter-copy strong {
+    color:#10120F;
+    font-family:var(--sans);
+    font-weight:820;
+    background:linear-gradient(transparent 62%, rgba(216,255,62,.36) 62%);
+    padding:0 .02em;
+  }
+  .premium-letter .compact-note {
+    font-family:var(--cn-serif);
+    font-size:16px;
+    line-height:2;
+    letter-spacing:.025em;
+    color:#F4F6EC;
+    box-shadow:inset 0 1px rgba(255,255,255,.08), 0 18px 42px rgba(17,22,16,.12);
+  }
+  .premium-letter .letter-sign {
+    font-family:var(--cn-serif);
+    letter-spacing:.04em;
+    color:#4B574B;
+  }
+  .premium-letter .festival-blessing p {
+    color:rgba(16,18,15,.74);
+    line-height:2;
+  }
+  .premium-letter .method-band {
+    background:#11140F;
+  }
+  .premium-letter .method-media {
+    clip-path:polygon(7% 0,100% 5%,94% 100%,0 94%);
+    border-radius:0;
+  }
+  .premium-letter .letter-band {
+    background:#ECEBE5;
+  }
+  .premium-letter .letter-copy h2,
+  .premium-letter .pillars-head h2,
+  .premium-letter .closing-copy h2 {
+    letter-spacing:-.06em;
+  }
+  .premium-letter .principle {
+    border-radius:0;
+    box-shadow:none;
+  }
+  .premium-letter .principle figure {
+    height:300px;
+  }
+  .premium-letter .closing-band {
+    min-height:92vh;
+  }
+  @media (max-width:900px) {
+    .premium-letter .article-hero {
+      min-height:100svh;
+      display:block;
+    }
+    .premium-letter .hero-bg {
+      position:relative;
+      inset:auto;
+      width:calc(100vw - 36px);
+      height:36vh;
+      min-height:240px;
+      margin:72px auto 0;
+      display:block;
+    }
+    .premium-letter .hero-copy {
+      display:block;
+      padding:24px 0 22px;
+    }
+    .premium-letter .article-hero h1 {
+      font-size:clamp(44px,11.2vw,72px);
+      line-height:.92;
+    }
+    .premium-letter .hero-mantra {
+      display:none;
+      border-radius:0;
+      aspect-ratio:auto;
+      padding:18px 0;
+      background:transparent;
+      border-left:0;
+      border-right:0;
+    }
+    .signature-shell,
+    .culture-head,
+    .culture-grid {
+      grid-template-columns:1fr;
+    }
+    .festival-blessing .inner {
+      grid-template-columns:1fr;
+      gap:22px;
+    }
+    .signature-grid {
+      order:-1;
+    }
+    .culture-card:first-child figure,
+    .culture-card figure {
+      height:260px;
+    }
+  }
+  @media (max-width:560px) {
+    .premium-letter .hero-bg {
+      width:calc(100vw - 28px);
+      height:34vh;
+      min-height:220px;
+    }
+    .premium-letter .article-hero h1 {
+      font-size:clamp(42px,12.2vw,58px);
+    }
+    .signature-band,
+    .culture-cards,
+    .festival-blessing {
+      padding:86px 14px;
+    }
+    .signature-grid {
+      grid-template-columns:1fr;
+    }
+    .signature-tile:first-child,
+    .signature-tile {
+      min-height:260px;
+      grid-column:auto;
+    }
+  }
+  @media (prefers-reduced-motion:reduce) {
+    *, *::before, *::after {
+      animation-duration:.01ms !important;
+      animation-iteration-count:1 !important;
+      scroll-behavior:auto !important;
+      transition-duration:.01ms !important;
+    }
+  }
+</style>
+</head>
+<body class="premium-letter">
+<div class="noise" aria-hidden="true"></div>
+
+<header class="article-hero">
+  <img class="hero-bg" src="megee-top-spirit-assets/new-campus-front.jpg" alt="美集新工厂园区正面">
+  <div class="site-hd">
+    <a class="site-logo" href="https://novora.cc"><span class="logo-l">n</span><span class="logo-l">o</span><span class="logo-l">v</span><span class="logo-l">o</span><span class="logo-l">r</span><span class="logo-l">a</span></a>
+    <span class="site-sub">MEGEE COSPACK · LETTER TO ALL</span>
+  </div>
+  <div class="hero-copy">
+    <div>
+      <p class="festival-chip"><b>端午安康</b><span>2026.06.19</span></p>
+      <p class="kicker">Megee Culture · Trusting / Outperforming / Perfecting</p>
+      <h1>致美集全员<br>的一封信<br>把TOP精神写进<br><em>每一天</em></h1>
+      <p class="deck">写给每一位正在新工厂、项目现场、客户一线和管理岗位上共同前行的美集人：先祝大家端午安康。我们正在建设的不只是一个更大的生产空间，也是一套更值得被信任的做事方式。</p>
+      <p class="meta">2026年6月18日 · 美集全员信 · TOP精神 · Novora 页面化整理</p>
+      <div class="share-bar-top">
+        <button class="share-btn-top" onclick="copyLink()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>复制链接</button>
+        <button class="share-btn-top" onclick="shareWechat()"><svg viewBox="0 0 24 24" fill="#07C160"><path d="M8.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-7.5 4c-3.3 0-6-2.2-6-5 0-2.3 1.8-4.2 4.5-4.8C5.2 2.8 8.4 1 12 1c4.7 0 8.5 3.1 8.5 7 0 1.7-.7 3.2-1.8 4.4.2.4.3.9.3 1.4 0 2.2-1.8 4-4 4-.6 0-1.2-.1-1.7-.4A6.5 6.5 0 0 1 6 15z"/></svg>微信好友</button>
+      </div>
+    </div>
+    <aside class="hero-mantra">
+      <span>Guarding every touch of beauty.</span>
+      <p>精神不是写给别人看的标语，而是我们在每一次承诺、每一次协作、每一次面对问题时共同选择的行动。</p>
+    </aside>
+  </div>
+  <div class="hero-metrics" aria-label="TOP精神">
+    <div><b>Trusting</b><span>讲真话，守承诺，让协作站得稳。</span></div>
+    <div><b>Outperforming</b><span>不满足于完成，把今天再推进一步。</span></div>
+    <div><b>Perfecting</b><span>尊重细节，在迭代中接近更好。</span></div>
+  </div>
+</header>
+
+<main>
+  <section class="signature-band">
+    <div class="signature-shell">
+      <div class="signature-copy">
+        <p class="eyebrow">MEGEE COSPACK · LETTER TO ALL</p>
+        <h2>不是一篇文章，<br>是一种 <em>daily discipline</em></h2>
+        <p>TOP 精神不该停留在会议屏幕、文化墙或一次发布里。它应该进入现场、邮件、报价、样品、量产、质检和客户沟通，成为美集每天被看见、被信任、被选择的原因。</p>
+        <p>这封信写给每一个正在把美集向前推进的人：我们不是只建设一个更大的工厂，而是在建设一种更稳定、更漂亮、更有方法的组织能力。</p>
+      </div>
+      <div class="signature-grid" aria-label="MEGEE 品牌视觉">
+        <figure class="signature-tile"><img src="megee-top-spirit-assets/megee-airless-black.jpg" alt="美集黑色高端真空泵包装"><span>Engineered desire</span></figure>
+        <figure class="signature-tile product"><img src="megee-top-spirit-assets/megee-refillable-brown-detail.jpg" alt="美集替换装包装系统"><span>Refillable future</span></figure>
+        <figure class="signature-tile"><img src="megee-top-spirit-assets/megee-campus-entry.jpg" alt="美集新工厂入口"><span>Brand entrance</span></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="story-band">
+    <div class="story-shell">
+      <div class="story-copy">
+        <p class="lead">亲爱的美集同仁：这封信写在一个忙碌、紧绷，也值得被认真记住的阶段。新工厂的设备正在进场，现场的管线、洁净空间、注塑设备、项目节点和客户要求，都在同时推进。每个人都在自己的位置上托住这件事。</p>
+        <p>我们想对大家说一声谢谢。谢谢一线同事在现场反复确认标准，谢谢项目团队在节点之间协调资源，谢谢业务与客户团队在压力中保持沟通，谢谢职能与管理团队把看不见的事务一件件落下去。美集向前，不是靠某一个人的冲锋，而是靠一群人把复杂的事情持续做准。</p>
+        <p>越是在这样的时期，我们越需要回到共同的做事方式。TOP 精神不是一句口号，它是美集面对客户、产品、现场和团队时的基本选择：Trusting，诚信；Outperforming，超越；Perfecting，完美。三个词合在一起，就是我们希望自己每天都能做到的样子。</p>
+        <div class="compact-note">
+          TOP 的价值，不在于把词语说得更响亮，而在于把日常做得更可靠。它要求我们在看得见与看不见的地方保持一致：说到做到，及时反馈，持续改善，认真对待每一个细节。
+        </div>
+      </div>
+      <div class="story-visual" aria-hidden="true">
+        <img src="megee-top-spirit-assets/new-campus-gate.jpg" alt="">
+        <img src="megee-top-spirit-assets/new-clean-corridor.jpg" alt="">
+      </div>
+    </div>
+  </section>
+
+  <section class="method-band">
+    <div class="method-shell">
+      <figure class="method-media">
+        <img src="megee-top-spirit-assets/new-factory-line.jpg" alt="美集新工厂注塑设备整线">
+      </figure>
+      <div class="method-copy">
+        <h2>从精神<br>到 <em>方法</em></h2>
+        <p>一家企业会被客户记住，常常不是因为某一次漂亮表达，而是因为很多次小事累计出的稳定感。项目推进是否透明，问题出现是否承担，质量标准是否可追溯，产品细节是否反复打磨，这些日常选择，最终构成企业真正的可信度。</p>
+        <p>今天的新工厂，不只是厂房、设备和产能的升级。它也在提醒我们：当空间变大、团队变大、客户期待变高，原来的经验必须沉淀成标准，个人的努力必须转化为组织的能力，临时解决问题的方式必须升级为可复制的方法。</p>
+        <p>所以 TOP 更像一份内部约定：让诚信成为协作的底线，让超越成为成长的方向，让完美成为持续迭代的动力。它不是要求大家永远不出错，而是要求我们在面对问题时不遮掩，在面对挑战时不后退，在面对细节时不轻慢。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="culture-cards">
+    <div class="culture-head">
+      <div>
+        <p class="eyebrow">TOP AS A WORKING SYSTEM</p>
+        <h2>把精神做成<br><em>可感知的质感</em></h2>
+      </div>
+      <p>一家企业的光彩，不只来自产品照片和展厅表达，更来自交付时的稳定、沟通时的清楚、问题出现时的承担，以及细节被反复打磨后的高级感。</p>
+    </div>
+    <div class="culture-grid">
+      <article class="culture-card">
+        <figure><img src="megee-top-spirit-assets/megee-twist-gradient.jpg" alt="美集渐变高端膏霜包装"></figure>
+        <div class="culture-body">
+          <span>Trusting</span>
+          <h3>让信任有形</h3>
+          <p>客户相信一家企业，往往不是因为它说得漂亮，而是因为它在关键时刻依然透明、准确、可靠。</p>
+        </div>
+      </article>
+      <article class="culture-card">
+        <figure><img src="megee-top-spirit-assets/megee-campus-garden.jpg" alt="美集新厂园区庭院"></figure>
+        <div class="culture-body">
+          <span>Outperforming</span>
+          <h3>让标准前进</h3>
+          <p>新工厂意味着新的动线、新的洁净要求、新的协作密度，也意味着每个岗位都要把经验推进成方法。</p>
+        </div>
+      </article>
+      <article class="culture-card">
+        <figure><img src="megee-top-spirit-assets/megee-mist-hero.jpg" alt="美集喷雾包装系列"></figure>
+        <div class="culture-body">
+          <span>Perfecting</span>
+          <h3>让细节发光</h3>
+          <p>完美不是一次抵达，而是在每一次复盘、确认、修正里，把产品和组织都磨得更清晰。</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="letter-band">
+    <div class="letter-shell">
+      <div class="letter-copy">
+        <span class="letter-label">A letter to every Megee colleague</span>
+        <h2>致每一位正在把美集托举向前的人</h2>
+        <p>亲爱的伙伴们，美集走到今天，靠的不是一句宏大的愿景，而是每一天都有人把手上的事情做扎实。有人在机器旁守标准，有人在会议室里理清责任，有人在客户面前解释风险，有人在现场把一根管线、一扇门、一条动线反复确认到位。</p>
+        <p>我们相信，真正的品牌不是先写在外部宣传里，而是先写在内部秩序里。客户感受到的专业，来自我们内部的清楚；客户感受到的安心，来自我们对承诺的敬畏；客户愿意长期选择美集，来自我们每一次交付背后稳定而可靠的系统。</p>
+        <p><strong>Trusting，是讲真话和守承诺。</strong> 对客户不轻易承诺做不到的事，对团队不隐藏会影响结果的信息，对问题不做选择性汇报。信任不是要求别人相信我们，而是我们用一次次真实、透明、守约的行动，让别人有理由相信我们。</p>
+        <p><strong>Outperforming，是不断把“完成”推向“更好”。</strong> 完成任务只是起点，把流程理顺一点，把响应提前一点，把沟通讲清楚一点，把产品细节再优化一点，才是美集持续成长的方式。超越不是喊口号，而是在每个岗位上多问一句：这件事还能不能更稳、更快、更好？</p>
+        <p><strong>Perfecting，是承认永远还有改进空间。</strong> 完美不是一开始就没有瑕疵，而是在复盘、检查、修正、再执行中不断靠近更好的结果。我们做的是美妆包装，客户最终触摸到的，往往就是那些被我们认真处理过的边角、结构、手感、色泽和稳定性。</p>
+        <p>接下来的路不会轻松。新工厂要进入更完整的运行状态，新项目要交付，客户标准会继续提高，组织协作也会经历新的磨合。但越是在复杂的时候，我们越要用简单、明确、可执行的原则彼此校准：讲真话，守承诺；不满足，继续改；重细节，重标准。</p>
+        <p>愿我们在忙碌中不丢掉秩序，在压力中不丢掉诚实，在追赶中不丢掉对质量的敬畏。也愿每一位美集人都知道：你今天认真做好的那一件小事，都会成为美集明天被信任的理由。</p>
+        <div class="letter-sign">
+          致每一位美集同仁<br>
+          让诚信成为底线，让超越成为习惯，让完美成为方向。
+        </div>
+      </div>
+      <figure class="letter-photo">
+        <img src="megee-top-spirit-assets/new-campus-courtyard.jpg" alt="美集新工厂园区庭院">
+        <figcaption class="letter-caption">新的空间秩序，最终会转化为客户能感受到的稳定交付。</figcaption>
+      </figure>
+    </div>
+    <div class="commitment-grid">
+      <div class="commitment">
+        <span>Trusting</span>
+        <b>对客户讲真话</b>
+        <p>进度、风险、能力边界和质量状态都要清楚表达。真实沟通不是降低期待，而是让合作建立在可靠的信息之上。</p>
+      </div>
+      <div class="commitment">
+        <span>Outperforming</span>
+        <b>对问题不绕行</b>
+        <p>发现问题，先面对，再拆解，再闭环。每一次处理问题，都应该让下一次协作更顺、更稳、更有方法。</p>
+      </div>
+      <div class="commitment">
+        <span>Perfecting</span>
+        <b>对细节再看一眼</b>
+        <p>多确认一次参数，多核对一次文件，多检查一个结构。真正的专业，常常就藏在这些不被放过的细节里。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pillars">
+    <div class="pillars-head">
+      <span>Three living disciplines</span>
+      <h2>把三个词，变成每个岗位都能看见的行动。</h2>
+    </div>
+    <div class="pillar-grid">
+      <section class="principle">
+        <figure><img src="megee-top-spirit-assets/garden-logo.jpg" alt="美集新工厂园区标识"></figure>
+        <div class="principle-body">
+          <div class="principle-head">
+            <h2 class="principle-title">Trusting｜诚信</h2>
+            <span class="principle-en">The Ground of Reliability</span>
+          </div>
+          <p>诚信不是姿态，而是可被验证的稳定行为。它体现在承诺之前的审慎，也体现在承诺之后的兑现；体现在顺利时不夸大，也体现在困难时不回避。</p>
+          <ul class="practice">
+            <li>对客户：真实沟通进度、风险与边界，让合作建立在清楚的信息之上。</li>
+            <li>对产品：把质量问题放在台面上处理，而不是让问题被流程噪声掩盖。</li>
+            <li>对团队：让信任从一次次守约、交付和复盘中生长出来。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="principle">
+        <figure><img src="megee-top-spirit-assets/new-ceiling-systems.jpg" alt="美集新工厂车间管线系统"></figure>
+        <div class="principle-body">
+          <div class="principle-head">
+            <h2 class="principle-title">Outperforming｜超越</h2>
+            <span class="principle-en">The Habit of Becoming Better</span>
+          </div>
+          <p>超越不是向外部证明什么，而是不断向内部追问：还能不能再好一点。它关乎效率，也关乎审美；关乎产品，也关乎人与人之间的协作方式。</p>
+          <ul class="practice">
+            <li>在产品开发中，把“可用”继续推进到“更顺手、更稳定、更符合体验”。</li>
+            <li>在流程管理中，把一次修正沉淀成方法，减少下一次重复犯错。</li>
+            <li>在组织成长中，让每个人都保留继续学习和主动改善的空间。</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="principle">
+        <figure><img src="megee-top-spirit-assets/new-rooftop-system.jpg" alt="新工厂屋顶设备系统"></figure>
+        <div class="principle-body">
+          <div class="principle-head">
+            <h2 class="principle-title">Perfecting｜完美</h2>
+            <span class="principle-en">The Discipline of Iteration</span>
+          </div>
+          <p>完美不是一站式抵达的结果，而是反复修正后的趋近。真正的完美主义并不等待所有条件成熟，它从不够完美的行动开始，再用一次次检查、调整和复盘把理想磨得更清晰。</p>
+          <ul class="practice">
+            <li>尊重细节：因为客户最终接触到的，往往就是那些被认真处理过的细节。</li>
+            <li>尊重时间：好的产品和可靠关系都需要被耐心打磨。</li>
+            <li>尊重迭代：把改进视为常态，而不是某次危机后的临时动作。</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="closing-band">
+    <img src="megee-top-spirit-assets/new-campus-green.jpg" alt="美集新工厂园区效果图">
+    <div class="closing-copy">
+      <h2>把品牌写进<br><em>做事方式</em></h2>
+      <p>当诚信让组织站稳，超越让组织向前，完美让组织不断接近更好的自己，TOP 就不再只是三个英文单词。它会进入产品、流程、沟通和交付，成为美集与客户、与伙伴、与未来相处的方式。</p>
+      <p>我们建设新工厂，也是在建设新的组织能力；我们追求更高产能，也是在追求更稳定的质量与更可信的交付；我们谈 TOP 精神，也是在提醒自己：真正重要的东西，最终都会回到每一天的行动里。</p>
+      <p class="closing">愿每一位美集人都继续带着诚实、主动和认真前行。把手上的事情做好，把身边的协作做好，把客户托付给我们的每一次触达做好。美集的明天，就在这些选择里。</p>
+    </div>
+  </section>
+
+  <section class="festival-blessing">
+    <div class="inner">
+      <div>
+        <span>Duanwu Festival · 2026.06.19</span>
+        <h2>端午安康</h2>
+      </div>
+      <p>粽叶有清香，艾草有长意。愿每一位美集同仁在忙碌之后，也能拥有一段安稳、清爽、被好好照顾的假期。祝大家端午安康，归来继续带着诚实、主动和认真，把美集的每一天做得更好。</p>
+    </div>
+  </section>
+</main>
+
+<div class="like-section">
+  <button class="like-btn" id="like-btn" onclick="toggleLike()">
+    <span class="heart" id="heart">♡</span>
+    <span class="like-count" id="like-count">0</span>
+  </button>
+</div>
+
+<div class="art-foot">
+  <a href="https://novora.cc">&larr; 返回 novora 首页</a>
+</div>
+
+<div class="share-toast" id="share-toast">&#10003; 链接已复制，去微信粘贴即可</div>
+<div class="share-overlay" id="share-overlay" onclick="if(event.target===this)closeShareOverlay()">
+  <div class="share-panel">
+    <h3 class="share-panel-title" id="share-panel-title"></h3>
+    <p class="share-panel-sub">复制链接后，打开微信粘贴发送，即可生成文章卡片。</p>
+    <div class="share-panel-url" id="share-panel-url"></div>
+    <button class="share-panel-copy" onclick="copyLinkFromPanel()">复制文章链接</button>
+    <button class="share-panel-close" onclick="closeShareOverlay()">关闭</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  var KEY = 'nv_like_megee-top-spirit';
+  var liked = localStorage.getItem(KEY) === '1';
+  var count = parseInt(localStorage.getItem(KEY + '_c') || '0', 10);
+  var btn = document.getElementById('like-btn');
+  var heart = document.getElementById('heart');
+  var cnt = document.getElementById('like-count');
+  function render() {
+    if (liked) { btn.classList.add('liked'); heart.textContent = '♥'; }
+    else { btn.classList.remove('liked'); heart.textContent = '♡'; }
+    cnt.textContent = count;
+  }
+  render();
+  window.toggleLike = function() {
+    liked = !liked;
+    count = liked ? count + 1 : Math.max(0, count - 1);
+    localStorage.setItem(KEY, liked ? '1' : '0');
+    localStorage.setItem(KEY + '_c', count.toString());
+    render();
+  };
+})();
+function cleanTitle(){
+  var title = document.title;
+  var idx = title.lastIndexOf(' — ');
+  return idx > -1 ? title.substring(0, idx) : title;
+}
+function showToast(text){
+  var t = document.getElementById('share-toast');
+  t.textContent = text || '✓ 链接已复制，去微信粘贴即可';
+  t.style.opacity = '1';
+  setTimeout(function(){ t.style.opacity = '0'; }, 2500);
+}
+function copyLink(){
+  navigator.clipboard.writeText(location.href).then(function(){
+    showToast();
+  }).catch(function(){
+    showToast('复制失败，请手动复制');
+  });
+}
+function shareWechat(){
+  var title = cleanTitle();
+  if (navigator.share) {
+    try {
+      navigator.share({ title:title, url:location.href });
+      return;
+    } catch(e) {}
+  }
+  showSharePanel(title);
+}
+function showSharePanel(title){
+  document.getElementById('share-panel-title').textContent = title;
+  document.getElementById('share-panel-url').textContent = location.href;
+  document.getElementById('share-overlay').classList.add('show');
+}
+function copyLinkFromPanel(){
+  navigator.clipboard.writeText(location.href).then(function(){
+    showToast();
+  }).catch(function(){
+    showToast('复制失败，请手动复制');
+  });
+}
+function closeShareOverlay(){
+  document.getElementById('share-overlay').classList.remove('show');
+}
+(function logoChain() {
+  var delay = 5000;
+  setTimeout(function() {
+    var letters = document.querySelectorAll('.site-hd .logo-l');
+    if (!letters.length) { logoChain(); return; }
+    letters.forEach(function(l, i) {
+      setTimeout(function() {
+        var cls = i === letters.length - 1 ? 'lrebound' : 'lnudge';
+        l.classList.add(cls);
+        setTimeout(function() { l.classList.remove(cls); }, i === letters.length - 1 ? 350 : 200);
+      }, i * 130);
+    });
+    logoChain();
+  }, delay);
+})();
+</script>
+</body>
+</html>

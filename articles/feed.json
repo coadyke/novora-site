@@ -1,5 +1,15 @@
 [
   {
+    "title": "致美集全员的一封信｜把TOP精神写进每一天",
+    "date": "2026-06-18",
+    "summary": "写给每一位正在新工厂、项目现场、客户一线和管理岗位上共同前行的美集人：让诚信成为底线，让超越成为习惯，让完美成为持续迭代的方向。",
+    "tags": [
+      "洞察",
+      "制造"
+    ],
+    "url": "https://novora.cc/articles/2026-06-18-megee-top-spirit.html"
+  },
+  {
     "title": "PCR塑料进入美妆包装：理想与模具之间差了五年",
     "date": "2026-06-16",
     "summary": "当L'Oréal承诺2030年100%回收包装时，注塑车间的工程师正在面对色差暴走、熔指跳动、薄壁脆化的三重夹击。一篇不讲承诺只讲工程的务实分析。",
@@ -8,7 +18,7 @@
       "材料",
       "可持续包装"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/2026-06-16-pcr-cosmetic-packaging.html"
+    "url": "https://novora.cc/articles/2026-06-16-pcr-cosmetic-packaging.html"
   },
   {
     "title": "替换装不是换个内芯那么简单——化妆品替换包装的工程挑战与设计哲学",
@@ -18,7 +28,7 @@
       "包装工程",
       "替换系统"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/2026-06-15-refill-packaging.html"
+    "url": "https://novora.cc/articles/2026-06-15-refill-packaging.html"
   },
   {
     "title": "你以为的创新，其实都是旧技术的重新组合——《技术的本质》如何重塑制造者的世界观",
@@ -28,7 +38,7 @@
       "周日阅读",
       "W. Brian Arthur"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/2026-06-14-the-nature-of-technology.html"
+    "url": "https://novora.cc/articles/2026-06-14-the-nature-of-technology.html"
   },
   {
     "title": "韩国ODM凭什么统治了全球美妆供应链？——COSMAX与Kolmar商业模式深度拆解",
@@ -38,7 +48,7 @@
       "洞察",
       "商业模式"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/2026-06-13-korean-odm.html"
+    "url": "https://novora.cc/articles/2026-06-13-korean-odm.html"
   },
   {
     "title": "工厂里来了AI Agent，但它不是来替代你的",
@@ -49,7 +59,7 @@
       "智能制造",
       "AI Agent"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/2026-06-12-ai-agent-manufacturing.html"
+    "url": "https://novora.cc/articles/2026-06-12-ai-agent-manufacturing.html"
   },
   {
     "title": "责任的边界",
@@ -60,7 +70,7 @@
       "管理",
       "领导力"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/2026-06-12-responsibility-boundary.html"
+    "url": "https://novora.cc/articles/2026-06-12-responsibility-boundary.html"
   },
   {
     "title": "CPK大于1.33就放心了？你可能被测量系统骗了——Gage R&amp;R 完全指南",
@@ -70,7 +80,7 @@
       "质量管理",
       "测量系统分析"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/2026-06-11-gage-rr.html"
+    "url": "https://novora.cc/articles/2026-06-11-gage-rr.html"
   },
   {
     "title": "注塑车间为什么越来越依赖自动化？从三班倒到无人值守的演进逻辑",
@@ -80,7 +90,7 @@
       "深度研究",
       "注塑自动化"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/2026-06-10-injection-molding-automation.html"
+    "url": "https://novora.cc/articles/2026-06-10-injection-molding-automation.html"
   },
   {
     "title": "为什么你的CPK总在1.0以下？注塑车间被忽视的5个系统性偏差",
@@ -90,7 +100,7 @@
       "产业深度解析",
       "质量管理"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/2026-06-09-cpk-injection.html"
+    "url": "https://novora.cc/articles/2026-06-09-cpk-injection.html"
   },
   {
     "title": "湖州工厂试产：与时间来一场赛跑",
@@ -100,7 +110,7 @@
       "现场直击",
       "工厂建设"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/2026-06-09-huzhou-trial-production.html"
+    "url": "https://novora.cc/articles/2026-06-09-huzhou-trial-production.html"
   },
   {
     "title": "Airless Pump 如何进行真空保持测试？",
@@ -110,7 +120,7 @@
       "产业深度解析",
       "包装技术"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/2026-06-08-airless-vacuum.html"
+    "url": "https://novora.cc/articles/2026-06-08-airless-vacuum.html"
   },
   {
     "title": "色母粒的分散性：为什么它决定了你产品的成败",
@@ -119,7 +129,7 @@
     "tags": [
       "色母粒行业知识"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/2026-06-08-dispersion.html"
+    "url": "https://novora.cc/articles/2026-06-08-dispersion.html"
   },
   {
     "title": "为什么低价色母粒最后反而更贵？",
@@ -129,7 +139,7 @@
       "现场直击",
       "工厂建设"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/cheap-masterbatch.html"
+    "url": "https://novora.cc/articles/cheap-masterbatch.html"
   },
   {
     "title": "世界文学名著典藏",
@@ -138,7 +148,7 @@
     "tags": [
       "洞察"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/classics.html"
+    "url": "https://novora.cc/articles/classics.html"
   },
   {
     "title": "一个配方，一年帮客户省了120万",
@@ -148,7 +158,7 @@
       "现场直击",
       "工厂建设"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/roi-120wan.html"
+    "url": "https://novora.cc/articles/roi-120wan.html"
   },
   {
     "title": "色母粒销售技巧与叙事体系",
@@ -157,7 +167,7 @@
     "tags": [
       "持续更新"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/sales-skills.html"
+    "url": "https://novora.cc/articles/sales-skills.html"
   },
   {
     "title": "色母粒到底是什么？一分钟搞懂",
@@ -167,7 +177,7 @@
       "现场直击",
       "工厂建设"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/what-is-masterbatch.html"
+    "url": "https://novora.cc/articles/what-is-masterbatch.html"
   },
   {
     "title": "瓶子发黄怎么办？塑料厂急诊室",
@@ -177,7 +187,7 @@
       "现场直击",
       "工厂建设"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/yellow-bottles.html"
+    "url": "https://novora.cc/articles/yellow-bottles.html"
   },
   {
     "title": "10万只瓶子报废，只因为这个颜色差了0.5%",
@@ -187,7 +197,7 @@
       "现场直击",
       "工厂建设"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/bottles-100k.html"
+    "url": "https://novora.cc/articles/bottles-100k.html"
   },
   {
     "title": "Silgan Dispensing：全球分配系统巨头深度调研",
@@ -197,6 +207,6 @@
       "深度研究",
       "包装产业"
     ],
-    "url": "https://lostravelerk.github.io/novora-site/articles/silgan-dispensing.html"
+    "url": "https://novora.cc/articles/silgan-dispensing.html"
   }
 ]
