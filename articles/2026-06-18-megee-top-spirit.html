@@ -38,7 +38,7 @@
 })();
 </script>
 
-<meta name="version" content="20260618v73">
+<meta name="version" content="20260620v76">
 <meta property="og:title" content="致美集全员的一封信｜把TOP精神写进每一天">
 <meta property="og:description" content="写给每一位正在新工厂、项目现场、客户一线和管理岗位上共同前行的美集人：让诚信成为底线，让超越成为习惯，让完美成为持续迭代的方向。">
 <meta property="og:url" content="https://novora.cc/articles/2026-06-18-megee-top-spirit.html">
@@ -920,6 +920,33 @@
     font:800 10vw/.8 var(--sans);
     letter-spacing:-.08em;
     white-space:nowrap;
+    display:none;
+  }
+  .signature-marquee {
+    position:absolute;
+    inset:auto 0 3vh;
+    z-index:0;
+    overflow:hidden;
+    color:rgba(216,255,62,.08);
+    pointer-events:none;
+  }
+  .signature-marquee-track {
+    display:flex;
+    width:max-content;
+    will-change:transform;
+    animation:signature-marquee 24s linear infinite;
+  }
+  .signature-marquee span {
+    flex:0 0 auto;
+    padding-right:.22em;
+    font:800 10vw/.8 var(--sans);
+    letter-spacing:-.08em;
+    white-space:nowrap;
+    text-transform:uppercase;
+  }
+  @keyframes signature-marquee {
+    from { transform:translate3d(0,0,0); }
+    to { transform:translate3d(-50%,0,0); }
   }
   .signature-shell {
     position:relative;
@@ -1317,6 +1344,12 @@
     min-height:92vh;
   }
   @media (max-width:900px) {
+    .signature-marquee {
+      bottom:24px;
+    }
+    .signature-marquee span {
+      font-size:clamp(72px,24vw,120px);
+    }
     .premium-letter .article-hero {
       min-height:auto;
       display:block;
@@ -1533,6 +1566,12 @@
 
 <main>
   <section class="signature-band">
+    <div class="signature-marquee" aria-hidden="true">
+      <div class="signature-marquee-track">
+        <span>Trusting Outperforming Perfecting</span>
+        <span>Trusting Outperforming Perfecting</span>
+      </div>
+    </div>
     <div class="signature-shell">
       <div class="signature-copy">
         <p class="eyebrow">MEGEE COSPACK · LETTER TO ALL</p>
