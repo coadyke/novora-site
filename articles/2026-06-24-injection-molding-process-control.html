@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<script>
+(function(){
+  var meta = document.querySelector('meta[name="version"]');
+  if (!meta) return;
+  var localV = meta.content;
+  var retries = parseInt(sessionStorage.getItem('nv_ver_retry')||'0');
+  if (retries > 3) { sessionStorage.removeItem('nv_ver_retry'); return; }
+  fetch('/novora-site/version.json?t=' + Date.now(), {cache:'no-store'})
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d.version && d.version !== localV) {
+        sessionStorage.setItem('nv_ver_retry', String(retries + 1));
+        var u = location.href.split('?')[0] + '?v=' + d.version + '&t=' + Date.now();
+        location.replace(u);
+      } else {
+        sessionStorage.removeItem('nv_ver_retry');
+      }
+    })
+    .catch(function(){});
+})();
+</script>
+
+<meta name="version" content="20260623v86">
+<meta property="og:title" content="你的注塑机调了二十年参数，为什么良率还是稳不住？——从经验调机到科学注塑的过程控制革命">
+<meta property="og:description" content="注塑机面板上的参数和模具型腔里真正发生的事，是两套物理。科学注塑不是换一台更贵的机器，而是用模腔压力传感器和脱耦方法论，把黑箱变成透明的工程系统。本文拆解包装制造中经验调机的三块遮羞布，给出三个低成本入手方案。">
+<meta property="og:url" content="https://novora.cc/articles/2026-06-24-injection-molding-process-control.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="novora">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://novora.cc/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:published_time" content="2026-06-24">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="你的注塑机调了二十年参数，为什么良率还是稳不住？——从经验调机到科学注塑的过程控制革命">
+<meta name="twitter:description" content="注塑机面板上的参数和模具型腔里真正发生的事，是两套物理。科学注塑用模腔压力传感器和脱耦方法论，把黑箱变成透明的工程系统。">
+<meta name="twitter:image" content="https://novora.cc/og-image.png">
+<meta name="description" content="注塑机面板上的参数和模具型腔里真正发生的事，是两套物理。科学注塑不是换一台更贵的机器，而是用模腔压力传感器和脱耦方法论，把黑箱变成透明的工程系统。本文拆解包装制造中经验调机的三块遮羞布，给出三个低成本入手方案。">
+<meta itemprop="name" content="你的注塑机调了二十年参数，为什么良率还是稳不住？——从经验调机到科学注塑的过程控制革命">
+<meta itemprop="description" content="注塑机面板上的参数和模具型腔里真正发生的事，是两套物理。科学注塑用模腔压力传感器和脱耦方法论，把黑箱变成透明的工程系统。">
+<meta itemprop="image" content="https://novora.cc/og-image.png">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "你的注塑机调了二十年参数，为什么良率还是稳不住？——从经验调机到科学注塑的过程控制革命", "description": "注塑机面板上的参数和模具型腔里真正发生的事，是两套物理。科学注塑不是换一台更贵的机器，而是用模腔压力传感器和脱耦方法论，把黑箱变成透明的工程系统。本文拆解包装制造中经验调机的三块遮羞布，给出三个低成本入手方案。", "image": "https://novora.cc/og-image.png", "datePublished": "2026-06-24", "publisher": {"@type": "Organization", "name": "novora", "url": "https://novora.cc/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://novora.cc/articles/2026-06-24-injection-molding-process-control.html"}}
+</script>
+
+<title>你的注塑机调了二十年参数，为什么良率还是稳不住？——从经验调机到科学注塑的过程控制革命 — novora</title>
+<style>
+  :root { --bdf: #0F2747; --bdf-l: #1A3F6E; --bdf-pale: #EEF3F9; --text: #1F2937; --muted: #6B7280; --bg: #F7F7F7; --card: #FFFFFF; --gray-1: #E5E7EB; --gray-3: #9CA3B8; }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  body { padding:8px 20px; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; font-size:15px; line-height:1.75; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased;  }
+
+  .site-hd { max-width:720px; margin:0 auto 2px; padding:0 4px; display:flex; align-items:baseline; gap:8px; }
+  .site-hd .site-logo { font-size:18px; font-weight:700; color:var(--bdf); letter-spacing:-0.3px; white-space:nowrap; text-decoration:none; }
+  .site-hd .site-sub { font-size:10px; color:var(--muted); letter-spacing:0.2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; min-width:0; }
+  .logo-l { display: inline-block; }
+  @keyframes logo-nudge { 0% { transform: translateX(0); } 40% { transform: translateX(1px); } 100% { transform: translateX(0); } }
+  @keyframes logo-rebound { 0% { transform: translateX(0); } 35% { transform: translateX(1px); } 65% { transform: translateX(-0.5px); } 100% { transform: translateX(0); } }
+  .lnudge { animation: logo-nudge 0.2s ease-in-out; }
+  .lrebound { animation: logo-rebound 0.35s ease-in-out; }
+
+  .article-hero { padding:8px 20px 6px; text-align:center; }
+  .article-hero h1 { font-size:18px; font-weight:700; color:var(--bdf); line-height:1.3; margin:0 0 4px; letter-spacing:-0.3px; }
+  .article-hero .meta { font-size:11px; color:var(--muted); }
+  .article-hero .share-bar-top { display:flex; gap:3px; justify-content:center; flex-wrap:wrap; margin-top:4px; }
+  .share-btn-top { display:inline-flex; align-items:center; gap:3px; font-size:11px; font-weight:500; color:var(--muted); background:#fff; border:1px solid var(--gray-1); border-radius:5px; padding:3px 10px; cursor:pointer; transition:all .15s; }
+  .share-btn-top:hover { border-color:#BFCAD8; color:var(--bdf); }
+
+  .ctr { max-width:720px; margin:0 auto; }
+  .art-body { background:var(--card); border-radius:16px; padding:20px 24px; border:1px solid rgba(0,0,0,0.04); }
+  .art-body h2 { font-size:16px; font-weight:700; color:var(--bdf); margin:20px 0 8px; padding-bottom:8px; border-bottom:1px solid var(--gray-1); }
+  .art-body h3 { font-size:15px; font-weight:600; color:var(--bdf-l); margin:14px 0 4px; }
+  .art-body p { margin-bottom:12px; }
+  .art-body ul, .art-body ol { padding-left:22px; margin-bottom:16px; }
+  .art-body li { margin-bottom:6px; }
+  .callout { border-left:3px solid var(--bdf-l); background:var(--bdf-pale); padding:14px 18px; border-radius:0 8px 8px 0; margin:18px 0; font-size:15px; }
+  .art-foot { text-align:center; padding:24px 0 36px; color:var(--muted); font-size:14px; }
+  .art-foot a { color:var(--bdf); text-decoration:none; }
+
+  .like-section { max-width:720px; margin:0 auto; text-align:center; padding:16px 0 8px; }
+  .like-btn { display:inline-flex; align-items:center; gap:6px; background:#fff; border:1px solid var(--gray-1); border-radius:20px; padding:8px 24px; cursor:pointer; font-size:16px; color:var(--muted); transition:all .2s; }
+  .like-btn:hover { border-color:#BFCAD8; }
+  .like-btn.liked { color:#E53935; border-color:#F8BBD0; background:#FFF5F5; }
+  .heart { font-size:20px; line-height:1; }
+  .like-count { font-size:15px; font-weight:500; }
+
+  @media (max-width:600px) {
+    .article-hero { padding:6px 12px 4px; }
+    .article-hero h1 { font-size:18px; }
+    .art-body { padding:18px 14px; font-size:14px; }
+    .art-body h2 { font-size:16px; }
+  }
+</style>
+
+</head>
+<body>
+
+<div class="site-hd">
+  <a class="site-logo" href="https://novora.cc/" target="_top"><span class="logo-l">n</span><span class="logo-l">o</span><span class="logo-l">v</span><span class="logo-l">o</span><span class="logo-l">r</span><span class="logo-l">a</span></a>
+  <span class="site-sub">包装｜材料｜制造｜质量｜AI｜可持续发展｜洞察｜阅读</span>
+</div>
+
+<div class="article-hero">
+  <h1>你的注塑机调了二十年参数，为什么良率还是稳不住？——从经验调机到科学注塑的过程控制革命</h1>
+  <p class="meta">2026年6月24日 · 制造 · 注塑成型</p>
+  <div class="share-bar-top" style="display:flex; gap:4px; justify-content:center; flex-wrap:wrap; margin-top:4px;">
+    <button class="share-btn-top" onclick="copyLink()" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:5px;padding:3px 10px;cursor:pointer;transition:all .2s;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      复制链接
+    </button>
+    <button class="share-btn-top" onclick="shareMoments()" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:5px;padding:3px 10px;cursor:pointer;transition:all .2s;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E53935" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+      分享至朋友圈
+    </button>
+    <button class="share-btn-top" onclick="shareWechat()" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:5px;padding:3px 10px;cursor:pointer;transition:all .2s;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="#07C160"><path d="M8.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-7.5 4c-3.3 0-6-2.2-6-5 0-2.3 1.8-4.2 4.5-4.8C5.2 2.8 8.4 1 12 1c4.7 0 8.5 3.1 8.5 7 0 1.7-.7 3.2-1.8 4.4.2.4.3.9.3 1.4 0 2.2-1.8 4-4 4-.6 0-1.2-.1-1.7-.4A6.5 6.5 0 0 1 6 15z"/></svg>
+      微信好友
+    </button>
+  </div>
+</div>
+
+<div class="ctr art-body">
+
+<h2>一、模具型腔里的「看不见的战争」</h2>
+
+<p>每当你按下注塑机的启动键，模具型腔内部都在上演一场速度超过你想象的物理剧变：熔融塑料以每秒数百毫米的速度注入型腔，温度从 230°C 在几秒内骤降至 80°C，熔体前沿碰到模壁的瞬间形成冻结层，而后面的热芯还在继续流动——这一切发生在 0.5 到 3 秒之间。</p>
+
+<p>问题是：<strong>你看不到。</strong></p>
+
+<p>传统注塑工艺的调试过程，更接近一门手艺而非科学。一位有二十年经验的技术员看到缩水，凭直觉说「保压加 0.3 秒」。看到飞边，说「锁模力再加十吨」。看到熔接线，说「料温提高十度」。这些调整可能有效，也可能无效——甚至可能解决了一个问题却制造了另一个问题。</p>
+
+<p>这不是技术水平的问题。这是<strong>信息不对称</strong>的问题。操作者只看到机器面板上的参数——螺杆位置、注射压力、保压时间——但看不到型腔内部正在发生什么。机器面板告诉你的是指令，不是结果。</p>
+
+<h2>二、传统调机的三块遮羞布</h2>
+
+<p>为什么注塑行业对「经验调机」如此依赖？因为有三块遮羞布，让问题不被看见：</p>
+
+<h3>2.1 只看机器，不看型腔</h3>
+
+<p>注塑机面板上显示的是螺杆位置、注射压力、保压时间——这些是<strong>机器的行为</strong>，不是你产品接收到的实际物理条件。螺杆前端到型腔之间还有喷嘴、主流道、分流道、浇口，每一个环节都有压力降和温度梯度。你设定的 80MPa 注射压力，到了型腔末端可能只剩 15MPa。你设定的保压时间为 3.5 秒，但模具型腔可能在第 2.8 秒就已经封口——后面的 0.7 秒保压不仅无效，还在给产品注入额外的内应力。</p>
+
+<h3>2.2 用重量和外观替代过程能力</h3>
+
+<p>绝大多数包装厂的质量验收标准是：尺寸 OK + 外观 OK = 合格。但这只是<strong>结果验收</strong>，不是<strong>过程控制</strong>。一个零件今天合格，不意味着下一模也合格。用外观判断注塑质量，相当于用体温判断一个人有没有癌症——指标本身没错，但测量对象不对。产品重量的波动、密度的漂移、内应力的累积，这些在外观上完全不可见。</p>
+
+<h3>2.3 把工艺窗口当安全垫</h3>
+
+<p>「这个参数范围很宽，怎么调都没问题」——这是最危险的错觉。工艺窗口宽，意味着你的工艺对波动不敏感，但<strong>不意味着波动不存在</strong>。当车间环境温度从早上的 22°C 升到下午的 34°C，模具表面温度漂移 3°C，冷却水温波动 2°C——你的「宽窗口」在冬季调到正中位置，到了夏季可能已经偏移到了窗口边缘。此时任何一个微小的额外扰动——材料批次粘度的轻微变化、止逆环的正常磨损——就足以把你推出窗口。</p>
+
+<div class="callout">
+<strong>核心事实：温度漂移的连锁反应</strong><br>
+模具表面温度波动 3°C → PP 收缩率变化约 0.3% → 对于壁厚 2.0mm、公差 ±0.05mm 的化妆品包材，这个变化量已经超过了公差带的三分之一。而大多数工厂既不知道模温是多少，也从不把模温变化和不良率波动联系起来。
+</div>
+
+<h2>三、科学注塑的核心：脱耦与过程透明</h2>
+
+<p>科学注塑（Scientific Injection Molding, SIM）的思想最早由 RJG 公司创始人 Rod Groleau 在 1990 年代系统化，后来被通用电气、苹果等企业作为供应商注塑工艺审核标准。其核心原则只有两条：</p>
+
+<ol>
+  <li><strong>脱耦（Decoupled Molding）：</strong>将注塑过程分解为填充（Fill）、补缩（Pack）、保压（Hold）三个独立阶段，每个阶段由不同的物理参数控制，互不干扰。</li>
+  <li><strong>以型腔内的实际物理量为控制依据：</strong>不是看螺杆位置，而是看模腔压力、模腔温度——产品真正「感受」到的物理条件。</li>
+</ol>
+
+<p>在传统注塑中，保压阶段靠「时间」控制：设定保压 4 秒，到时间就切换。但保压的物理本质是<strong>补偿收缩</strong>——塑料从熔融态冷却到固态，体积收缩约 15%–25%（无定形塑料）或更多（半结晶塑料如 PP、PE）。如果保压切换得太早，型腔还没填满就停止供料，产品会有缩痕；切换得太晚，型腔已经封口还在加压，残余应力会留在产品内部——这个应力可能在产品出厂后数月才以开裂的形式暴露。</p>
+
+<p>脱耦注塑的做法是：在型腔内安装压力传感器，实时监控塑料在型腔内的实际压力变化。保压切换不再依赖「3.5 秒」，而是在型腔压力降至某个设定值（比如浇口封口压力 180 bar）时自动切换。这个切换点独立于螺杆位置、注射速度、环境温度——它只取决于产品内部的真实物理状态。</p>
+
+<h2>四、模腔压力：注塑过程的「心电图」</h2>
+
+<p>如果说心电图让医生看到了心脏的搏动，那么模腔压力曲线就是注塑过程的「心电图」。一条完整的模腔压力曲线包含几个关键诊断信息：</p>
+
+<ul>
+  <li><strong>填充斜率：</strong>反映熔体流动速度。斜率越陡，填充越快。斜率波动意味着填充不稳定——可能是浇口尺寸问题、熔体粘度批次波动，或者排气不良导致的气体反压。</li>
+  <li><strong>峰值压力：</strong>模腔达到的最高压力。峰值过高可能是过填充，过低可能是短射。但峰值的绝对值本身意义有限——关键是<strong>批次间的一致性</strong>。今天所有模次的峰值压力在 380 ± 5 bar 内，明天突然变成 410 ± 15 bar，即使机器参数没变，也一定有事发生。</li>
+  <li><strong>压力下降速率：</strong>反映冷却和收缩速度。下降太快意味着冷却不均匀或收缩过快；下降太慢意味着周期时间有压缩空间。</li>
+  <li><strong>浇口封口压力：</strong>保压末端型腔封口时的残余压力。这个值决定了产品最终的密度、尺寸和内应力水平——它是单件产品物理特性的「终极指纹」。</li>
+</ul>
+
+<p>在包装行业中，一个化妆品泵头的泵芯（PP 材质，壁厚 2.5mm，外径 15mm）的典型模腔压力曲线是这样的：填充阶段约 0.8 秒到达峰值 380 bar，补缩阶段在约 3.2 秒内逐渐降至 120 bar 的封口压力，之后进入冷却阶段压力快速归零。如果你有一天发现填充峰值从 380 bar 变成了 410 bar，而机器参数完全没变——排查清单只有四项：模具温度漂移、材料批次粘度变化、止逆环磨损、或热流道温度控制异常。没有第五种可能。</p>
+
+<h2>五、一个包装件的真实案例推演</h2>
+
+<p>产品：化妆品乳液瓶的 PP 外罩，一模两穴，单件重量 28g，壁厚 2.0mm，配合公差 ±0.05mm。</p>
+
+<p>车间的日常：技术员每两小时取 5 模产品测重量、看外观。合格率在 94%–98% 之间波动。偶尔出现批量缩痕，调整保压时间后恢复。表面看，这是个管得不错的产线。</p>
+
+<p>但如果你把过去一个月的重量数据拉出来：单件重量在 27.6g–28.4g 之间波动，虽然都在规格范围内（27.0g–29.0g），但波动范围接近规格限度的 40%。更严重的是，<strong>两个穴的重量差稳定在 0.4g 左右</strong>——这意味着两穴的密度、收缩率、最终尺寸都不同。在灌装和组装端，这表现为「有的盖子太紧拧不开、有的盖子太松有间隙」——一个被当成「组装问题」追了半年的客户投诉，根源在注塑端。</p>
+
+<p>装一套模腔压力传感器（成本约每穴 2000–4000 元人民币），你会发现两个穴的峰值压力差了 18 bar。这是一侧浇口比另一侧大了约 0.03mm 造成的——这个级别的加工公差在模具制造环节是正常的。但问题是：<strong>没人知道</strong>。技术员面对机器面板上一模一样的参数，不会想到两个穴的产品已经在接受完全不同的「待遇」。</p>
+
+<p>装了传感器之后，可以做三件事：</p>
+
+<ol>
+  <li><strong>用模腔压力信号切换保压：</strong>不再依赖时间，而是在压力降至浇口封口压力时自动切换——消除材料批次变化对封口状态的影响。</li>
+  <li><strong>设定每个穴的压力报警上下限：</strong>峰值压力、封口压力各设定 ±3% 报警带。任何一穴越线，自动报警或自动剔除，不再等到下一批外观检查才发现问题。</li>
+  <li><strong>建立批次的完整压力数据记录：</strong>每一模产品都有压力曲线作为「出生证明」。原材料追溯、模具维护决策、客户投诉分析，全有了客观依据。</li>
+</ol>
+
+<div class="callout">
+<strong>投入产出一笔账</strong><br>
+一套两穴传感器的成本约 5000–8000 元，配套监控系统的软硬件约 2–3 万元。对于一条每天生产 5000 件、单价 2 元的产品线，只要良率提升 1%（从 95% 到 96%），每年多产合格品 18250 件，增收约 36500 元——不到一年收回投资。这还不算减少的客户投诉处理成本和品牌风险。
+</div>
+
+<h2>六、从哪开始？——三个低成本切入点</h2>
+
+<p>科学注塑不需要你一次投入几百万搞全自动化智能工厂。以下是三个可以在本月内启动的切入点：</p>
+
+<h3>6.1 买一套手持模温仪，每天测三次</h3>
+
+<p>成本约 2000 元。每天早班、中班、下午各测一次每副模具的定模和动模表面温度。记录下来，画成趋势图。你会惊讶地发现模温的日变化幅度可能超过 5°C，季节变化幅度可能超过 15°C。而很多工厂的模温机显示温度和模具表面实际温度的差值，可以高达 10°C——因为模温机测的是循环水的出口温度，不是模具钢表面的温度。</p>
+
+<h3>6.2 选一套关键模具，装一对直连式模腔压力传感器</h3>
+
+<p>不需要每一副模具都装。选产量最大、投诉最多的一套。用两个月的数据，和同期的不良率做相关性分析。我几乎可以保证，你会找到不良率波动的物理根源——它可能和你调整了半年的机器参数没有半点关系，而是模温漂移、材料批差、或者止逆环泄漏。</p>
+
+<h3>6.3 把调机参数记录从纸质改成结构化电子表</h3>
+
+<p>大多数工厂的技术员用纸笔记录模具「标准参数」：一段注射速度 65%、二段 45%、保压 3.5 秒……但这些参数既没有上下文（室温、模温、材料批次），也没有追溯性（谁调的、什么时候调的、为什么调）。用电子表格把参数、模具温度、材料批次、不良率记录在同一个时间序列里，三个月后你就会拥有一张<strong>工艺健康诊断图</strong>——哪些模具的参数漂移最大、哪些材料的工艺窗口最窄、哪些时段的良率最低，全部可视化。</p>
+
+<h2>七、结语</h2>
+
+<p>注塑成型已经发明了一百多年。在这一个多世纪里，机器从柱塞式变成了往复螺杆式，控制系统从继电器变成了 PLC 和伺服驱动，模具从两板模变成了热流道叠模——但调机这件事，绝大多数工厂仍然在用 1970 年代的方式：技术员站在机器旁边，看着产品，凭经验拧旋钮。</p>
+
+<p>这不是技术问题，是认知问题。我们习惯把注塑当成「操作」而不是「工程」——操作靠经验，工程靠数据。</p>
+
+<p>科学注塑不是要淘汰有经验的老师傅。恰恰相反——它是要把老师傅脑子里的隐性知识转化成<strong>可量化、可传递、可复制的工艺标准</strong>。让有经验的人更有价值，让没有经验的人少交学费。这才是一个行业从手工作坊走向工业体系的正道。</p>
+
+<p>下一次当注塑车间主任告诉你「这套模具一直这么做，二十年没变过」，你可以问他一个问题：<strong>模具型腔里二十年没变过——你怎么知道的？</strong></p>
+
+</div>
+
+<div class="like-section">
+  <button class="like-btn" id="like-btn" onclick="toggleLike()">
+    <span class="heart" id="heart">♡</span>
+    <span class="like-count" id="like-count">0</span>
+  </button>
+</div>
+<script>
+(function() {
+  var KEY = 'nv_like_injection-molding-process-control';
+  var liked = localStorage.getItem(KEY) === '1';
+  var count = parseInt(localStorage.getItem(KEY + '_c') || '0', 10);
+  var btn = document.getElementById('like-btn');
+  var heart = document.getElementById('heart');
+  var cnt = document.getElementById('like-count');
+  function render() {
+    if (liked) { btn.classList.add('liked'); heart.textContent = '♥'; }
+    else { btn.classList.remove('liked'); heart.textContent = '♡'; }
+    cnt.textContent = count;
+  }
+  render();
+  window.toggleLike = function() {
+    liked = !liked;
+    count = liked ? count + 1 : Math.max(0, count - 1);
+    localStorage.setItem(KEY, liked ? '1' : '0');
+    localStorage.setItem(KEY + '_c', count.toString());
+    render();
+  };
+})();
+</script>
+
+<div class="art-foot">
+  <a href="https://novora.cc/" target="_top">&larr; 返回 novora 首页</a>
+</div>
+
+<div class="share-toast" id="share-toast">&#10003; 链接已复制，去微信粘贴即可</div>
+<div class="share-overlay" id="share-overlay" onclick="if(event.target===this)closeShareOverlay()">
+  <div class="share-panel">
+    <div class="share-panel-icon">&#128279;</div>
+    <h3 class="share-panel-title" id="share-panel-title"></h3>
+    <p class="share-panel-sub">复制链接后，打开微信粘贴发送，<br>即可在朋友圈看到可点击的文章卡片</p>
+    <div class="share-panel-url" id="share-panel-url"></div>
+    <button class="share-panel-copy" onclick="copyLinkFromPanel()">&#128203; 复制文章链接</button>
+    <button class="share-panel-close" onclick="closeShareOverlay()">关闭</button>
+  </div>
+</div>
+<script>
+function copyLink(){
+  navigator.clipboard.writeText(location.href).then(function(){
+    var t=document.getElementById('share-toast');
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';},2500);
+  }).catch(function(){
+    var t=document.getElementById('share-toast');
+    t.textContent='✗ 复制失败，请手动复制';
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';t.textContent='✓ 链接已复制，去微信粘贴即可';},2500);
+  });
+}
+function shareMoments(){
+  var title = document.title;
+  var idx = title.lastIndexOf(' — ');
+  var cleanTitle = idx > -1 ? title.substring(0, idx) : title;
+  if (navigator.share) {
+    try { navigator.share({ title: cleanTitle, url: location.href }); return; }
+    catch(e) { showSharePanel(cleanTitle); return; }
+  }
+  showSharePanel(cleanTitle);
+}
+function shareWechat(){
+  var title = document.title;
+  var idx = title.lastIndexOf(' — ');
+  var cleanTitle = idx > -1 ? title.substring(0, idx) : title;
+  if (navigator.share) {
+    try { navigator.share({ title: cleanTitle, url: location.href }); return; }
+    catch(e) { showSharePanel(cleanTitle); return; }
+  }
+  showSharePanel(cleanTitle);
+}
+function showSharePanel(cleanTitle){
+  document.getElementById('share-panel-title').textContent = cleanTitle;
+  document.getElementById('share-panel-url').textContent = location.href;
+  document.getElementById('share-overlay').classList.add('show');
+}
+function copyLinkFromPanel(){
+  navigator.clipboard.writeText(location.href).then(function(){
+    var t=document.getElementById('share-toast');
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';},2500);
+  }).catch(function(){
+    var t=document.getElementById('share-toast');
+    t.textContent='✗ 复制失败，请手动复制';
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';t.textContent='✓ 链接已复制，去微信粘贴即可';},2500);
+  });
+}
+function closeShareOverlay(){
+  document.getElementById('share-overlay').classList.remove('show');
+}
+
+  (function logoChain() {
+    var delay = 5000;
+    setTimeout(function() {
+      var letters = document.querySelectorAll('.site-hd .logo-l');
+      if (!letters.length) { logoChain(); return; }
+      letters.forEach(function(l, i) {
+        setTimeout(function() {
+          var cls = i === letters.length - 1 ? 'lrebound' : 'lnudge';
+          l.classList.add(cls);
+          setTimeout(function() { l.classList.remove(cls); }, i === letters.length - 1 ? 350 : 200);
+        }, i * 130);
+      });
+      logoChain();
+    }, delay);
+  })();
+</script>
+</body>
+</html>
