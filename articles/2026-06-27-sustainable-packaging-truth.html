@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+<script>
+(function(){
+  var meta = document.querySelector('meta[name="version"]');
+  if (!meta) return;
+  var localV = meta.content;
+  var retries = parseInt(sessionStorage.getItem('nv_ver_retry')||'0');
+  if (retries > 3) { sessionStorage.removeItem('nv_ver_retry'); return; }
+  fetch('/novora-site/version.json?t=' + Date.now(), {cache:'no-store'})
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d.version && d.version !== localV) {
+        sessionStorage.setItem('nv_ver_retry', String(retries + 1));
+        var u = location.href.split('?')[0] + '?v=' + d.version + '&t=' + Date.now();
+        location.replace(u);
+      } else {
+        sessionStorage.removeItem('nv_ver_retry');
+      }
+    })
+    .catch(function(){});
+})();
+</script>
+
+<meta name="version" content="20260623v89">
+<meta property="og:title" content="你的包材用了30% PCR，为什么ESG评级还是上不去？——化妆品包材可持续转型的产业真相">
+<meta property="og:description" content="PCR标签贴满了，CDP评分纹丝不动。可持续包装的真正战场不在材料配比表上，在供应链追溯体系、回收基础设施和Scope 3数据能力。拆解PPWR法规、全球PCR供需落差，以及日韩企业的三种应对路径。">
+<meta property="og:url" content="https://novora.cc/articles/2026-06-27-sustainable-packaging-truth.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="novora">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://novora.cc/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="article:published_time" content="2026-06-27">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="你的包材用了30% PCR，为什么ESG评级还是上不去？——化妆品包材可持续转型的产业真相">
+<meta name="twitter:description" content="PCR标签贴满了，CDP评分纹丝不动。可持续包装的真正战场不在材料配比表上，在供应链追溯体系、回收基础设施和Scope 3数据能力。拆解PPWR法规、全球PCR供需落差，以及日韩企业的三种应对路径。">
+<meta name="twitter:image" content="https://novora.cc/og-image.png">
+<meta name="description" content="PCR标签贴满了，CDP评分纹丝不动。可持续包装的真正战场不在材料配比表上，在供应链追溯体系、回收基础设施和Scope 3数据能力。拆解PPWR法规、全球PCR供需落差，以及日韩企业的三种应对路径。">
+<meta itemprop="name" content="你的包材用了30% PCR，为什么ESG评级还是上不去？——化妆品包材可持续转型的产业真相">
+<meta itemprop="description" content="PCR标签贴满了，CDP评分纹丝不动。可持续包装的真正战场不在材料配比表上，在供应链追溯体系、回收基础设施和Scope 3数据能力。拆解PPWR法规、全球PCR供需落差，以及日韩企业的三种应对路径。">
+<meta itemprop="image" content="https://novora.cc/og-image.png">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Article", "headline": "你的包材用了30% PCR，为什么ESG评级还是上不去？——化妆品包材可持续转型的产业真相", "description": "PCR标签贴满了，CDP评分纹丝不动。可持续包装的真正战场不在材料配比表上，在供应链追溯体系、回收基础设施和Scope 3数据能力。拆解PPWR法规、全球PCR供需落差，以及日韩企业的三种应对路径。", "image": "https://novora.cc/og-image.png", "datePublished": "2026-06-27", "publisher": {"@type": "Organization", "name": "novora", "url": "https://novora.cc/"}, "mainEntityOfPage": {"@type": "WebPage", "@id": "https://novora.cc/articles/2026-06-27-sustainable-packaging-truth.html"}}
+</script>
+
+<title>你的包材用了30% PCR，为什么ESG评级还是上不去？——化妆品包材可持续转型的产业真相 — novora</title>
+<style>
+  :root { --bdf: #0F2747; --bdf-l: #1A3F6E; --bdf-pale: #EEF3F9; --text: #1F2937; --muted: #6B7280; --bg: #F7F7F7; --card: #FFFFFF; --gray-1: #E5E7EB; --gray-3: #9CA3B8; }
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+  body { padding:8px 20px; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; font-size:15px; line-height:1.75; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased;  }
+
+  /* -- Site Header -- */
+  .site-hd { max-width:720px; margin:0 auto 2px; padding:0 4px; display:flex; align-items:baseline; gap:8px; }
+  .site-hd .site-logo { font-size:18px; font-weight:700; color:var(--bdf); letter-spacing:-0.3px; white-space:nowrap; text-decoration:none; }
+  .site-hd .site-sub { font-size:10px; color:var(--muted); letter-spacing:0.2px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; min-width:0; }
+  .logo-l { display: inline-block; }
+  @keyframes logo-nudge { 0% { transform: translateX(0); } 40% { transform: translateX(1px); } 100% { transform: translateX(0); } }
+  @keyframes logo-rebound { 0% { transform: translateX(0); } 35% { transform: translateX(1px); } 65% { transform: translateX(-0.5px); } 100% { transform: translateX(0); } }
+  .lnudge { animation: logo-nudge 0.2s ease-in-out; }
+  .lrebound { animation: logo-rebound 0.35s ease-in-out; }
+
+  /* -- Hero -- */
+  .article-hero { padding:8px 20px 6px; text-align:center; }
+  .article-hero h1 { font-size:18px; font-weight:700; color:var(--bdf); line-height:1.3; margin:0 0 4px; letter-spacing:-0.3px; }
+  .article-hero .meta { font-size:11px; color:var(--muted); }
+  .article-hero .share-bar-top { display:flex; gap:3px; justify-content:center; flex-wrap:wrap; margin-top:4px; }
+  .share-btn-top { display:inline-flex; align-items:center; gap:3px; font-size:11px; font-weight:500; color:var(--muted); background:#fff; border:1px solid var(--gray-1); border-radius:5px; padding:3px 10px; cursor:pointer; transition:all .15s; }
+  .share-btn-top:hover { border-color:#BFCAD8; color:var(--bdf); }
+
+  .ctr { max-width:720px; margin:0 auto; }
+  .art-body { background:var(--card); border-radius:16px; padding:20px 24px; border:1px solid rgba(0,0,0,0.04); }
+  .art-body h2 { font-size:16px; font-weight:700; color:var(--bdf); margin:20px 0 8px; padding-bottom:8px; border-bottom:1px solid var(--gray-1); }
+  .art-body h3 { font-size:15px; font-weight:600; color:var(--bdf-l); margin:14px 0 4px; }
+  .art-body p { margin-bottom:12px; }
+  .art-body ul, .art-body ol { padding-left:22px; margin-bottom:16px; }
+  .art-body li { margin-bottom:6px; }
+  .callout { border-left:3px solid var(--bdf-l); background:var(--bdf-pale); padding:14px 18px; border-radius:0 8px 8px 0; margin:18px 0; font-size:15px; }
+  .art-foot { text-align:center; padding:24px 0 36px; color:var(--muted); font-size:14px; }
+  .art-foot a { color:var(--bdf); text-decoration:none; }
+  .video-embed { border-radius:12px; overflow:hidden; margin:20px 0; border:1px solid var(--gray-1); }
+  .video-embed video { width:100%; display:block; }
+
+  @media (max-width:600px) {
+    .article-hero { padding:6px 12px 4px; }
+    .article-hero h1 { font-size:18px; }
+    .art-body { padding:18px 14px; font-size:14px; }
+    .art-body h2 { font-size:16px; }
+  }
+  .like-count { font-variant-numeric:tabular-nums; }
+  /* Share toast & overlay */
+  .share-toast { position:fixed; bottom:40px; left:50%; transform:translateX(-50%); background:#0F2747; color:#fff; padding:10px 24px; border-radius:8px; font-size:14px; z-index:10001; opacity:0; transition:opacity .3s; pointer-events:none; white-space:nowrap; }
+  .share-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.55); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); display:flex; align-items:center; justify-content:center; z-index:10000; opacity:0; pointer-events:none; transition:opacity .25s; }
+  .share-overlay.show { opacity:1; pointer-events:auto; }
+  .share-panel { background:#fff; border-radius:16px; padding:32px 28px 24px; max-width:400px; width:88vw; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.25); }
+  .share-panel-icon { font-size:40px; margin-bottom:8px; }
+  .share-panel-title { font-size:17px; font-weight:700; color:#0F2747; margin:0 0 6px; }
+  .share-panel-sub { font-size:13px; color:#5f6b7a; margin:0 0 20px; line-height:1.6; }
+  .share-panel-url { display:flex; gap:8px; align-items:center; background:#f4f6f9; border-radius:10px; padding:10px 14px; font-size:12px; color:#3b4556; word-break:break-all; margin-bottom:16px; }
+  .share-panel-copy { display:inline-flex; align-items:center; gap:6px; background:#0F2747; color:#fff; border:none; border-radius:8px; padding:10px 22px; font-size:14px; font-weight:600; cursor:pointer; }
+  .share-panel-copy:hover { background:#1a3560; }
+  .share-panel-close { display:block; margin:16px auto 0; background:none; border:none; color:#8c97a8; font-size:13px; cursor:pointer; }
+</style>
+
+</head>
+<body>
+
+<!-- Site Header -->
+<div class="site-hd">
+  <a class="site-logo" href="https://novora.cc/" target="_top"><span class="logo-l">n</span><span class="logo-l">o</span><span class="logo-l">v</span><span class="logo-l">o</span><span class="logo-l">r</span><span class="logo-l">a</span></a>
+  <span class="site-sub">包装｜材料｜制造｜质量｜AI｜洞察｜阅读</span>
+</div>
+
+<!-- Hero -->
+<div class="article-hero">
+  <h1>你的包材用了30% PCR，为什么ESG评级还是上不去？——化妆品包材可持续转型的产业真相</h1>
+  <p class="meta">2026年6月27日 · 洞察 · 可持续包装 · 产业趋势</p>
+  <div class="share-bar-top" style="display:flex; gap:4px; justify-content:center; flex-wrap:wrap; margin-top:4px;">
+    <button class="share-btn-top" onclick="copyLink()" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:5px;padding:3px 10px;cursor:pointer;transition:all .2s;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      复制链接
+    </button>
+    <button class="share-btn-top" onclick="shareMoments()" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:5px;padding:3px 10px;cursor:pointer;transition:all .2s;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#E53935" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/></svg>
+      分享至朋友圈
+    </button>
+    <button class="share-btn-top" onclick="shareWechat()" style="display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:500;color:#6B7280;background:#fff;border:1px solid #E5E7EB;border-radius:5px;padding:3px 10px;cursor:pointer;transition:all .2s;">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="#07C160"><path d="M8.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm-7.5 4c-3.3 0-6-2.2-6-5 0-2.3 1.8-4.2 4.5-4.8C5.2 2.8 8.4 1 12 1c4.7 0 8.5 3.1 8.5 7 0 1.7-.7 3.2-1.8 4.4.2.4.3.9.3 1.4 0 2.2-1.8 4-4 4-.6 0-1.2-.1-1.7-.4A6.5 6.5 0 0 1 6 15z"/></svg>
+      微信好友
+    </button>
+  </div>
+  </div>
+
+<div class="ctr art-body">
+
+<h2>一、可持续包材的幻觉</h2>
+
+<p>这两年，几乎所有化妆品品牌都在包装上打「可持续」标签：30% PCR、可替换芯、单一材质、减塑声明。品牌方的ESG报告越来越厚，用料越来越讲究，但打开MSCI ESG评级一看——纹丝不动。CDP气候变化评分也没有因你换了一批PCR瓶子而提升半分。</p>
+
+<p>这就引出了一个尴尬的问题：<strong>你在包材上花的每一分可持续预算，到底产生了多少真实的环境收益和评级回报？</strong></p>
+
+<p>答案藏在一条被刻意忽略的产业逻辑里：可持续包装，远不止材料本身。PCR标签只是冰山浮在水面上的那一小块。水面之下，是回收基础设施、供应链追溯、数据能力、设计策略和商业模式的全面工程。这几块做不到位，标签再多也是给自己看的。</p>
+
+<h2>二、三个被刻意回避的真相</h2>
+
+<h3>真相一：PCR的真实成本远高于你的报价单上的数字</h3>
+
+<p>市场上一吨PP新料约8000-10000元人民币，而相同规格的食品级PCR PP价格在12000-16000元之间，溢价50%以上。而且不是有钱就能买到——<strong>全球高品质PCR的供给严重不足</strong>。欧洲的PCR收集分拣体系相对成熟，但亚洲（尤其是中国）的食品接触级PCR供应链仍处于起步阶段，批量供应的稳定性堪忧。</p>
+
+<p>品牌方要求30% PCR含量，供应商的应对往往是：报一个30%的数字，实际混入量不到15%。为什么能这么干？因为没有足够的PCR原料，也没有成本可控的检测手段来验证——<strong>PCR含量检测需要光谱分析和批次级审计，大多数品牌方既没有这个预算，也没有这个技术能力</strong>。</p>
+
+<p>这不是谁在故意造假，而是当市场需求远超供给能力时，灰色地带必然出现。产业的真实状态就是这样。</p>
+
+<h3>真相二：PCR不等于可回收，可回收不等于被回收</h3>
+
+<p>一个标着「100% recyclable」的PP瓶，在现实中真的被回收的概率不超过14%（全球平均）。原因不在材料本身——PP确实是可回收的——而在于三个系统性障碍：</p>
+
+<ul>
+  <li><strong>体积太小</strong>：化妆品包材（尤其是样品装、旅行装）的体积远低于回收分拣设备的最小识别阈值，在传送带上直接掉进「残余物」流。</li>
+  <li><strong>多组件复合</strong>：一个真空瓶可能包含PP外瓶、金属弹簧、硅胶活塞、PE内胆和铝箔封口——五种材料粘合在一起，拆解成本远超回收收益。</li>
+  <li><strong>残留物污染</strong>：瓶内残留的乳液、膏霜在回收清洗环节增加大量成本，导致废品回收商直接拒收化妆品包材。</li>
+</ul>
+
+<p>技术上可回收和在回收流的终局中真的被回收，这是两个概念。而MSCI和CDP的评分看的是<strong>终局</strong>。</p>
+
+<h3>真相三：可持续的真正战场在Scope 3，不在包装标签上</h3>
+
+<p>ESG评级机构（MSCI、CDP、Sustainalytics）评估的是一个品牌的<strong>全生命周期碳排放和供应链透明度</strong>，不是包材有没有PCR标识。一个品牌可以把瓶子换成100% PCR，但如果注塑厂用的是煤电、运输用的是柴油车队、模具钢来自没有碳排放披露的钢厂——你的Scope 3排放不会有任何实质性改善。</p>
+
+<p>Scope 3（供应链间接排放）通常占一个品牌总碳排放的80-95%。包材PCR替代只影响其中的一个子项。这解释了为什么L'Oréal和Estée Lauder的可持续策略远不止于包材：他们在重建整个供应链的数据追溯体系，从原料产地的能源结构到物流环节的碳效率。PCR只是这条漫长链条上的一个节点。</p>
+
+<div class="callout">
+<strong>Scope 1/2/3 速查：</strong><br>
+Scope 1：自有设施的燃烧和制冷剂逸散<br>
+Scope 2：外购电力/蒸汽的排放<br>
+<strong>Scope 3：供应商活动、产品使用和废弃处理的排放（占总排放的80-95%）</strong>
+</div>
+
+<h2>三、PPWR法规下的产业重构——2030年不是远方的雷声</h2>
+
+<p>2025年生效的欧盟PPWR（包装与包装废弃物法规），对化妆品包材的影响是结构性的。三项核心条款尤其值得注意：</p>
+
+<ol>
+  <li><strong>可回收性强制要求</strong>：2030年起所有包装必须「可大规模回收」。这意味着多材料复合结构（如PP外瓶+金属弹簧+硅胶活塞的真空瓶）将面临设计改革或市场退出——因为复合结构在大规模回收流中无法有效分选。</li>
+  <li><strong>PCR含量最低门槛</strong>：到2030年，塑料包装中必须含10-35%的回收含量（按包装品类不同）。这不是品牌自愿承诺，而是法律义务。</li>
+  <li><strong>生产者责任延伸（EPR）</strong>：品牌方要为包装废弃物的回收处理付费。包装越不可回收，费用越高——这实际上是通过价格信号倒逼设计选择。</li>
+</ol>
+
+<p>2030年听起来很远，但对制造企业来说就是「下一个投资周期」。<strong>今天买入的模具寿命通常是5-8年，今天锁定的产线设计将直接运营到2030年以后。</strong>如果当前的设计不符合PPWR的可回收性要求，这些投资就是未来的沉没成本。</p>
+
+<p>然而，PPWR的落地路径仍然充满了不确定性：谁来建立亚洲市场的PCR认证体系？检测标准如何统一？中小品牌如何承担EPR费用？法规的骨架有了，但执行的血肉还远未长全。这个「法规与产业现实的落差」，恰恰是未来五年最大的产业风险——也是最大的战略机会。</p>
+
+<h2>四、日韩企业的三种应对路径——谁的路走对了？</h2>
+
+<h3>COSMAX/Kolmar：供应链垂直整合派</h3>
+
+<p>韩国COSMAX的策略可以用一个词概括：<strong>自己干</strong>。他们投资建设了自己的PCR材料回收和加工线，从源头控制PCR粒子的质量和成本。同时大力推进「单一材质替代方案」——将传统PP/PET+金属弹簧的真空瓶改为全PP结构的气雾less系统。虽然泵芯性能略有下降（出液均匀度和回弹速度），但换来了PPWR认可的「mono-material recyclable」身份。</p>
+
+<p>这是一种重资产的应对策略，适合有规模优势的头部ODM企业。中小供应商无力复制。</p>
+
+<h3>资生堂：系统替代派</h3>
+
+<p>日本资生堂走了一条截然不同的路：不追求包材本身的PCR含量，而是把精力放在<strong>refill/替换装系统</strong>上。资生堂的替换装销售占比在日本市场已超过60%，这意味着一个外瓶被重复购买和使用6-10次。</p>
+
+<p>从系统层面看，refill系统的塑料使用量通常只有传统一次性包装的20-30%。这比在单个瓶子上加5% PCR更有效——但前提是你的品牌有足够的消费者忠诚度和分销渠道来支撑替换装的复购。这不是技术问题，是商业模式问题。</p>
+
+<h3>国内头部包材厂：观望与渐进派</h3>
+
+<p>国内化妆品包材企业的普遍策略是：<strong>等法规再清晰一点、等客户再明确一点、等成本再降一点</strong>。PCR材料的小批量试制在进行，但规模化投资尚未启动。这种观望并非完全是惰性——在PPWR执行细则不明、国内PCR供应链尚未成型的情况下，过于激进的投资可能踩错节奏。</p>
+
+<p>但风险也在于此：当法规从「鼓励」变为「强制」时，供应链重建的窗口期可能比你预想的短得多。</p>
+
+<h2>五、给品牌方和采购的四条实用判断框架</h2>
+
+<p>如果你是一个中等规模的化妆品品牌，面对可持续包材的决策压力，以下四条框架比任何PCR标签都实用：</p>
+
+<ol>
+  <li><strong>不问「含多少PCR」，问「PCR的来源和认证」。</strong>要求供应商提供完整批次追溯——不是一纸声明，而是从PCR粒子供应商到注塑厂的完整链条。如果供应商说不清楚，那个数字大概率是虚标的。真实PCR和声称PCR之间的差距，是这个产业尚未公开的最大问题。</li>
+  <li><strong>优先单一材质设计，而非高比例PCR。</strong>一个全PP结构的泵瓶，即使只含10% PCR，其终端回收可行性远高于含30% PCR但多层复合的瓶子。可持续不是比含量，是比终端回收率。先解决「能不能被回收」，再追求「含了多少回收料」。</li>
+  <li><strong>关注替代系统，而非替代材料。</strong>Refill/替换装系统的塑料总用量通常是传统一次性包装的20-30%，比任何材料替代都更有效。但前提是你需要评估：你的SKU结构适合替换装吗？你的线上/线下渠道能支撑替换装的购买便利性吗？消费者愿意为一个空瓶子付多少钱？</li>
+  <li><strong>现在就开始建立Scope 3数据能力。</strong>无论PPWR还是ESG评级，未来的核心瓶颈不是标签，是数据——从原料产地碳足迹到注塑能耗、到物流碳效率、到终端处理路径。今天不建这套体系，三年后就得花三倍成本补课。而且这套能力一旦建立，本身就是一种竞争壁垒。</li>
+</ol>
+
+<h2>六、结语</h2>
+
+<p>化妆品包材的可持续转型，不是一场材料竞赛，而是一场系统能力的竞赛。PCR标签只是入场券，远不是终点。</p>
+
+<p>真正的分水岭在三个层面展开：回收基础设施能否跟上法规节奏？供应链追溯体系何时从PPT落到SOP？品牌方是满足于在包装上印一个绿色图标，还是重建从原料到货架的全生命周期管理体系？</p>
+
+<p>当你下一次在包材报价单上看到「30% PCR」时，不要只看那个数字。问三个问题：</p>
+
+<p><strong>PCR从哪来？终端能回收吗？我的Scope 3数据在哪？</strong></p>
+
+<p>能回答这三个问题的企业，才真正站在了可持续转型的起跑线上。其他人的30% PCR，只是花更多钱买了一个漂亮的故事。</p>
+
+</div>
+
+<!-- Like Button -->
+<div class="like-section">
+  <button class="like-btn" id="like-btn" onclick="toggleLike()">
+    <span class="heart" id="heart">♡</span>
+    <span class="like-count" id="like-count">0</span>
+  </button>
+</div>
+<script>
+(function() {
+  var KEY = 'nv_like_sustainable-packaging-truth';
+  var liked = localStorage.getItem(KEY) === '1';
+  var count = parseInt(localStorage.getItem(KEY + '_c') || '0', 10);
+  var btn = document.getElementById('like-btn');
+  var heart = document.getElementById('heart');
+  var cnt = document.getElementById('like-count');
+  function render() {
+    if (liked) { btn.classList.add('liked'); heart.textContent = '\u2665'; }
+    else { btn.classList.remove('liked'); heart.textContent = '\u2661'; }
+    cnt.textContent = count;
+  }
+  render();
+  window.toggleLike = function() {
+    liked = !liked;
+    count = liked ? count + 1 : Math.max(0, count - 1);
+    localStorage.setItem(KEY, liked ? '1' : '0');
+    localStorage.setItem(KEY + '_c', count.toString());
+    render();
+  };
+})();
+</script>
+
+<div class="art-foot">
+  <a href="https://novora.cc/" target="_top">&larr; 返回 novora 首页</a>
+</div>
+
+</div><!-- .ctr/art-body -->
+
+<div class="share-toast" id="share-toast">&#10003; 链接已复制，去微信粘贴即可</div>
+<div class="share-overlay" id="share-overlay" onclick="if(event.target===this)closeShareOverlay()">
+  <div class="share-panel">
+    <div class="share-panel-icon">&#128279;</div>
+    <h3 class="share-panel-title" id="share-panel-title"></h3>
+    <p class="share-panel-sub">复制链接后，打开微信粘贴发送，<br>即可在朋友圈看到可点击的文章卡片</p>
+    <div class="share-panel-url" id="share-panel-url"></div>
+    <button class="share-panel-copy" onclick="copyLinkFromPanel()">&#128203; 复制文章链接</button>
+    <button class="share-panel-close" onclick="closeShareOverlay()">关闭</button>
+  </div>
+</div><script>
+function copyLink(){
+  navigator.clipboard.writeText(location.href).then(function(){
+    var t=document.getElementById('share-toast');
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';},2500);
+  }).catch(function(){
+    var t=document.getElementById('share-toast');
+    t.textContent='\u2717 复制失败，请手动复制';
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';t.textContent='\u2713 链接已复制，去微信粘贴即可';},2500);
+  });
+}
+function shareMoments(){
+  var title = document.title;
+  var idx = title.lastIndexOf(' \u2014 ');
+  var cleanTitle = idx > -1 ? title.substring(0, idx) : title;
+  if (navigator.share) {
+    try {
+      navigator.share({ title: cleanTitle, url: location.href });
+      return;
+    } catch(e) { showSharePanel(cleanTitle); return; }
+  }
+  showSharePanel(cleanTitle);
+}
+function shareWechat(){
+  var title = document.title;
+  var idx = title.lastIndexOf(' \u2014 ');
+  var cleanTitle = idx > -1 ? title.substring(0, idx) : title;
+  if (navigator.share) {
+    try {
+      navigator.share({ title: cleanTitle, url: location.href });
+      return;
+    } catch(e) { showSharePanel(cleanTitle); return; }
+  }
+  showSharePanel(cleanTitle);
+}
+function showSharePanel(cleanTitle){
+  document.getElementById('share-panel-title').textContent = cleanTitle;
+  document.getElementById('share-panel-url').textContent = location.href;
+  document.getElementById('share-overlay').classList.add('show');
+}
+function copyLinkFromPanel(){
+  navigator.clipboard.writeText(location.href).then(function(){
+    var t=document.getElementById('share-toast');
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';},2500);
+  }).catch(function(){
+    var t=document.getElementById('share-toast');
+    t.textContent='\u2717 复制失败，请手动复制';
+    t.style.opacity='1'; setTimeout(function(){t.style.opacity='0';t.textContent='\u2713 链接已复制，去微信粘贴即可';},2500);
+  });
+}
+function closeShareOverlay(){
+  document.getElementById('share-overlay').classList.remove('show');
+}
+
+  // -- novora logo micro-collision (5s) --
+  (function logoChain() {
+    var delay = 5000;
+    setTimeout(function() {
+      var letters = document.querySelectorAll('.site-hd .logo-l');
+      if (!letters.length) { logoChain(); return; }
+      letters.forEach(function(l, i) {
+        setTimeout(function() {
+          var cls = i === letters.length - 1 ? 'lrebound' : 'lnudge';
+          l.classList.add(cls);
+          setTimeout(function() { l.classList.remove(cls); }, i === letters.length - 1 ? 350 : 200);
+        }, i * 130);
+      });
+      logoChain();
+    }, delay);
+  })();
+</script>
+</body>
+</html>
