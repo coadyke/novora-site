@@ -1,211 +1,604 @@
 [
   {
+    "title": "你的包材壁厚加了1mm，为什么氧气还是进去了？——高分子阻隔技术的物理与工程真相",
+    "date": "2026-06-30",
+    "summary": "把PET瓶壁厚从0.8mm加到1.5mm，氧气透过率只降了不到一半，成本却涨了80%。从溶解-扩散模型到EVOH的RH塌陷，从多层共挤流变匹配到SiOx镀膜微裂纹——阻隔不是靠厚度，是一套系统工程。",
+    "file": "articles/2026-06-30-barrier-technology.html",
+    "tags": [
+      "材料",
+      "阻隔技术"
+    ],
+    "topics": [
+      "高分子阻隔",
+      "渗透物理",
+      "多层共挤",
+      "EVOH",
+      "OTR",
+      "包材工程"
+    ],
+    "url": "https://novora.cc/articles/2026-06-30-barrier-technology.html"
+  },
+  {
+    "title": "你的真空泵不真空——Airless包装系统从原理到失效的工程全解",
+    "date": "2026-06-29",
+    "summary": "拆解四类Airless技术路线，从活塞窜气到袋体褶痕疲劳的失效诊断表。活塞过盈量0.1-0.3mm、出料量CV<8%、袋体比率1.05-1.15——包材工程师的设计参数手册。",
+    "file": "articles/2026-06-29-airless-packaging.html",
+    "tags": [
+      "包装",
+      "无气包装"
+    ],
+    "topics": [
+      "Airless",
+      "真空泵",
+      "活塞泵",
+      "袋阀式",
+      "化妆品包材"
+    ],
+    "url": "https://novora.cc/articles/2026-06-29-airless-packaging.html"
+  },
+  {
+    "title": "你的行业不赚钱，不是因为竞争太激烈，而是因为竞争太同质——《竞争战略》如何让你看见产业的结构性力量",
+    "date": "2026-06-28",
+    "summary": "迈克尔·波特的五力模型和通用竞争战略已经40年了，但包装制造业的从业者至今没有充分使用它。这篇文章用注塑代工、泵头ODM和包材贸易三个真实场景，拆解波特框架如何让你看清所在行业真正的利润瓶颈在哪里。",
+    "file": "articles/2026-06-28-competitive-strategy.html",
+    "tags": [
+      "阅读",
+      "竞争战略"
+    ],
+    "topics": [
+      "波特五力模型",
+      "通用竞争战略",
+      "包装制造业产业结构",
+      "注塑代工",
+      "Aptar泵头",
+      "韩国ODM"
+    ],
+    "url": "https://novora.cc/articles/2026-06-28-competitive-strategy.html"
+  },
+  {
+    "title": "你的包材用了30% PCR，为什么ESG评级还是上不去？——化妆品包材可持续转型的产业真相",
+    "date": "2026-06-27",
+    "summary": "全球化妆品品牌纷纷在包装上贴PCR标签，但ESG评级却纹丝不动。拆解PCR材料的真实成本与供需落差、PPWR法规的结构性影响、日韩企业的三种应对路径，以及给品牌方的四条实用判断框架。",
+    "file": "articles/2026-06-27-sustainable-packaging-truth.html",
+    "tags": [
+      "洞察",
+      "可持续包装"
+    ],
+    "topics": [
+      "PCR",
+      "可持续包装",
+      "PPWR",
+      "ESG",
+      "Scope3",
+      "COSMAX",
+      "资生堂",
+      "化妆品包材"
+    ],
+    "url": "https://novora.cc/articles/2026-06-27-sustainable-packaging-truth.html"
+  },
+  {
+    "title": "你的AI视觉检测上线了，为什么漏检率还是5%？——工业视觉AI从实验室到产线的九十九道坎",
+    "date": "2026-06-26",
+    "summary": "AI视觉检测系统的实验室准确率轻松达到99%，但产线实测漏检率常年在3%-5%徘徊。本文从数据、光照、缺陷定义、模型迭代与人工关系五个维度，拆解工业视觉AI落地的关键挑战与突破路径。",
+    "file": "articles/2026-06-26-industrial-vision-ai.html",
+    "tags": [
+      "AI",
+      "工业视觉"
+    ],
+    "topics": [
+      "视觉检测",
+      "深度学习",
+      "质量控制",
+      "MLOps",
+      "人机协作"
+    ],
+    "url": "https://novora.cc/articles/2026-06-26-industrial-vision-ai.html"
+  },
+  {
+    "title": "你的根因分析永远停在「操作失误」那一栏——根本原因分析如何从走过场变成工程武器",
+    "date": "2026-06-25",
+    "summary": "大多数企业的RCA只是「填表任务」而非真正的工程分析。本文从5-Why、鱼骨图、故障树分析和8D出发，剖析RCA失效的三大认知陷阱，提出一套可落地的五步分析框架。",
+    "file": "articles/2026-06-25-root-cause-analysis.html",
+    "tags": [
+      "质量",
+      "工程方法论"
+    ],
+    "topics": [
+      "根本原因分析",
+      "5-Why",
+      "鱼骨图",
+      "8D",
+      "故障树分析",
+      "RCA"
+    ],
+    "url": "https://novora.cc/articles/2026-06-25-root-cause-analysis.html"
+  },
+  {
+    "title": "你的注塑机调了二十年参数，为什么良率还是稳不住？——从经验调机到科学注塑的过程控制革命",
+    "date": "2026-06-24",
+    "summary": "注塑机面板上的参数和模具型腔里真正发生的事，是两套物理。科学注塑不是换一台更贵的机器，而是用模腔压力传感器和脱耦方法论，把黑箱变成透明的工程系统。本文拆解包装制造中经验调机的三块遮羞布，给出三个低成本入手方案。",
+    "file": "articles/2026-06-24-injection-molding-process-control.html",
+    "tags": [
+      "制造"
+    ],
+    "topics": [
+      "注塑成型",
+      "过程控制",
+      "科学注塑",
+      "模腔压力",
+      "工艺参数",
+      "脱耦注塑"
+    ],
+    "url": "https://novora.cc/articles/2026-06-24-injection-molding-process-control.html"
+  },
+  {
+    "title": "你的包材配方兼容性测试只做了7天？——高分子材料的化学耐受性工程指南",
+    "date": "2026-06-23",
+    "summary": "绝大多数化妆品包材的配方兼容性测试只做到45°C/7天。但一瓶精华液的货架期是36个月。从溶胀、应力开裂到成分萃取，四种失效模式、六种材料与配方成分的真实相互作用数据、完整的加速测试方法论——让兼容性测试不再是一道「走过场」的工序。",
+    "file": "articles/2026-06-23-material-compatibility.html",
+    "tags": [
+      "材料"
+    ],
+    "topics": [
+      "材料兼容性",
+      "化学耐受性",
+      "高分子材料",
+      "包装工程"
+    ],
+    "url": "https://novora.cc/articles/2026-06-23-material-compatibility.html"
+  },
+  {
+    "title": "你以为的防篡改，只是贴了一张标签——化妆品包材防篡改设计的工程真相",
+    "date": "2026-06-22",
+    "summary": "防篡改不是一张易碎贴纸的事。从断裂式瓶盖到热缩环到感应封口，六种主流方案的力学原理、可靠性验证与产线集成成本全拆解。化妆品包材你绕不开的必修课。",
+    "file": "articles/2026-06-22-tamper-evident-packaging.html",
+    "tags": [
+      "包装"
+    ],
+    "topics": [
+      "防篡改",
+      "包装工程",
+      "产品安全"
+    ],
+    "url": "https://novora.cc/articles/2026-06-22-tamper-evident-packaging.html"
+  },
+  {
+    "title": "为什么最懂客户的巨头反而最先倒下？——《创新者的窘境》如何解释制造业的每一次洗牌",
+    "date": "2026-06-21",
+    "summary": "克莱顿·克里斯坦森的经典著作揭示了颠覆性创新的核心悖论：管理越好、越倾听客户的企业，越可能在新一轮技术浪潮中被淘汰。从注塑代工到泵头ODM到单材化包装，制造业的每一次洗牌背后都有同一套逻辑。",
+    "file": "articles/2026-06-21-innovators-dilemma.html",
+    "tags": [
+      "阅读"
+    ],
+    "topics": [
+      "创新理论",
+      "颠覆性创新",
+      "产业变迁"
+    ],
+    "url": "https://novora.cc/articles/2026-06-21-innovators-dilemma.html"
+  },
+  {
+    "title": "你的包材供应商越做越强，但你的采购成本为什么没降？——全球包材行业并购潮背后的权力转移",
+    "date": "2026-06-20",
+    "summary": "过去五年全球化妆品包材并购超百亿美元。Silgan收购Weener、Aptar整合亚洲——供应商变少变大，品牌方议价能力却在下降。从产业经济学拆解权力转移的逻辑与三条应对策略。",
+    "file": "articles/2026-06-20-packaging-ma-power-shift.html",
+    "tags": [
+      "洞察",
+      "包装"
+    ],
+    "topics": [
+      "并购",
+      "供应链",
+      "包材",
+      "产业整合"
+    ],
+    "url": "https://novora.cc/articles/2026-06-20-packaging-ma-power-shift.html"
+  },
+  {
+    "title": "你的企业知识库为什么喂给AI也没用？——RAG落地工业场景的五个盲区",
+    "date": "2026-06-19",
+    "summary": "90%的AI知识库项目第一年即告失败。本文从数据治理、语义鸿沟、分块策略、幻觉风险与知识衰减五个维度，拆解RAG在工业场景的落地真相，并给出分阶段推进路线图。",
+    "file": "articles/2026-06-19-rag-industrial-pitfalls.html",
+    "tags": [
+      "AI"
+    ],
+    "topics": [
+      "RAG",
+      "知识管理",
+      "AI落地"
+    ],
+    "url": "https://novora.cc/articles/2026-06-19-rag-industrial-pitfalls.html"
+  },
+  {
+    "title": "天然气火焰处理系统 — 从经验驱动到工程控制",
+    "date": "2026-06-19",
+    "summary": "从液化气到天然气，不是能源替换，而是制造质量控制体系的系统性转型。11章技术评估：气源物化对比、四材料差异策略、FMEA风险模型、工艺控制窗口、三件套工程方案。",
+    "file": "articles/2026-06-19-natural-gas-flame-treatment.html",
+    "tags": [
+      "制造",
+      "质量",
+      "材料"
+    ],
+    "topics": [
+      "火焰处理",
+      "天然气",
+      "表面活化",
+      "包装制造"
+    ],
+    "url": "https://novora.cc/articles/2026-06-19-natural-gas-flame-treatment.html"
+  },
+  {
+    "title": "FMEA为什么总是流于形式？——失效模式分析的正确打开方式",
+    "date": "2026-06-18",
+    "summary": "FMEA不是填表运动。从RPN三角到AIAG-VDA AP矩阵，从PFMEA四步实操到交叉影响分析，系统还原失效模式分析作为风险管理工具的本来面目。",
+    "file": "articles/2026-06-18-fmea-methodology.html",
+    "tags": [
+      "质量"
+    ],
+    "topics": [
+      "FMEA",
+      "风险管理",
+      "AIAG-VDA"
+    ],
+    "url": "https://novora.cc/articles/2026-06-18-fmea-methodology.html"
+  },
+  {
     "title": "致美集全员的一封信｜把TOP精神写进每一天",
     "date": "2026-06-18",
     "summary": "写给每一位正在新工厂、项目现场、客户一线和管理岗位上共同前行的美集人：让诚信成为底线，让超越成为习惯，让完美成为持续迭代的方向。",
+    "file": "articles/2026-06-18-megee-top-spirit.html",
     "tags": [
       "洞察",
       "制造"
     ],
+    "topics": [
+      "Megee",
+      "TOP精神",
+      "组织文化"
+    ],
     "url": "https://novora.cc/articles/2026-06-18-megee-top-spirit.html"
+  },
+  {
+    "title": "你的工厂90%的时间都在等待——价值流图析揭示的精益真相",
+    "date": "2026-06-17",
+    "summary": "从原材料进厂到成品出厂，真正创造价值的时间可能不到5%。本文用价值流图析方法，拆解包装制造中隐藏最深的七种浪费，并给出5步可操作的启动清单。",
+    "file": "articles/2026-06-17-lean-value-stream.html",
+    "tags": [
+      "制造"
+    ],
+    "topics": [
+      "精益生产",
+      "价值流图析",
+      "VSM"
+    ],
+    "url": "https://novora.cc/articles/2026-06-17-lean-value-stream.html"
+  },
+  {
+    "title": "为什么单材化包装这么难？从材料科学到工业化的三重障碍",
+    "date": "2026-06-16",
+    "summary": "欧盟PPWR法规要求2030年全塑包装实现可回收设计。从EVOH阻隔原理到三条单材化技术路线，系统拆解设备兼容性、系统性能与回收闭环三重工业障碍。",
+    "file": "articles/2026-06-16-mono-material-barrier.html",
+    "tags": [
+      "材料"
+    ],
+    "topics": [
+      "单材化",
+      "阻隔技术",
+      "PPWR"
+    ],
+    "url": "https://novora.cc/articles/2026-06-16-mono-material-barrier.html"
   },
   {
     "title": "PCR塑料进入美妆包装：理想与模具之间差了五年",
     "date": "2026-06-16",
-    "summary": "当L'Oréal承诺2030年100%回收包装时，注塑车间的工程师正在面对色差暴走、熔指跳动、薄壁脆化的三重夹击。一篇不讲承诺只讲工程的务实分析。",
+    "summary": "PPWR法规倒计时，品牌竞相承诺100%回收包装。但注塑车间里，同一模具掺30% PCR良率就从98%掉到82%。色差、脆化、熔指跳动——本文从工程视角拆解PCR材料进入美妆包装的真实挑战与三条务实路线。",
+    "file": "articles/2026-06-16-pcr-cosmetic-packaging.html",
     "tags": [
-      "深度研究",
-      "材料",
-      "可持续包装"
+      "材料"
     ],
+    "topics": [],
     "url": "https://novora.cc/articles/2026-06-16-pcr-cosmetic-packaging.html"
   },
   {
     "title": "替换装不是换个内芯那么简单——化妆品替换包装的工程挑战与设计哲学",
     "date": "2026-06-15",
-    "summary": "90%的替换包装项目卡在同一个地方：密封。从三重密封策略到卡扣疲劳寿命到用户体验的隐性工程，系统拆解替换包装中最容易被低估的五个技术问题。",
+    "summary": "90%的替换包装项目卡在同一个地方：密封。从三重密封策略到卡扣疲劳寿命到用户体验的隐性工程，系统拆解替换包装中最容易被低估的五个技术问题。附三种技术路线决策框架。",
+    "file": "articles/2026-06-15-refill-packaging.html",
     "tags": [
-      "包装工程",
-      "替换系统"
+      "包装",
+      "可持续发展"
+    ],
+    "topics": [
+      "替换包装",
+      "密封设计",
+      "卡扣工程"
     ],
     "url": "https://novora.cc/articles/2026-06-15-refill-packaging.html"
   },
   {
     "title": "你以为的创新，其实都是旧技术的重新组合——《技术的本质》如何重塑制造者的世界观",
     "date": "2026-06-14",
-    "summary": "Airless真空泵、多头注塑、MES系统——这些'创新'的底层逻辑是什么？W. Brian Arthur用组合进化论回答：所有技术都是已有技术的重新组合，所有的组合机会都早已埋藏在技术集合中。",
+    "summary": "Airless真空泵、多头注塑、MES系统——这些'创新'的底层逻辑是什么？W. Brian Arthur用组合进化论回答：所有技术都是已有技术的重新组合。现象是技术的源头，组合是创新的机制。一本每个制造从业者都该读的书。",
+    "file": "articles/2026-06-14-the-nature-of-technology.html",
     "tags": [
-      "周日阅读",
-      "W. Brian Arthur"
+      "阅读",
+      "洞察"
+    ],
+    "topics": [
+      "技术的本质",
+      "W. Brian Arthur",
+      "组合进化",
+      "创新理论"
     ],
     "url": "https://novora.cc/articles/2026-06-14-the-nature-of-technology.html"
   },
   {
     "title": "韩国ODM凭什么统治了全球美妆供应链？——COSMAX与Kolmar商业模式深度拆解",
     "date": "2026-06-13",
-    "summary": "从1990年代小作坊到全球美妆ODM寡头，COSMAX和Kolmar Korea如何用'研发即制造'模式改写了品牌与供应链的权力关系。对中国包材/制造企业的三条启示。",
+    "summary": "从1990年代小作坊到全球美妆ODM寡头，COSMAX和Kolmar Korea如何用'研发即制造'模式改写了品牌与供应链的权力关系。R&BD模式拆解、防晒技术壁垒、对中国包材/制造企业的三条启示。",
+    "file": "articles/2026-06-13-korean-odm.html",
     "tags": [
       "洞察",
-      "商业模式"
+      "制造"
+    ],
+    "topics": [
+      "ODM",
+      "商业模式",
+      "COSMAX",
+      "供应链"
     ],
     "url": "https://novora.cc/articles/2026-06-13-korean-odm.html"
   },
   {
     "title": "工厂里来了AI Agent，但它不是来替代你的",
     "date": "2026-06-12",
-    "summary": "从RPA到自主决策的三代演进，Agent四层架构拆解，注塑/电子/SMT三个真实落地场景，以及制造业AI项目最致命的三个陷阱。",
+    "summary": "从RPA到自主决策的三代演进，Agent四层架构拆解，注塑工艺调优/设备预判/跨系统问答三个真实落地场景，以及制造业AI项目最致命的三大陷阱。",
+    "file": "articles/2026-06-12-ai-agent-manufacturing.html",
     "tags": [
       "AI",
+      "制造"
+    ],
+    "topics": [
+      "AI Agent",
       "智能制造",
-      "AI Agent"
+      "知识系统"
     ],
     "url": "https://novora.cc/articles/2026-06-12-ai-agent-manufacturing.html"
   },
   {
-    "title": "责任的边界",
+    "title": "责任的边界：为什么卓越管理者最终必须学会放弃「正确」",
     "date": "2026-06-12",
     "summary": "从心理所有权到系统责任：一种高阶管理者人格结构研究。12,000字深度思想论文，揭示优秀者悖论与偏差吸引效应。",
+    "file": "articles/2026-06-12-responsibility-boundary.html",
     "tags": [
-      "思想论文",
+      "洞察"
+    ],
+    "topics": [
       "管理",
-      "领导力"
+      "领导力",
+      "责任边界"
     ],
     "url": "https://novora.cc/articles/2026-06-12-responsibility-boundary.html"
   },
   {
-    "title": "CPK大于1.33就放心了？你可能被测量系统骗了——Gage R&amp;R 完全指南",
+    "title": "CPK大于1.33就放心了？你可能被测量系统骗了——Gage R&R 完全指南",
     "date": "2026-06-11",
-    "summary": "过程能力达标不等于质量过关。测量误差可能比过程变异更大。从%GR&amp;R到ndc到ANOVA方法，注塑车间实施Gage R&amp;R的完整方法论与避坑指南。",
+    "summary": "过程能力达标不等于质量过关。测量误差可能比过程变异更大。从%GR&R到ndc到ANOVA方法，注塑车间实施Gage R&R的完整方法论与避坑指南。两个真实案例诊断。",
+    "file": "articles/2026-06-11-gage-rr.html",
     "tags": [
-      "质量管理",
-      "测量系统分析"
+      "质量",
+      "制造"
+    ],
+    "topics": [
+      "MSA",
+      "Gage R&R",
+      "质量管理"
     ],
     "url": "https://novora.cc/articles/2026-06-11-gage-rr.html"
   },
   {
     "title": "注塑车间为什么越来越依赖自动化？从三班倒到无人值守的演进逻辑",
     "date": "2026-06-10",
-    "summary": "注塑自动化不只关乎成本。从机械手到MES到AI视觉，深度分析注塑工厂自动化的五阶段演进路径、关键投资决策框架与实施陷阱。",
+    "summary": "注塑自动化不只关乎成本。从机械手到MES到AI视觉，五阶段演进路径、投资决策框架与实施陷阱全拆解。",
+    "file": "articles/2026-06-10-injection-molding-automation.html",
     "tags": [
-      "深度研究",
-      "注塑自动化"
+      "制造",
+      "AI"
+    ],
+    "topics": [
+      "注塑自动化",
+      "工业4.0"
     ],
     "url": "https://novora.cc/articles/2026-06-10-injection-molding-automation.html"
   },
   {
+    "title": "📖 什么是 Airless Pump？真空泵百科词条",
+    "date": "2026-06-10",
+    "summary": "定义、工作原理、历史发展、行业应用、典型案例与常见误区。包装领域核心概念，Novora百科全书第一条词条。",
+    "file": "articles/encyclopedia/airless-pump.html",
+    "tags": [
+      "包装",
+      "制造"
+    ],
+    "topics": [
+      "Airless Pump",
+      "百科"
+    ],
+    "url": "https://novora.cc/articles/encyclopedia/airless-pump.html"
+  },
+  {
+    "title": "湖州工厂试产：与时间来一场赛跑",
+    "date": "2026-06-09",
+    "summary": "南浔美集项目进入试产冲刺。设备调试、用工保障、政企协同全速推进，从土建到交付的每一环都在与时间博弈。现场视频直击。",
+    "file": "articles/2026-06-09-huzhou-trial-production.html",
+    "tags": [
+      "制造",
+      "洞察"
+    ],
+    "topics": [
+      "工厂建设",
+      "湖州美集"
+    ],
+    "url": "https://novora.cc/articles/2026-06-09-huzhou-trial-production.html"
+  },
+  {
     "title": "为什么你的CPK总在1.0以下？注塑车间被忽视的5个系统性偏差",
     "date": "2026-06-09",
-    "summary": "CPK低于1.0不只是设备问题。从模具温度波动到材料批次差异，揭示注塑车间5个被忽视的系统性偏差及改进方案。",
+    "summary": "客户审核CPK报告0.82不及格。真正问题不在设备不在模具——取样策略、测量系统、模腔差异、材料批次、参数漂移，五个系统性偏差逐层拆解。附两个真实车间诊断案例。",
+    "file": "articles/2026-06-09-cpk-injection.html",
     "tags": [
-      "产业深度解析",
+      "质量",
+      "制造"
+    ],
+    "topics": [
+      "CPK",
+      "SPC",
+      "注塑制造",
       "质量管理"
     ],
     "url": "https://novora.cc/articles/2026-06-09-cpk-injection.html"
   },
   {
-    "title": "湖州工厂试产：与时间来一场赛跑",
-    "date": "2026-06-09",
-    "summary": "南浔美集项目进入试产冲刺。设备调试、用工保障、政企协同全速推进。现场视频直击。",
-    "tags": [
-      "现场直击",
-      "工厂建设"
-    ],
-    "url": "https://novora.cc/articles/2026-06-09-huzhou-trial-production.html"
-  },
-  {
     "title": "Airless Pump 如何进行真空保持测试？",
     "date": "2026-06-08",
-    "summary": "Airless真空泵的密封性与真空保持能力直接决定产品保质期。本文详解真空衰减测试方法、关键参数与判定标准。",
+    "summary": "高端品牌做供应商审核时必考的项目。从三重密封结构到28天全周期检测，从负压挑战到温差循环，全面解析真空保持测试的方法论与判定标准。",
+    "file": "articles/2026-06-08-airless-vacuum.html",
     "tags": [
-      "产业深度解析",
-      "包装技术"
+      "包装",
+      "制造",
+      "质量"
+    ],
+    "topics": [
+      "Airless Pump",
+      "化妆品包装"
     ],
     "url": "https://novora.cc/articles/2026-06-08-airless-vacuum.html"
   },
   {
     "title": "色母粒的分散性：为什么它决定了你产品的成败",
     "date": "2026-06-08",
-    "summary": "色母粒分散性不足会导致产品表面瑕疵、力学性能下降甚至客户退货。从颜料选择到加工工艺，完整解析分散性控制要点。",
+    "summary": "因色母粒分散不良导致的质量问题占客诉60%以上。从颜料选择到分散剂配方到加工工艺，一文讲透分散性的四大关键因素，附三种实用检测方法。",
+    "file": "articles/2026-06-08-dispersion.html",
     "tags": [
-      "色母粒行业知识"
+      "材料",
+      "制造",
+      "质量"
+    ],
+    "topics": [
+      "色母粒"
     ],
     "url": "https://novora.cc/articles/2026-06-08-dispersion.html"
   },
   {
-    "title": "为什么低价色母粒最后反而更贵？",
-    "date": "2026-06-07",
-    "summary": "三组算账对比：便宜色母粒VS高品质色母粒——真正的省钱是什么？",
-    "tags": [
-      "现场直击",
-      "工厂建设"
-    ],
-    "url": "https://novora.cc/articles/cheap-masterbatch.html"
-  },
-  {
-    "title": "世界文学名著典藏",
-    "date": "2026-06-07",
-    "summary": "二百八十部不朽经典——从荷马史诗到村上春树，完整的中文阅读与原文下载指南。",
-    "tags": [
-      "洞察"
-    ],
-    "url": "https://novora.cc/articles/classics.html"
-  },
-  {
-    "title": "一个配方，一年帮客户省了120万",
-    "date": "2026-06-07",
-    "summary": "真实案例：添加量从4%优化到2.5%效果不变。色母粒不是越便宜越好。",
-    "tags": [
-      "现场直击",
-      "工厂建设"
-    ],
-    "url": "https://novora.cc/articles/roi-120wan.html"
-  },
-  {
     "title": "色母粒销售技巧与叙事体系",
     "date": "2026-06-07",
-    "summary": "色母粒销售不只是卖产品——从技术顾问到解决方案，构建专业销售叙事体系与客户沟通框架。",
+    "summary": "11章完整弹药库：从核心叙事框架到30条异议处理，从10个场景化故事到30个短视频标题库。不卖色母粒，而是解决塑料企业的生产问题。",
+    "file": "articles/sales-skills.html",
     "tags": [
-      "持续更新"
+      "材料"
+    ],
+    "topics": [
+      "色母粒",
+      "B2B销售"
     ],
     "url": "https://novora.cc/articles/sales-skills.html"
   },
   {
+    "title": "世界文学名著典藏 · 280部导读",
+    "date": "2026-06-07",
+    "summary": "17卷分卷：从古希腊荷马史诗到现代经典，涵盖英国、法国、俄国、德国、意大利、拉美、亚洲等全球文学。",
+    "file": "articles/classics.html",
+    "tags": [
+      "阅读"
+    ],
+    "topics": [],
+    "url": "https://novora.cc/articles/classics.html"
+  },
+  {
     "title": "色母粒到底是什么？一分钟搞懂",
     "date": "2026-06-07",
-    "summary": "从零开始的色母粒科普：为什么不用色粉直接染色？",
+    "summary": "从零开始的色母粒科普：为什么不用色粉直接染色？色母粒和色粉的本质区别是什么？",
+    "file": "articles/what-is-masterbatch.html",
     "tags": [
-      "现场直击",
-      "工厂建设"
+      "材料",
+      "制造"
+    ],
+    "topics": [
+      "色母粒"
     ],
     "url": "https://novora.cc/articles/what-is-masterbatch.html"
   },
   {
     "title": "瓶子发黄怎么办？塑料厂急诊室",
     "date": "2026-06-07",
-    "summary": "PET瓶发黄、注塑件黑点、吹塑件破裂——完整诊断框架与解决方案。",
+    "summary": "PET瓶发黄、注塑件黑点、吹塑件破裂——这些看似不同的质量问题，往往指向同一个幕后黑手。完整诊断框架与解决方案。",
+    "file": "articles/yellow-bottles.html",
     "tags": [
-      "现场直击",
-      "工厂建设"
+      "材料",
+      "制造",
+      "质量"
+    ],
+    "topics": [
+      "色母粒",
+      "注塑制造"
     ],
     "url": "https://novora.cc/articles/yellow-bottles.html"
   },
   {
-    "title": "10万只瓶子报废，只因为这个颜色差了0.5%",
-    "date": "2026-06-05",
-    "summary": "不同材料、不同供应商、不同工艺的瓶胚成本差异有多大？",
+    "title": "为什么低价色母粒最后反而更贵？",
+    "date": "2026-06-07",
+    "summary": "三组算账对比：便宜色母粒VS高品质色母粒，添加量、不良率、停机率——真正的省钱是什么？",
+    "file": "articles/cheap-masterbatch.html",
     "tags": [
-      "现场直击",
-      "工厂建设"
+      "材料",
+      "制造"
+    ],
+    "topics": [
+      "色母粒"
+    ],
+    "url": "https://novora.cc/articles/cheap-masterbatch.html"
+  },
+  {
+    "title": "一个配方，一年帮客户省了120万",
+    "date": "2026-06-07",
+    "summary": "真实案例：添加量从4%优化到2.5%效果不变。色母粒不是越便宜越好——关键是综合成本。",
+    "file": "articles/roi-120wan.html",
+    "tags": [
+      "材料",
+      "制造"
+    ],
+    "topics": [
+      "色母粒"
+    ],
+    "url": "https://novora.cc/articles/roi-120wan.html"
+  },
+  {
+    "title": "10万只瓶子报废，只因为颜色差了0.5%",
+    "date": "2026-06-07",
+    "summary": "客户验货当天，10万只瓶子直接退货。问题竟然出在色母粒添加比例上。",
+    "file": "articles/bottles-100k.html",
+    "tags": [
+      "材料",
+      "制造",
+      "质量"
+    ],
+    "topics": [
+      "色母粒"
     ],
     "url": "https://novora.cc/articles/bottles-100k.html"
   },
   {
-    "title": "Silgan Dispensing：全球分配系统巨头深度调研",
-    "date": "2026-06-05",
-    "summary": "14页深度报告：从母集团架构到中国市场深耕，完整覆盖Silgan Dispensing业务版图、财务表现与竞争护城河。",
+    "title": "Silgan Dispensing 深度调研报告",
+    "date": "2026-05-16",
+    "summary": "西尔格分配系统全球最完整深度分析。14页覆盖：集团架构、中国市场28年深耕、5笔重大收购、核心技术平台。",
+    "file": "articles/silgan-dispensing.html",
     "tags": [
-      "深度研究",
-      "包装产业"
+      "包装",
+      "制造"
+    ],
+    "topics": [
+      "化妆品包装",
+      "定量泵系统"
     ],
     "url": "https://novora.cc/articles/silgan-dispensing.html"
   }
