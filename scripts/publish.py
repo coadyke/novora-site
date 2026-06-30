@@ -333,10 +333,26 @@ def main():
         print("🔄 Git 推送失败，但 index.html 已修改。请手动处理。")
         sys.exit(1)
 
-    # 9. 生成 feed.json（bdf.pro 文章同步数据源）
+    # 9. 生成 feed.json → 同步到 bdf-materials 仓库（bdf.pro 文章数据源）
     from build_feed import build_feed
-    build_feed()
-    # 把 feed.json 加入 git
+    feed_path = build_feed()
+
+    # 同步 feed.json 到 bdf-materials 仓库
+    BDF_ROOT = os.path.join(os.path.dirname(NOVORA_ROOT), "beethoven-newmaterials")
+    if os.path.isdir(BDF_ROOT):
+        import shutil
+        shutil.copy(feed_path, os.path.join(BDF_ROOT, "feed.json"))
+        bdf_ssh = 'GIT_SSH_COMMAND="ssh -i ~/.ssh/github_bdf -o IdentitiesOnly=yes"'
+        cmds = [
+            f"cd {BDF_ROOT}",
+            f"{bdf_ssh} git add feed.json",
+            f'{bdf_ssh} git commit -m "sync: feed.json from novora publish (v{version})"',
+            f"{bdf_ssh} git push",
+        ]
+        subprocess.run(" && ".join(cmds), shell=True, capture_output=True, text=True)
+        print("✅ feed.json → bdf-materials 同步完成")
+
+    # 把 feed.json 加入 novora git
     subprocess.run(
         f"cd {NOVORA_ROOT} && {GIT_SSH} git add articles/feed.json",
         shell=True, capture_output=True, text=True
