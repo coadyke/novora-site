@@ -18,8 +18,8 @@ novora 文章发布管线 — 唯一入口
 import argparse
 import json
 import os
-import re
 import shutil
+import re
 import subprocess
 import sys
 from datetime import datetime
@@ -35,7 +35,25 @@ BACKUP_PATH = INDEX_PATH + ".backup"
 WRANGLER = os.path.expanduser(
     "/Users/coady/.workbuddy/binaries/node/versions/22.22.2/bin/wrangler"
 )
-CF_TOKEN = os.environ.get("CLOUDFLARE_API_TOKEN", "")
+
+def _get_cf_token() -> str:
+    """优先读环境变量，否则从 macOS Keychain 读取"""
+    token = os.environ.get("CLOUDFLARE_API_TOKEN", "")
+    if token:
+        return token
+    try:
+        result = subprocess.run(
+            ["security", "find-generic-password",
+             "-s", "workbuddy-cf-token", "-w"],
+            capture_output=True, text=True, timeout=10
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            return result.stdout.strip()
+    except Exception:
+        pass
+    return ""
+
+CF_TOKEN = _get_cf_token()
 
 GIT_SSH = (
     'GIT_SSH_COMMAND="ssh -i ~/.ssh/github_novora -o IdentitiesOnly=yes"'
@@ -340,7 +358,6 @@ def main():
     # 同步 feed.json 到 bdf-materials 仓库
     BDF_ROOT = os.path.join(os.path.dirname(NOVORA_ROOT), "beethoven-newmaterials")
     if os.path.isdir(BDF_ROOT):
-        import shutil
         shutil.copy(feed_path, os.path.join(BDF_ROOT, "feed.json"))
         bdf_ssh = 'GIT_SSH_COMMAND="ssh -i ~/.ssh/github_bdf -o IdentitiesOnly=yes"'
         cmds = [
